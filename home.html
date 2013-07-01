@@ -251,6 +251,7 @@
 		var prenom = $.localStorage.getItem('prenom');
 		var siret = $.localStorage.getItem('siret');
 		var station = $.localStorage.getItem('station');
+		var mngid = $.localStorage.getItem('mngid');
 		var pass = $.sessionStorage.getItem('pass');
 		var idcourse = $.sessionStorage.setItem('idcourse', '');
 		var rdv = $.sessionStorage.setItem('rdv', '');
@@ -385,6 +386,10 @@
 			$('#siret').val(siret);
 			$('#station').val(dec_station);
 			$('#log').val(tel);
+			$.post("https://ssl14.ovh.net/~taxibleu/client/billing.php", { taxi: taxi, pass: pass, dep: '34', mngid: mngid }, function(data){
+				$("#billing").empty().append(data);
+				//alert(data);
+			});
 		});
 		
         function getLocation()
@@ -446,7 +451,7 @@
 		function update()
 		{
 			var dispo = $.sessionStorage.getItem('dispo');
-			$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_drive.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34' }, function(data){ 
+			$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_drive.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid }, function(data){ 
 				$("#screen_job").empty().append(data);
 				if (data != 0)
 				{
@@ -464,7 +469,7 @@
 				}
 			});
 
-			$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_drive.php?cmd=1", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34' }, function(data){ 
+			$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_drive.php?cmd=1", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid }, function(data){ 
 				$("#screen_job_cmd").empty().append(data);
 				if (data != 0)
 				{
@@ -1369,6 +1374,13 @@
                                 </b></p>
                             </form>
                             </fieldset>
+                        </div>
+                        <div data-role="collapsible" data-collapsed="true">
+                            <h1>
+                                 Facturation pour le mois en cours
+                            </h1>
+                            <div id="billing">
+                            </div>
                         </div>
                         <div data-role="collapsible" data-collapsed="true">
                             <h1>
