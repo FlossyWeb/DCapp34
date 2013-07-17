@@ -34,6 +34,7 @@
                 // Make your jQuery Mobile framework configuration changes here!
                 $.support.cors = true;
                 $.mobile.allowCrossDomainPages = true;
+				$.mobile.selectmenu.prototype.options.nativeMenu = false;
             });
         </script>    
 		<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
@@ -210,6 +211,7 @@
 						$.localStorage.setItem('siret', data.siret);
 						$.localStorage.setItem('email', data.email);
 						$.localStorage.setItem('station', data.station);
+						$.localStorage.setItem('group', data.group);
 						$.localStorage.setItem('mngid', data.mngid);
 						$.sessionStorage.setItem('pass', data.pass);
 						$.sessionStorage.setItem('badid', data.badid);
@@ -268,6 +270,7 @@
 							$.localStorage.setItem('tel', data.tel);
 							$.localStorage.setItem('siret', data.siret);
 							$.localStorage.setItem('email', data.email);
+							$.localStorage.setItem('group', data.group);
 							$.sessionStorage.setItem('pwd', data.pwd);
 							$.sessionStorage.setItem('subscribed', data.subscribed);
 							$.sessionStorage.setItem('telexist', data.telexist);
@@ -330,15 +333,20 @@
                                 </select>
                                 <input type="text" name="nom" placeholder="Nom" maxlength="60" size="20" class="required"><em></em>
                                 <input type="text" name="prenom" placeholder="Pr&eacute;nom" maxlength="60" size="20" class="required"><em></em>	
-                                <input type="text" name="taxi" placeholder="Num&eacute;ro de taxi" maxlength="60" size="20" class="required">
-                                <input type="text" name="tel" placeholder="T&eacute;l&eacute;phone (Sans espace SVP)" maxlength="10" size="20" class="required"><em></em>
-                                <input type="text" name="siret" placeholder="N&deg; SIRET (14 chiffres sans espace SVP)" maxlength="14" size="20" class="required"><em></em>
+                                <input type="tel" name="taxi" placeholder="Num&eacute;ro de taxi" maxlength="60" size="20" class="required">
+                                <input type="tel" name="tel" placeholder="T&eacute;l&eacute;phone (Sans espace SVP)" maxlength="10" size="20" class="required"><em></em>
+                                <input type="tel" name="siret" placeholder="N&deg; SIRET (14 chiffres sans espace SVP)" maxlength="14" size="20" class="required"><em></em>
                                 <input type="text" name="station" placeholder="Commune de stationnement" maxlength="60" size="20" class="required"><em></em>
                                 <select name="type" id="type">
                                     <option selected value="">Type de vehicule</option>
                                     <option>Berline</option>
                                     <option>Break 5 places</option>
                                     <option>Van</option>
+                                </select><em></em>
+                                <select name="group" id="group">
+                                    <option selected value="1">Groupe de taxis</option>
+                                    <option value="4">Montpellier ville</option>
+                                    <option value="5">Montpellier A&eacute;roport</option>
                                 </select><em></em>
                                 <fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
                                     <legend>
@@ -420,8 +428,8 @@
                                         Je certifie et accepte
                                     </label><em></em>
                                 </fieldset>
-                                <input type="text" name="email" id="email" placeholder="Adresse email" maxlength="60" size="20" class="required email"><em></em>
-                                <input type="text" name="confirmail" placeholder="Confirmez email SVP" maxlength="60" size="20" class="required email"><em></em>
+                                <input type="email" name="email" id="email" placeholder="Adresse email" maxlength="60" size="20" class="required email"><em></em>
+                                <input type="email" name="confirmail" placeholder="Confirmez email SVP" maxlength="60" size="20" class="required email"><em></em>
                                 <input type="hidden" name="dep" value="34"/>
                                 <input type="submit" name="submit" id="subReg" value="Envoyer">
                                 <p><b>
@@ -437,7 +445,7 @@
                             </h1>
                             <fieldset><legend></legend>
                             <form  action="/" method="post" name="id" id="login" data-ajax="false" data-transition="slidefade">
-                                <input type="text" name="log" size="20" maxlength="10" placeholder="Identifiant"/>
+                                <input type="tel" name="log" size="20" maxlength="10" placeholder="Identifiant"/>
                                 <input type="password" name="pass" size="20" maxlength="16" placeholder="Mot de Passe"/>
                                 <input type="hidden" name="dep" value="34"/>
                                 <input type="submit" id="subLog" value=" Connection "/>
@@ -450,8 +458,8 @@
                             </h1>
                             <fieldset><legend></legend>
                             <form  action="/" method="post" name="forget" id="forget" data-ajax="false" data-transition="slidefade">
-                                <input type="text" name="login" size="20" maxlength="10" placeholder="Identifiant"/>
-                                <input type="text" name="mail" size="32" maxlength="60" placeholder="L&rsquo;email de votre compte"/>
+                                <input type="tel" name="login" size="20" maxlength="10" placeholder="Identifiant"/>
+                                <input type="email" name="mail" size="32" maxlength="60" placeholder="L&rsquo;email de votre compte"/>
                                  <input type="hidden" name="dep" value="34"/>
                                 <input type="submit" id="subFor" value=" Envoyer "/>
                            </form>
