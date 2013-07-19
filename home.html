@@ -629,6 +629,12 @@
 			$.sessionStorage.setItem('query_string', query_string);
 			$.mobile.changePage( $("#delayPop"), { transition: "slide"} );
 		}
+		$(document).on( "click", "#directCall", function() {
+			$.mobile.loading( "show" );
+		});
+		$(document).on( "click", "#diaryLink", function() {
+			$.mobile.loading( "show" );
+		});
 		function directCall()
 		{
 			var query_string = $.sessionStorage.getItem('query_string');
