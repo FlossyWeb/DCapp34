@@ -124,6 +124,12 @@
 					 nom: "Ce champs est obligatoire",
 					 prenom: "Ce champs est obligatoire",
 					 taxi: "Ce champs est obligatoire",
+					 tel: {
+					   required: "Ce champs est obligatoire"
+					 },
+					 siret: {
+					   required: "Ce champs est obligatoire"
+					 },
 					 station: "Ce champs est obligatoire",
 					 cgv: "Vous devez acceper les CGV",
 					 email: {
@@ -190,6 +196,7 @@
 
 				if($.sessionStorage.getItem('pass'))
 				{
+					$.mobile.loading( "show" );
 					document.location.href='home.html';
 					//$.mobile.changePage( "test.html", { transition: "slide"} );
 				}
@@ -229,6 +236,7 @@
 						$("#returns").empty().append(display);
 						if(data.pass)
 						{ // IDENTIFIED SO GETS IN...
+							$.mobile.loading( "show" );
 							document.location.href='home.html';
 							//$.mobile.changePage( "test.html", { transition: "slide"} );
 						}
