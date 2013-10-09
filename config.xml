@@ -33,6 +33,7 @@
 	<preference name="detect-data-types" value="false" />
 
 	<gap:plugin name="com.phonegap.plugins.childbrowser" />
+	<gap:plugin name="nl.x-services.plugins.calendar" />
 	<gap:plugin name="com.phonegap.plugins.barcodescanner" />
 	<gap:plugin name="com.adobe.plugins.gaplugin" />
 	<gap:plugin name="com.phonegap.plugins.pushplugin" />
