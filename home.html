@@ -265,6 +265,9 @@
         var my_media = null;
         var mediaTimer = null;
 
+		// Scanner
+		var scanner;
+
         var mobileDemo = { 'center': '43.615945,3.876743', 'zoom': 10 };
                 
         ////////////////////////////////////////////////////////////
@@ -280,6 +283,10 @@
 			$('#to').val(rdv);
 
 			var infos = '<p>';
+			if (cell != '')
+			{
+				infos += '<a data-ajax="false" href="tel:' + cell + '" data-role="button" data-icon="grid">Joindre le client</a>';
+			}
 			if (com != '')
 			{
 				infos += '<b>Infos RDV : <span style="color:#09F;">' + com + '</span></b></br>';
@@ -287,10 +294,6 @@
 			if (idcourse != '')
 			{
 				infos += '<br>N&deg; de course : <b>' + idcourse + '</b>';
-			}
-			if (cell != '')
-			{
-				infos += '<a data-ajax="false" href="tel:' + cell + '" data-role="button" data-icon="grid">Joindre le client</a>';
 			}
 			infos += '</p>';
 			$("#infos_map").append(infos);			
@@ -733,8 +736,41 @@
 	    function onDeviceReady() {
 	        //navigator.geolocation.getCurrentPosition(onSuccess, onError);
 	        getLocation();
+			scanner = cordova.require("cordova/plugin/BarcodeScanner");
 	    }
 		
+		var scanSuccess = function (result) {
+			var textFormats = "QR_CODE DATA_MATRIX";
+			var productFormats = "UPC_E UPC_A EAN_8 EAN_13";
+			if (result.cancelled) { return; }
+			if (textFormats.match(result.format)) {                
+				var scanVal = result.text;
+				if (scanVal.indexOf("http") === 0) {
+					setTimeout(function() { window.plugins.childBrowser.showWebPage(result.text, { showLocationBar: true }); }, 500);
+				} else {
+					navigator.notification.alert(
+							result.text,
+							function (){},
+							'Scan Value:',
+							'Done'
+						);
+				}
+			} else if (productFormats.match(result.format)) {
+				var searchUrl = "https://www.google.fr/#q=" + result.text;
+				setTimeout(function() { window.plugins.childBrowser.showWebPage(searchUrl, { showLocationBar: true }); }, 500);
+			} else { alert("Format du scan: " + result.format + 
+					  " NON SUPPORTE. Valeur du scan: " + result.text);
+			}
+		}
+		function goScan ()
+		{
+			scanner.scan(
+				scanSuccess, 
+				function (error) {
+					alert("Scan Erreur: " + error);
+				}
+			);
+		}
 		/*
 		// Swiping between pages function
 		$('div.ui-page').live("swipeleft", function(){
@@ -1432,6 +1468,7 @@
                             <a href="http://taxibleuservices.com/client/docs/CGV.pdf" target="_blank" data-theme="b" data-role="button" data-icon="edit" data-transition="slide"><b>T&eacute;l&eacute;charger les CGV</b></a>
                         </div>
                     </div>
+                    <input type="button" value="Scanner un QrCode" onClick="goScan()" data-icon="gear"/>
                 </div>
                 <div id="returns"></div>
             </div>
