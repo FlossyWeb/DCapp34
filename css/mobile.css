@@ -156,6 +156,10 @@ a {
 	opacity: 0.9;
 	filter: alpha(opacity=90);
 }
+#histBlock ul {
+	color: #09F;
+	text-align: left;
+}
 #marquee-wrapper
 {
 position:relative;
