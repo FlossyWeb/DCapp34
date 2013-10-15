@@ -642,6 +642,14 @@
 			$.sessionStorage.setItem('cmd', 1);
 			$.mobile.changePage( $("#directions_map"), { transition: "slide"} );
 		}
+		function justify(when, rdv, comments, destadd, cell)//justify(\''.$when.'\', \''.$rdv.'\', \''.$comments.'\', \''.$destadd.'\', \''.$cell.'\
+		{
+			$.post("https://ssl14.ovh.net/~taxibleu/client/justify.php", { when: when, rdv: rdv, comments: comments, destadd: destadd, cell: cell, dep: '', pass: pass, email: email }, function(data){
+				$.mobile.loading( "show" );
+				alert(data);
+				//window.plugins.childBrowser.showWebPage('http://www.taximedia.fr', { showLocationBar: true });
+			}).done(function() { $.mobile.loading( "hide" ); });
+		}
 		// diaryCall for direct job that open #delay
 		function delayCall(query_string)
 		{

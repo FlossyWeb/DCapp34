@@ -68,11 +68,22 @@
         </script>        
         <script type="application/javascript" src="js/add2home.js"></script>
         <script type="text/javascript">		
-            document.addEventListener("deviceready", function(){
-              if(navigator.network.connection.type == Connection.NONE){
-                $("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
-              }
-            });
+			// Attendre que PhoneGap soit prêt	    //
+			document.addEventListener("deviceready", onDeviceReady, false);
+		
+			// PhoneGap est prêt
+			function onDeviceReady() {
+				if(navigator.network.connection.type == Connection.NONE){
+					$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
+				}
+				if($.localStorage.getItem('pass'))
+				{
+					navigator.splashscreen.hide();
+					$.mobile.loading( "show" );
+					document.location.href='home.html';
+					//$.mobile.changePage( "test.html", { transition: "slide"} );
+				}
+			}
 		</script>
         <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
 		<script type="text/javascript">
@@ -194,13 +205,6 @@
 			}
 
 			$(document).bind( 'pageinit', function() {
-
-				if($.localStorage.getItem('pass'))
-				{
-					$.mobile.loading( "show" );
-					document.location.href='home.html';
-					//$.mobile.changePage( "test.html", { transition: "slide"} );
-				}
 
 				footer();
 
