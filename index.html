@@ -76,13 +76,6 @@
 				if(navigator.network.connection.type == Connection.NONE){
 					$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
 				}
-				if($.localStorage.getItem('pass'))
-				{
-					navigator.splashscreen.hide();
-					$.mobile.loading( "show" );
-					document.location.href='home.html';
-					//$.mobile.changePage( "test.html", { transition: "slide"} );
-				}
 			}
 		</script>
         <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
@@ -206,6 +199,14 @@
 
 			$(document).bind( 'pageinit', function() {
 
+				if($.localStorage.getItem('pass'))
+				{
+					//navigator.splashscreen.hide();
+					$.mobile.loading( "show" );
+					document.location.href='home.html';
+					//$.mobile.changePage( "test.html", { transition: "slideup"} );
+				}
+				
 				footer();
 
 				$("#login").submit(function(event) {

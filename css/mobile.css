@@ -156,10 +156,10 @@ a {
 	opacity: 0.9;
 	filter: alpha(opacity=90);
 }
-#histBlock {
+#histBlock, #infos_map {
 	text-align: left;
 }
-#histBlock ul {
+#histBlock ul, infos_map ul {
 	color: #09F;
 }
 #marquee-wrapper

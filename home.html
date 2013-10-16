@@ -56,13 +56,6 @@
     <script type="text/javascript" src="ui/jquery.ui.map.js"></script>
     <script type="text/javascript" src="ui/jquery.ui.map.services.js"></script>
     <script type="text/javascript" src="ui/jquery.ui.map.extensions.js"></script>
-    <script type="text/javascript">		
-        document.addEventListener("deviceready", function(){
-          if(navigator.network.connection.type == Connection.NONE){
-            $("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
-          }
-        });
-    </script>
     <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
     <script type="text/javascript">
 
@@ -743,6 +736,10 @@
 	    // PhoneGap est prêt
 	    function onDeviceReady() {
 	        //navigator.geolocation.getCurrentPosition(onSuccess, onError);
+			navigator.splashscreen.hide();
+			if(navigator.network.connection.type == Connection.NONE){
+				$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
+			}
 	        getLocation();
 			scanner = cordova.require("cordova/plugin/BarcodeScanner");
 	    }
