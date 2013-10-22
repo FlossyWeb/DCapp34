@@ -746,7 +746,7 @@
 			var idcourseUrg = myDate.getTime();
 			$.sessionStorage.setItem('idcourseUrg', idcourseUrg);
 			
-			$.post("https://ssl14.ovh.net/~taxibleu/client/secure_xml.php", { lat: lat, lng: lng, dep: '', pass: pass}, function(xml){
+			$.post("https://ssl14.ovh.net/~taxibleu/client/secure_xml.php", { lat: lat, lng: lng, dep: '34', pass: pass}, function(xml){
 																									 
 				var i = 0; // We need to make any numreq unique on that one !!
 				$(xml).find('marker').each(function(){
@@ -761,7 +761,7 @@
 					//$('<div id='+name+'></div>').html('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>').appendTo('#secureResults');
 					//$('#secureResults').append('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>');
 					
-					$.post("https://ssl14.ovh.net/~taxibleu/client/secure.php", { taxi: name, tel: address, rdvpoint: rdvpoint, helptaxi: taxi, helpname: helpname, helptel: tel, idcourse: idcourseUrg, num_req: num_reqUrg, dep: '', pass: pass}, function(data){
+					$.post("https://ssl14.ovh.net/~taxibleu/client/secure.php", { taxi: name, tel: address, rdvpoint: rdvpoint, helptaxi: taxi, helpname: helpname, helptel: tel, idcourse: idcourseUrg, num_req: num_reqUrg, dep: '34', pass: pass}, function(data){
 						//$('#secureResults').append(data);
 					});
 					i++;
@@ -777,7 +777,7 @@
 			$.mobile.changePage( $("#urgency"), { transition: "slide"} );
 			var idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
 			sec = setInterval( function () {
-				$.post("https://ssl14.ovh.net/~taxibleu/client/status.php?idcourse=" + idcourseUrg + "&check=1" , { dep: '13'}, function(data){ 
+				$.post("https://ssl14.ovh.net/~taxibleu/client/status.php?idcourse=" + idcourseUrg + "&check=1" , { dep: '34'}, function(data){ 
 					if (data != 0)
 					{
 						//cancel(idcourse);
@@ -792,7 +792,7 @@
 		function stopSecureCall()
 		{
 			var idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
-			$.post("https://ssl14.ovh.net/~taxibleu/client/secure.php", { taxi: '', tel: '', rdvpoint: '', helptaxi: taxi, helpname: '', helptel: tel, idcourse: idcourseUrg, dep: '', pass: pass, stopcall: 'true'}, function(data){
+			$.post("https://ssl14.ovh.net/~taxibleu/client/secure.php", { taxi: '', tel: '', rdvpoint: '', helptaxi: taxi, helpname: '', helptel: tel, idcourse: idcourseUrg, dep: '34', pass: pass, stopcall: 'true'}, function(data){
 				$.mobile.changePage( $("#home"), { transition: "slide"} );
 			});
 			//$.sessionStorage.setItem('idcourseUrg', false);
