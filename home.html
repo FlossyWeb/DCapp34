@@ -248,6 +248,7 @@
 		var mngid = $.localStorage.getItem('mngid');
 		var pass = $.localStorage.getItem('pass');
 		var idcourse = $.sessionStorage.setItem('idcourse', '');
+		var idcourseUrg = $.sessionStorage.setItem('idcourseUrg', '');
 		var rdv = $.sessionStorage.setItem('rdv', '');
 		var com = $.sessionStorage.setItem('com', '');
 		var cell = $.sessionStorage.setItem('cell', '');
@@ -261,6 +262,10 @@
 		// Scanner
 		var scanner;
 
+		// getLocation & secureCall
+		var lat = 0;
+		var lng = 0;
+		
         var mobileDemo = { 'center': '43.615945,3.876743', 'zoom': 10 };
                 
         ////////////////////////////////////////////////////////////
@@ -445,8 +450,8 @@
           }			  
         function get_coords(position) 
         {
-            var lat = position.coords.latitude;
-            var lng = position.coords.longitude;
+            lat = position.coords.latitude;
+            lng = position.coords.longitude;
 			//var x=document.getElementById("results");
 			//x.innerHTML="lat = " + lat + " - lng = " +lng;
 			//alert('taxi: ' + taxi + ' tel: ' + tel + ' pass=' + pass);
@@ -717,6 +722,83 @@
 			}, "json");
 		}
 
+		// Urgence call => Danger zone
+        function getLocationOnce()
+        {
+            if (navigator.geolocation)
+            {
+				$.mobile.loading( "show" );
+                navigator.geolocation.getCurrentPosition(secureCall, showError,{enableHighAccuracy:true, maximumAge:0});
+				//var watchId = navigator.geolocation.watchPosition(get_coords, showError);
+				//navigator.geolocation.getAccurateCurrentPosition(get_coords, showError, {maxWait:30000});
+            }
+            else {
+				alert("Localisation impossible.");
+            }
+        }
+		function secureCall(position)
+		{			
+            lat = position.coords.latitude;
+            lng = position.coords.longitude;
+			var rdvpoint = lat + ', ' + lng;
+			var helpname = civil + ' ' + nom + ' ' + prenom;
+			var myDate = new Date();
+			var idcourseUrg = myDate.getTime();
+			$.sessionStorage.setItem('idcourseUrg', idcourseUrg);
+			
+			$.post("https://ssl14.ovh.net/~taxibleu/client/secure_xml.php", { lat: lat, lng: lng, dep: '', pass: pass}, function(xml){
+																									 
+				var i = 0; // We need to make any numreq unique on that one !!
+				$(xml).find('marker').each(function(){
+					var name = $(this).attr('name');
+					var address = $(this).attr('address');
+					var lat2 = $(this).attr('lat');
+					var lng2 = $(this).attr('lng');
+					var timestamp = $(this).attr('timestamp');
+					var distance = $(this).attr('distance');
+					var num_reqUrg = idcourseUrg + i;
+					//var title = $(this).find('title').text(); To get nodes inside
+					//$('<div id='+name+'></div>').html('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>').appendTo('#secureResults');
+					//$('#secureResults').append('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>');
+					
+					$.post("https://ssl14.ovh.net/~taxibleu/client/secure.php", { taxi: name, tel: address, rdvpoint: rdvpoint, helptaxi: taxi, helpname: helpname, helptel: tel, idcourse: idcourseUrg, num_req: num_reqUrg, dep: '', pass: pass}, function(data){
+						//$('#secureResults').append(data);
+					});
+					i++;
+				});
+				check_answer();
+				//alert('Geoloc results :' + lat + ' - ' + lng);
+				//$('#results').append('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>');
+				
+			}, "xml");
+		}
+		function check_answer()
+		{
+			$.mobile.changePage( $("#urgency"), { transition: "slide"} );
+			var idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
+			sec = setInterval( function () {
+				$.post("https://ssl14.ovh.net/~taxibleu/client/status.php?idcourse=" + idcourseUrg + "&check=1" , { dep: '13'}, function(data){ 
+					if (data != 0)
+					{
+						//cancel(idcourse);
+						//$('#dblinks').append($('<input id="stop" type="hidden" value="1" />'));
+						//var box = alert(data);
+						$('#urgencyResults').empty().append(data);
+					}
+				}); 
+			}, 6000);
+			return false;
+		}
+		function stopSecureCall()
+		{
+			var idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
+			$.post("https://ssl14.ovh.net/~taxibleu/client/secure.php", { taxi: '', tel: '', rdvpoint: '', helptaxi: taxi, helpname: '', helptel: tel, idcourse: idcourseUrg, dep: '', pass: pass, stopcall: 'true'}, function(data){
+				$.mobile.changePage( $("#home"), { transition: "slide"} );
+			});
+			//$.sessionStorage.setItem('idcourseUrg', false);
+			clearInterval(sec);
+		}
+
 		function taximedia()
 		{
 			window.plugins.childBrowser.showWebPage('http://www.taximedia.fr/redir.php', { showLocationBar: true });
@@ -980,6 +1062,7 @@
                     <!-- N&rsquo;oubliez pas de vous rendre indisponible quand vous ne d&eacute;sirez plus prendre de courses, cela vous &eacute;vitera d&rsquo;&ecirc;tre importun&eacute; durant votre repos.<br> -->
                 </div>
                 <div id="results"></div>
+                <a href="#secureDialog" data-rel="dialog" data-role="button" class="secure-bt" data-theme="b" data-icon="alert">Bouton d&rsquo;urgence</a>
                 <div id="player_home">
                     <audio id="play_home" loop="loop" preload="auto" style="display:none" >
                         <source src="http://www.taxibleuservices.com/client/sounds/ring.mp3" type="audio/mpeg" />
@@ -1573,6 +1656,51 @@
             <div data-theme="a" data-role="footer" id="footer_cont8" data-position="fixed">
 				<div class="ui-bar-a ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des information DCVP en cours.</b></marquee></div>
                 <p class="copyright" style="font-size:xx-small">&copy; 2012 - </p>
+            </div>
+        </div>
+        
+        <div data-role="dialog" data-theme="e" id="secureDialog">
+            <div data-theme="a" data-role="header">
+				<h1>
+                	Confirmation
+                </h1>
+            </div>
+            <div data-role="content">
+            	<h1>Lancer l&rsquo;appel d&rsquo;urgence ?</h1>
+                <input type="button" data-theme="b" data-icon="check" onClick="secureCall()" value="CONFIRMER"/>
+                <a href="#home" data-rel="back" data-icon="delete" data-role="button" data-transition="slideUp" data-theme="c">ANNULER</a>            
+            </div>
+        </div>
+        
+        <div data-role="dialog" data-theme="e" id="secureDialog">
+            <div data-theme="a" data-role="header">
+				<h1>
+                	Confirmation
+                </h1>
+            </div>
+            <div data-role="content">
+            	<h1>Lancer l&rsquo;appel d&rsquo;urgence ?</h1>
+                <input type="button" data-theme="b" data-icon="check" onClick="getLocationOnce()" value="CONFIRMER"/>
+                <a href="#home" data-rel="back" data-icon="delete" data-role="button" data-transition="slideUp" data-theme="c">ANNULER</a>            
+                <div id="secureResults"></div>
+            </div>
+        </div>
+
+        <div data-role="page" data-theme="a" id="urgency">
+            <div data-theme="a" data-role="header" data-position="fixed">
+				<h1 style="width:100%; padding: 0; margin: 0; color: #F00;">
+                	URGENCE
+                </h1>
+            </div>
+            <div data-role="content">
+                <div id="urgent" class="ui-bar-a ui-corner-all ui-shadow" style="padding:1em;">
+                	<h1 style="color: #F00;">Proc&eacute;dure d&rsquo;appel d&rsquo;urgence activ&eacute;e.</h1>
+                    <input type="button" data-theme="c" data-icon="check" onClick="stopSecureCall()" value="ARRETER"/>
+               </div>                    
+                <div id="urgencyResults"></div>
+            </div>
+            <div data-theme="a" data-role="footer" id="footer_cont8" data-position="fixed">
+				<div class="ui-bar-a ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Proc&eacute;dure d&rsquo;appel d&rsquo;urgence activ&eacute;e.</b></marquee></div>
             </div>
         </div>
         

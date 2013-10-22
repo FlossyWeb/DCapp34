@@ -109,7 +109,7 @@ a {
 #later {
 	color: #333;
 	background-color: #FFF;
-	border: #666
+	border: #666;
 	box-shadow: 0 0 2px #CCC;
 	-moz-box-shadow: 0 0 2px #CCC; 
 	-webkit-box-shadow: 0 0 2px #CCC;
@@ -164,17 +164,20 @@ a {
 }
 #marquee-wrapper
 {
-position:relative;
-width:100%;
-overflow:hidden;
-height:100%;
+	position:relative;
+	width:100%;
+	overflow:hidden;
+	height:100%;
 }
 #marquee
 {
-position:absolute;
-top:0px;
-left:0px;
-white-space : nowrap;
+	position:absolute;
+	top:0px;
+	left:0px;
+	white-space : nowrap;
+}
+h3 {
+	color: #F00;
 }
 body, #gmap-4, .page { height:100%; }
 .ui-body-c a.ui-link { color: #008595; font-weight: bold; text-decoration: none; }
