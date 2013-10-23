@@ -360,27 +360,30 @@
 		});
 
 		$( '#planning' ).live( 'pagebeforeshow',function(event){
-			$.post("https://ssl14.ovh.net/~taxibleu/client/in_app_calls.php", { planning: 'true', taxi: taxi, pass: pass, dep: '34' }, function(data){
+			$.post("https://ssl14.ovh.net/~taxibleu/client/in_app_calls.php", { planning: 'true', tel: tel, pass: pass, dep: '34' }, function(data){
+				$.mobile.loading( "show" );
 				$("#plan_cont").empty().append(data);
 				$("#plan_cont").trigger('create');
 				//alert(data);
-			});
+			}).done(function() { $.mobile.loading( "hide" ); });
 		});
 
 		$( '#history' ).live( 'pagebeforeshow',function(event){
-			$.post("https://ssl14.ovh.net/~taxibleu/client/in_app_calls.php", { history: 'true', taxi: taxi, pass: pass, dep: '34' }, function(data){
+			$.post("https://ssl14.ovh.net/~taxibleu/client/in_app_calls.php", { history: 'true', tel: tel, pass: pass, dep: '34' }, function(data){
+				$.mobile.loading( "show" );
 				$("#hist_cont").empty().append(data);
 				$("#hist_cont").trigger('create');
 				//alert(data);
-			});
+			}).done(function() { $.mobile.loading( "hide" ); });
 		});
 
 		$( '#infos' ).live( 'pagebeforeshow',function(event){
 			$.post("https://ssl14.ovh.net/~taxibleu/client/in_app_calls.php", { infos: 'true', pass: pass, dep: '34' }, function(data){
+				$.mobile.loading( "show" );
 				$("#infos_cont").empty().append(data);
 				$("#infos_cont").trigger('create');
 				//alert(data);
-			});
+			}).done(function() { $.mobile.loading( "hide" ); });
 		});
 
         $('#manage').live('pageinit', function() {
