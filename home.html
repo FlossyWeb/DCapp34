@@ -263,6 +263,9 @@
 		// Scanner
 		var scanner;
 
+		// Detect wether it is an App or WebApp
+		var app;
+		
 		// getLocation & secureCall
 		var lat = 0;
 		var lng = 0;
@@ -821,19 +824,24 @@
 			window.plugins.childBrowser.showWebPage('http://taxibleuservices.com/client/docs/CGV.pdf', { showLocationBar: true });
 		}
 		
-	    // Attendre que PhoneGap soit prêt	    //
-	    document.addEventListener("deviceready", onDeviceReady, false);
-	
-	    // PhoneGap est prêt
-	    function onDeviceReady() {
-	        //navigator.geolocation.getCurrentPosition(onSuccess, onError);
-			navigator.splashscreen.hide();
-			if(navigator.network.connection.type == Connection.NONE){
-				$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
+		// Checks App or Browser
+		app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1 && document.URL.indexOf("localhost") != 7;
+		if ( app ) {
+			// PhoneGap application
+			// Attendre que PhoneGap soit prêt	    //
+			document.addEventListener("deviceready", onDeviceReady, false);
+		
+			// PhoneGap est prêt
+			function onDeviceReady() {
+				//navigator.geolocation.getCurrentPosition(onSuccess, onError);
+				navigator.splashscreen.hide();
+				if(navigator.network.connection.type == Connection.NONE){
+					$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
+				}
+				getLocation();
+				scanner = cordova.require("cordova/plugin/BarcodeScanner");
 			}
-	        getLocation();
-			scanner = cordova.require("cordova/plugin/BarcodeScanner");
-	    }
+		}
 		
 		var scanSuccess = function (result) {
 			var textFormats = "QR_CODE DATA_MATRIX";
@@ -928,7 +936,7 @@
 				//$.mobile.changePage( "test.html", { transition: "slide"} );
 			}
 			//setTimeout('dispo()', 10000);
-			//getLocation();
+			if(!app) getLocation();
 			update();
 			dispo();
 			footer();
