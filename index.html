@@ -190,11 +190,20 @@
         </style>
 		<script type="text/javascript">
 
+			// getLocation & secureCall & Actived check
+			var lat = 0;
+			var lng = 0;
+			var idcourseUrg = $.sessionStorage.setItem('idcourseUrg', '');
+			var taxi = $.localStorage.getItem('taxi');
+			var tel = $.localStorage.getItem('tel');
+			var civil = $.localStorage.getItem('civil');
+			var nom = $.localStorage.getItem('nom');
+			var prenom = $.localStorage.getItem('prenom');
 			var actived;
+		
 			function active()
 			{
-				var tel = $.localStorage.getItem('tel');
-				$.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel}, function(data) {
+				$.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel, dep: '34'}, function(data) {
 					var actived = data.active;
 					if($.localStorage.getItem('pass') && actived)
 					{
@@ -210,6 +219,103 @@
 					}
 				}, "json");
 			}
+			
+			// Urgence call => Danger zone
+			function showError(error)
+			{
+				var x=document.getElementById("results");
+				switch(error.code) 
+				{
+					case error.PERMISSION_DENIED:
+					  x.innerHTML="Vous avez refus&eacute; l&rsquo;acc&egrave;s &agrave; la G&eacute;olocalisation."
+					  break;
+					case error.POSITION_UNAVAILABLE:
+					  x.innerHTML="G&eacute;olocalisation indisponible, veuillez regarder dans l&rsquo;aide ou activer le service dans les reglages de votre appareil."
+					  break;
+					case error.TIMEOUT:
+					  x.innerHTML="La demande de G&eacute;olocalisation a expir&eacute;(user location request timed out)."
+					  break;
+					case error.UNKNOWN_ERROR:
+					  x.innerHTML="Erreur inconnue de G&eacute;olocalisation (unknown error occurred)."
+					  break;
+				}
+			}			  
+			function getLocationOnce()
+			{
+				if (navigator.geolocation)
+				{
+					$.mobile.loading( "show" );
+					navigator.geolocation.getCurrentPosition(secureCall, showError,{enableHighAccuracy:true, maximumAge:0});
+					//var watchId = navigator.geolocation.watchPosition(get_coords, showError);
+					//navigator.geolocation.getAccurateCurrentPosition(get_coords, showError, {maxWait:30000});
+				}
+				else {
+					alert("Localisation impossible.");
+				}
+			}
+			function secureCall(position)
+			{
+				lat = position.coords.latitude;
+				lng = position.coords.longitude;
+				var rdvpoint = lat + ', ' + lng;
+				var helpname = civil + ' ' + nom + ' ' + prenom;
+				var myDate = new Date();
+				var idcourseUrg = myDate.getTime();
+				$.sessionStorage.setItem('idcourseUrg', idcourseUrg);
+				
+				$.post("https://ssl14.ovh.net/~taxibleu/client/secure_xml.php", { lat: lat, lng: lng, dep: '34', pass: 'true'}, function(xml){
+																										 
+					var i = 0; // We need to make any numreq unique on that one !!
+					$(xml).find('marker').each(function(){
+						var name = $(this).attr('name');
+						var address = $(this).attr('address');
+						var lat2 = $(this).attr('lat');
+						var lng2 = $(this).attr('lng');
+						var timestamp = $(this).attr('timestamp');
+						var distance = $(this).attr('distance');
+						var num_reqUrg = idcourseUrg + i;
+						//var title = $(this).find('title').text(); To get nodes inside
+						//$('<div id='+name+'></div>').html('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>').appendTo('#secureResults');
+						//$('#secureResults').append('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>');
+						
+						$.post("https://ssl14.ovh.net/~taxibleu/client/secure.php", { taxi: name, tel: address, rdvpoint: rdvpoint, helptaxi: taxi, helpname: helpname, helptel: tel, idcourse: idcourseUrg, num_req: num_reqUrg, dep: '34', pass: 'true'}, function(data){
+							//$('#secureResults').append(data);
+						});
+						i++;
+					});
+					check_answer();
+					//alert('Geoloc results :' + lat + ' - ' + lng);
+					//$('#results').append('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>');
+					
+				}, "xml");
+			}
+			function check_answer()
+			{
+				$.mobile.changePage( $("#urgency"), { transition: "slide"} );
+				var idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
+				sec = setInterval( function () {
+					$.post("https://ssl14.ovh.net/~taxibleu/client/status.php?idcourse=" + idcourseUrg + "&check=1" , { dep: '34'}, function(data){ 
+						if (data != 0)
+						{
+							//cancel(idcourse);
+							//$('#dblinks').append($('<input id="stop" type="hidden" value="1" />'));
+							//var box = alert(data);
+							$('#urgencyResults').empty().append(data);
+						}
+					}); 
+				}, 6000);
+				return false;
+			}
+			function stopSecureCall()
+			{
+				var idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
+				$.post("https://ssl14.ovh.net/~taxibleu/client/secure.php", { taxi: '', tel: '', rdvpoint: '', helptaxi: taxi, helpname: '', helptel: tel, idcourse: idcourseUrg, dep: '34', pass: 'true', stopcall: 'true'}, function(data){
+					$.mobile.changePage( $("#portal"), { transition: "slide"} );
+				});
+				//$.sessionStorage.setItem('idcourseUrg', false);
+				clearInterval(sec);
+			}
+			
 			function footer()
 			{
 				$.post("https://ssl14.ovh.net/~taxibleu/client/footer_app.php", { dep: '34' }, function(data) {

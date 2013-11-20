@@ -50,6 +50,10 @@ a {
 	display: inline-block;
 	margin-left: 2%;
 }
+#results {
+	color: #F00;
+	font-weight: bolder;
+}
 #screen a {
 	display: block;
 	width: 96%;
