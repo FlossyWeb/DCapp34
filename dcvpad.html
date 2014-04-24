@@ -190,7 +190,7 @@
 		});
         $("#search-box").hide("fast");
 		$("#next-box").show("medium");
-        $(".mustHave").change(function () {
+        var ok = setInterval( function () {
             var name_filled = document.getElementById('Accurate').value;
             var cell_filled = document.getElementById('cellular').value;
             
@@ -204,7 +204,7 @@
                 $("#search-box").hide("fast");
                 $("#next-box").show("medium");
             }
-        });
+        }, 1000);
 		$('#regLinks').append('<fieldset data-role="controlgroup"><legend>Derni&egrave;res informations saisies:</legend>');
 		for(n=1;n<4;n++) {
 			if(($.localStorage.getItem('regName'+n) != null) && ($.localStorage.getItem('regCell'+n) != null)) {
@@ -322,6 +322,7 @@
 	function searchLocationsNear(center, mapEvent) {
 		//clearLocations();
 		//alert('In searchLocationsNear');
+		$('#map').gmap('refresh');
 		var myDate = new Date();
 		idcourse = myDate.getTime();
 		//$('#dblinks').append($('<input id="idcourse" type="hidden" value="' + idcourse + '"/>'));
@@ -510,10 +511,10 @@
     </script>
     </head>
     <body style="margin:0px; padding:0px;">
-    <div data-role="page" data-theme="b" style="background: #00254B url(visuels/bg.png) top left repeat-x;" id="infos">
-        <div data-role="header" data-theme="a">
-            <a href="#" onClick="goBackMode()" class="ui-btn ui-btn-b ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back" data-transition="slide" data-ajax="false">
-                Retour
+    <div data-role="page" data-theme="b" style="background: #000 url(visuels/bg.png) top left repeat-x;" id="infos">
+        <div data-role="header">
+            <a href="#" onClick="goBackMode()" class="ui-btn ui-btn-a ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back" data-transition="slide" data-ajax="false">
+                <p style="font-size:16px"><b>Retour</b></p>
             </a>
             <span class="ui-title"></span>
         </div>
@@ -524,7 +525,7 @@
             <a href="taxipad_portal.php" class="back"><img src="picts/back_button.png" /></a>
             <div style="display:block; height:30px"></div>
             -->
-            <div class="ui-bar-a ui-corner-all ui-shadow" style="padding:1em; display:block;">
+            <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em; display:block;">
                 <p><b>Envoyez une course</b></p>
                 <input type="hidden" id="operator" size="40" value="0"/>
                 <input type="hidden" id="hostname" size="40" value=""/>
@@ -553,9 +554,8 @@
                     </tbody>
                 </table>
                 <p style="font-size:small;"><em>*</em> Ces informations sont obligatoires</p>
-                <p style="font-size:small;"><em>*</em> Ces informations sont obligatoires</p>
                 <label for="howMany">Combien de passagers :</label>
-                <input name="howMany" id="howMany" min="1" max="8" value="1" data-show-value="true" data-popup-enabled="true" type="range">
+                <input name="howMany" id="howMany" min="1" max="8" value="1" data-theme="a" data-show-value="true" data-popup-enabled="true" type="range">
                 <p id="datelabel"><b>Date et heure du RDV si r&eacute;servation :</b></p>
                 <span style="display:inline-block;width: 48%;">
                     <input type="date" id="date" placeholder="Date" data-inline="true" value=""/>
@@ -624,15 +624,15 @@
             </center>
         </div>
     </div>
-    <div data-role="page" data-theme="b" id="map_page" style="background: #00254B url(visuels/bg.png) top left repeat-x;">
+    <div data-role="page" data-theme="b" id="map_page" style="background: #000 url(visuels/bg.png) top left repeat-x;">
         <div class="ui-content" role="main">
-            <div class="ui-bar-a ui-corner-all ui-shadow" style="padding:1em; display:block;">
+            <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em; display:block;">
                 
                 <center>
                 <div id="deliv-hide" style="width: 0px; height: 0px; visibility:hidden;">
                 	<input type="button" onClick="" id="deliver" value="" />
                 </div>
-                <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em; margin-bottom: 6px;"><p><b>Veuillez patienter pendant la recherche SVP</b></p></div>
+                <div class="ui-bar-a ui-corner-all ui-shadow" style="padding:1em; margin-bottom: 6px;"><p><b>Veuillez patienter pendant la recherche SVP</b></p></div>
                 </center>
                 <div id="map" style="height:360px;"></div>
                 <div id="left" style="width: 0px; height: 0px; visibility:hidden;">

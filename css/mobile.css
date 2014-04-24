@@ -1,10 +1,10 @@
 body {  
 	margin: 0px;
 	padding: 0px;
-	background: #0099CC url(../visuels/bgd.png) top left repeat-x;
+	background: #000 url(../visuels/bg.png) top left repeat-x;
 }
 .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
-	background: #0099CC url(../visuels/bgd.png) top left repeat-x;
+	background: #000 url(../visuels/bg.png) top left repeat-x;
 }
 p, h1, h2, h3, h4, h5, h6 {
 	margin: 0px;
