@@ -671,6 +671,7 @@
 		// diaryCall for direct job that open #delay
 		function delayCall(query_string)
 		{
+			Sound_Off();
 			$.sessionStorage.setItem('query_string', query_string);
 			$.mobile.pageContainer.pagecontainer("change", "#delayPop", { transition: "slide"} );
 		}
@@ -688,6 +689,7 @@
 		function directCall()
 		{
 			$.mobile.loading( "show" );
+			Sound_On(); // Pump up the volume 
 			// Getting query_string using sessionStorage
 			var dataDiary = $.sessionStorage.getItem('query_string');
 			// Modifying the link 2 diary
@@ -722,6 +724,7 @@
 		function diaryCall(query_string)
 		{
 			$.mobile.loading( "show" );
+			Sound_On(); // Pump up the volume 
 			$.post("https://ssl14.ovh.net/~taxibleu/server/diary_app_dcvp.php?dep=34", query_string, function(data){ 
 				switch (data.location) {
 					 case '#directions_map':
