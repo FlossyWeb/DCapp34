@@ -1085,9 +1085,10 @@
 				//$.mobile.changePage( "test.html", { transition: "slide"} );
 			}
 			// Advert user that the app may need his Android device to be rebooted, for geolocation to work.
+			var droidFirstInstall = 1;
 			var droidFirstInstall = $.localStorage.getItem('v1.3.0');
 			if(!droidFirstInstall) {
-				$.localStorage.setItem('v1.3.0', true);
+				$.localStorage.setItem('v1.3.0', 0);
 				if (navigator.userAgent.toLowerCase().match(/android/)) {
 					setTimeout(function () {
 						$.mobile.pageContainer.pagecontainer("change", "#droidFirstInstall", { transition: "slide"} );
@@ -1991,8 +1992,11 @@
                 <a href="#"  onClick="goEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Simple</a>
                 <a href="#droidFirstInstall" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
             </div><!-- /panel -->
-            <div data-theme="a" data-role="header" data-position="fixed">
-                <a href="#dfi_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home"><h1><b>Menu</b></h1></a>
+            <div data-theme="b" data-role="header">
+                <a href="#dfi_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home large">
+                	<span style="font-size:16px;"><b>Menu</b></span>
+                </a>
+                <span class="ui-title"></span>
             </div>
             <div class="ui-content" role="main">
                 <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">

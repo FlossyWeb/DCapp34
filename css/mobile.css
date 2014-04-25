@@ -13,6 +13,9 @@ p, h1, h2, h3, h4, h5, h6 {
 a {
 	text-decoration: none;
 }
+.large {
+	width: 96%;
+}
 input[type=text], input[type=tel], input[type=date], input[type=time], input[type=email] {
 	color: #000;
 }
