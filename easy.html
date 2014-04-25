@@ -942,7 +942,6 @@
 				$( "#popSms" ).popup( "open", { positionTo: "window" } );
 			};
 			sms.send(number, message, intent, success, error);
-			window.plugins.contactNumberPicker.pick(successCallbackPick,failedCallbackPick);
 		}
 		function ShareArt()
 		{
@@ -960,6 +959,33 @@
 				$( "#popSms" ).popup( "open", { positionTo: "window" } );
 			};
 			sms.send(number, message, intent, success, error);
+		}
+		function contactShare()
+		{
+			var successCallbackPick = function(result){
+				setTimeout(function(){
+					//alert(result.name + " " + result.phoneNumber);
+					var number = result.phoneNumber;
+					var message = "Téléchargez l'app myTaxi 34 en suivant ce lien : http://www.taximedia.fr/stores.php?app=mytaxi&dep=34";
+					var intent = ""; //leave empty for sending sms using default intent
+					var success = function () {
+						//alert('Message sent successfully');
+						$('#smsReturn').empty().append('Message envoy&eacute; avec succ&egrave;s, Merci');
+						$( "#popSms" ).popup( "open", { positionTo: "window" } );
+					};
+					var error = function (e) {
+						//alert('Message Failed:' + e); 
+						$('#smsReturn').empty().append('Probl&egrave;me lors de l&rsquo;envoi du message: ' + e);
+						$( "#popSms" ).popup( "open", { positionTo: "window" } );
+					};
+					sms.send(number, message, intent, success, error);
+				},500);
+			};
+			var failedCallbackPick = function(result){
+				setTimeout(function(){
+					//alert(result);
+				},500);
+			}
 			window.plugins.contactNumberPicker.pick(successCallbackPick,failedCallbackPick);
 		}
 		/*
@@ -1102,6 +1128,7 @@
                   <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
                   <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
                   <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
+                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
                 </ul>
                 <a href="#"  onClick="unEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Avanc&eacute;</a>
                 <a href="#home" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
@@ -1233,6 +1260,7 @@
                   <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
                   <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
                   <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
+                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
                 </ul>
                 <a href="#"  onClick="unEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Avanc&eacute;</a>
                 <a href="#jobs_taker" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
@@ -1325,6 +1353,7 @@
                   <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
                   <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
                   <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
+                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
                 </ul>
                 <a href="#"  onClick="unEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Avanc&eacute;</a>
                 <a href="#delayPop" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
@@ -1376,6 +1405,7 @@
                   <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
                   <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
                   <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
+                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
                 </ul>
                 <a href="#"  onClick="unEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Avanc&eacute;</a>
                 <a href="#cmd" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
@@ -1470,6 +1500,7 @@
                   <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
                   <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
                   <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
+                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
                 </ul>
                 <a href="#"  onClick="unEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Avanc&eacute;</a>
                 <a href="#planning" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
@@ -1512,6 +1543,7 @@
                   <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
                   <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
                   <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
+                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
                 </ul>
                 <a href="#"  onClick="unEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Avanc&eacute;</a>
                 <a href="#history" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
@@ -1554,6 +1586,7 @@
                   <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
                   <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
                   <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
+                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
                 </ul>
                 <a href="#"  onClick="unEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Avanc&eacute;</a>
                 <a href="#manage" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
@@ -1590,6 +1623,7 @@
                   <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
                   <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
                   <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
+                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
                 </ul>
                 <a href="#"  onClick="unEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Avanc&eacute;</a>
                 <a href="#manage" data-rel="close" data-role="button" data-theme="a">Fermer</a>
@@ -1776,7 +1810,7 @@
                             <a href="#" onClick="ShareArt()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail ui-shadow-icon ui-corner-all"><b>Partager DCVP 34</b></a>
                         </div>
                     </div>
-                    <input type="button" value="Scanner un QrCode" onClick="goScan()" data-icon="gear"/>
+                    <input type="button" value="Scanner un QrCode" onClick="goScan()" data-icon="camera"/>
                 </div>
                 <div id="returns"></div>
                 <div data-role="popup" data-theme="b" id="popSms" data-dismissible="true">
@@ -1813,6 +1847,7 @@
                   <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
                   <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
                   <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
+                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
                 </ul>
                 <a href="#"  onClick="unEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Avanc&eacute;</a>
                 <a href="#directions_map" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
@@ -1862,6 +1897,7 @@
                   <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
                   <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
                   <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
+                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
                 </ul>
                 <a href="#"  onClick="unEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Avanc&eacute;</a>
                 <a href="#toolate" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
