@@ -427,8 +427,13 @@
         }
         function testGeoloc()
         {
-			var passed = function () { alert('REUSSI');}
-			var failed = function () { alert('ECHEC');}
+			var passed = function () { 
+				alert('REUSSI');
+				document.location.href='home.html';
+			}
+			var failed = function () { 
+				alert('ECHEC');
+			}
             if (navigator.geolocation)
             {
 				navigator.geolocation.getCurrentPosition(passed, failed,{enableHighAccuracy:false, maximumAge:0});
@@ -1966,7 +1971,7 @@
         </div>
         
         <div data-role="page" data-theme="a" id="droidFirstInstall">
-            <div data-role="panel" id="dfi_panel" data-position="left" data-display="reveal" data-theme="e">
+            <div data-role="panel" id="dfi_panel" data-position="left" data-display="reveal" data-theme="b">
                 <!-- panel content goes here -->
                 <ul data-role="listview" data-inset="true" data-theme="b">
                   <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
@@ -1987,15 +1992,16 @@
                 <a href="#droidFirstInstall" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
             </div><!-- /panel -->
             <div data-theme="a" data-role="header" data-position="fixed">
-                <a href="#dfi_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><h1><b>Menu</b></h1></a>
+                <a href="#dfi_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home"><h1><b>Menu</b></h1></a>
             </div>
             <div class="ui-content" role="main">
-                <div id="urgent" class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
+                <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em;">
                     <p>&nbsp;</p>
-                    <p style="color:#F00; font-size:1.2em;"><strong>Le syst&egrave;me a d&eacute;tect&eacute; un probl&egrave;me de G&eacute;olocalisation. Veuillez activer la G&eacute;olocalisation, puis red&eacute;marrer votre appareil.</strong></p>
+                    <p style="color:#09F; font-size:1.2em;"><strong>Un test de G&eacute;olocalisation est recquis.</strong></p>
                     <br>
-                    <p>Vous pouvez effectuer un test, si rien ne se passe pendant 30 secondes, veuillez suivre la proc&eacute;dure en rouge</p>
-                    <input type="button" data-theme="c" data-icon="check" onClick="testGeoloc()" value="Test"/>
+                    <p>Appuiyez sur le bouton test, si rien ne se passe pendant 30 secondes, veuillez suivre la proc&eacute;dure en rouge</p>
+                    <input type="button" data-theme="b" data-icon="check" onClick="testGeoloc()" value="Test"/>
+                    <p style="color:#F00; font-size:1.2em;">Veuillez activer la G&eacute;olocalisation, puis red&eacute;marrer votre appareil.</strong></p>
                </div>                    
             </div>
         </div>
