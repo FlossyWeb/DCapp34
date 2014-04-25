@@ -1084,18 +1084,16 @@
 				document.location.href='index.html';
 				//$.mobile.changePage( "test.html", { transition: "slide"} );
 			}
-			/*
 			// Advert user that the app may need his Android device to be rebooted, for geolocation to work.
 			var droidFirstInstall = $.localStorage.getItem('v1.3.0');
 			if(!droidFirstInstall) {
-				$.localStorage.setItem('v1.3.0', false);
+				$.localStorage.setItem('v1.3.0', true);
 				if (navigator.userAgent.toLowerCase().match(/android/)) {
 					setTimeout(function () {
 						$.mobile.pageContainer.pagecontainer("change", "#droidFirstInstall", { transition: "slide"} );
 					 }, 3000);
 				}
 			}
-			*/
 			//setTimeout('dispo()', 10000);
 			if(!app) {
 				getLocation();
