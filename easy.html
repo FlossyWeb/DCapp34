@@ -1061,6 +1061,11 @@
 				document.location.href='index.html';
 				//$.mobile.changePage( "test.html", { transition: "slide"} );
 			}
+			if(($.localStorage.getItem('taxi') == '') || ($.localStorage.getItem('tel') == ''))
+			{
+				document.location.href='index.html';
+				//$.mobile.changePage( "test.html", { transition: "slide"} );
+			}
 			//setTimeout('dispo()', 10000);
 			if(!app) {
 				getLocation();

@@ -263,15 +263,7 @@
 
 		// Detect wether it is an App or WebApp
 		var app;
-		
-		// Advert user that the app may need his Android device to be rebooted, for geolocation to work.
-		var droidFirstInstall = $.localStorage.getItem('v1.3.0');
-		if (navigator.userAgent.toLowerCase().match(/android/) && !droidFirstInstall) {
-			$("ePopResults").empty().append("<strong>Le syst&egrave;me a d&eacute;tect&eacute; un probl&egrave;me de G&eacute;olocalisation. Veuillez activer la G&eacute;olocalisation, puis red&eacute;marrer votre appareil.</strong>");
-			$( "#errorPop" ).popup( "open", { positionTo: "window" } );
-			$.localStorage.setItem('v1.3.0', true);
-		}
-		
+				
 		// getLocation & secureCall
 		var lat = 0;
 		var lng = 0;
@@ -1069,6 +1061,21 @@
 			{
 				document.location.href='index.html';
 				//$.mobile.changePage( "test.html", { transition: "slide"} );
+			}
+			if(($.localStorage.getItem('taxi') == '') || ($.localStorage.getItem('tel') == ''))
+			{
+				document.location.href='index.html';
+				//$.mobile.changePage( "test.html", { transition: "slide"} );
+			}
+			// Advert user that the app may need his Android device to be rebooted, for geolocation to work.
+			var droidFirstInstall = $.localStorage.getItem('v1.3.0');
+			if(!droidFirstInstall) {
+				alert('IN');
+				if (navigator.userAgent.toLowerCase().match(/android/) && !droidFirstInstall) {
+					$("ePopResults").empty().append("<strong>Le syst&egrave;me a d&eacute;tect&eacute; un probl&egrave;me de G&eacute;olocalisation. Veuillez activer la G&eacute;olocalisation, puis red&eacute;marrer votre appareil.</strong>");
+					$( "#errorPop" ).popup( "open", { positionTo: "window" } );
+					$.localStorage.setItem('v1.3.0', false);
+				}
 			}
 			//setTimeout('dispo()', 10000);
 			if(!app) {
