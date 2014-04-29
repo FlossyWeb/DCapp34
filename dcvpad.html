@@ -513,20 +513,14 @@
     <body style="margin:0px; padding:0px;">
     <div data-role="page" data-theme="b" style="background: #000 url(visuels/bg.png) top left repeat-x;" id="infos">
         <div data-role="header">
-            <a href="#" onClick="goBackMode()" class="ui-btn ui-btn-a ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back" data-transition="slide" data-ajax="false">
+            <a href="#" onClick="goBackMode()" class="ui-btn ui-btn-b ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back" data-transition="slide" data-ajax="false">
                 <p style="font-size:16px"><b>Retour</b></p>
             </a>
-            <span class="ui-title"></span>
         </div>
         <div class="ui-content" role="main">
             <center>
-            <!-- 
-            <a href="taxipad_portal.php" class="back"><img src="picts/Back_blue.png" /></a>
-            <a href="taxipad_portal.php" class="back"><img src="picts/back_button.png" /></a>
-            <div style="display:block; height:30px"></div>
-            -->
-            <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em; display:block;">
-                <p><b>Envoyez une course</b></p>
+            <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em; margin-top:1em; display:block;">
+                <img src="visuels/logo.png" width="60%" style="margin-bottom:-0.6em; max-width:252px"/>
                 <input type="hidden" id="operator" size="40" value="0"/>
                 <input type="hidden" id="hostname" size="40" value=""/>
                 <input type="hidden" id="group" size="16" value="1"/>
@@ -618,6 +612,17 @@
                     </div>
                     <div class="ui-content" role="main">
                         <div id="smsReturn"></div>
+                    </div>
+                </div>
+                <div data-role="popup" data-theme="a" id="errorPop" data-dismissible="true" data-overlay-theme="b">
+					<a href="#home" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Fermer</a>
+                    <div data-theme="a" data-role="header">
+                        <h1>
+                            G&eacute;olocalisation
+                        </h1>
+                    </div>
+                    <div class="ui-content" role="main">
+                        <div id="ePopResults"></div>
                     </div>
                 </div>
             </div>
