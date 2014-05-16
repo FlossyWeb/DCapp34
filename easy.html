@@ -846,10 +846,10 @@
 		function unEasy()
 		{
 			$.mobile.loading( "show" );
-			$.localStorage.setItem('easy', false)
+			$.localStorage.setItem('easy', 0)
 			var wait2go = setTimeout( function () {
 				document.location.href='home.html';
-			}, 1000);
+			}, 2000);
 		}
 		
 		// Checks App or Browser
