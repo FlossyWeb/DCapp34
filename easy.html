@@ -1043,19 +1043,6 @@
 					
 		$(document).bind( 'pagecreate', function() {
 		
-			var tel = $.localStorage.getItem('tel');
-			$.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel, dep: '34'}, function(data) {
-				// GET SHIT BACK !!
-				$.localStorage.setItem('civil', data.civil);
-				$.localStorage.setItem('nom', data.nom);
-				$.localStorage.setItem('prenom', data.prenom);
-				$.localStorage.setItem('taxi', data.taxi);
-				$.localStorage.setItem('tel', data.tel);
-				$.localStorage.setItem('siret', data.siret);
-				$.localStorage.setItem('email', data.email);
-				$.localStorage.setItem('station', data.station);
-				$.localStorage.setItem('group', data.group);
-			}, "json");
 			if(!$.localStorage.getItem('pass'))
 			{
 				document.location.href='index.html';
