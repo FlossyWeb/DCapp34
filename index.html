@@ -67,18 +67,6 @@
 			};
         </script>        
         <script type="application/javascript" src="js/add2home.js"></script>
-        <script type="text/javascript">		
-			// Attendre que PhoneGap soit prêt	    //
-			document.addEventListener("deviceready", onDeviceReady, false);
-		
-			// PhoneGap est prêt
-			function onDeviceReady() {
-				if(navigator.network.connection.type == Connection.NONE){
-					$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
-				}
-				StatusBar.overlaysWebView(false);
-			}
-		</script>
         <script type="text/javascript" src="js/jquery.validate.js"></script>
 		<script type="text/javascript">
 
@@ -331,9 +319,27 @@
 				});
 			}
 
+			// Checks App or Browser
+			app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1 && document.URL.indexOf("localhost") != 7;
+			if ( app ) {
+				// Attendre que PhoneGap soit prêt	    //
+				document.addEventListener("deviceready", onDeviceReady, false);
+			
+				// PhoneGap est prêt
+				function onDeviceReady() {
+					if(navigator.network.connection.type == Connection.NONE){
+						$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
+					}
+					StatusBar.overlaysWebView(false);
+					active();				
+				}
+			}
+			
 			$(document).bind( 'pagecreate', function() {
 
-				active();				
+				if(!app) {
+					active();				
+				}
 				footer();
 
 				$("#login").submit(function(event) {
