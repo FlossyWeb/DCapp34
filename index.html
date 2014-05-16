@@ -208,14 +208,12 @@
 						//navigator.splashscreen.hide();
 						$.mobile.loading( "show" );
 						var wait2go = setTimeout( function () {
-							if($.localStorage.getItem('easy'))
+							if($.localStorage.getItem('easy') == 1)
 							{
-								$.mobile.loading( "hide" );
 								document.location.href='easy.html';
 								//$.mobile.changePage( "test.html", { transition: "slideup"} );
 							}
 							else {
-								$.mobile.loading( "hide" );
 								document.location.href='home.html';
 							}
 						}, 1000);
