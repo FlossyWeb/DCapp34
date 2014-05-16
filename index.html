@@ -34,6 +34,7 @@
                 $.support.cors = true;
                 $.mobile.allowCrossDomainPages = true;
 				$.mobile.selectmenu.prototype.options.nativeMenu = false;
+				$.mobile.ajaxEnabled = false;
             });
         </script>    
 		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
@@ -207,15 +208,17 @@
 					{
 						//navigator.splashscreen.hide();
 						$.mobile.loading( "show" );
-						if($.localStorage.getItem('easy') == 1)
-						{
-							window.location='easy.html';
-							//$.mobile.pageContainer.pagecontainer("change", "easy.html", { reload: true} );
-						}
-						else {
-							window.location='home.html';
-							//$.mobile.pageContainer.pagecontainer("change", "home.html", { reload: true} );
-						}
+						var wait2go = setTimeout( function () {
+							if($.localStorage.getItem('easy') == 1)
+							{
+								window.location='easy.html';
+								//$.mobile.pageContainer.pagecontainer("change", "easy.html", { reload: true} );
+							}
+							else {
+								window.location='home.html';
+								//$.mobile.pageContainer.pagecontainer("change", "home.html", { reload: true} );
+							}
+						}, 1000);
 					}
 					else if (!actived) {
 						var display = '<p style="color:red;"><b>Il semblerait que votre compte ait &eacute;t&eacute; d&eacute;sactiv&eacute;</b></p><a href="mailto:info@taxibleuservices.com"style="width:32%;display:inline-block;"><img src="visuels/Contact_flat.png" width="90%"/></a>';

@@ -34,7 +34,8 @@
             $.support.cors = true;
             $.mobile.allowCrossDomainPages = true;
             //$.mobile.selectmenu.prototype.options.nativeMenu = false;
-        });
+			$.mobile.ajaxEnabled = false;
+       });
     </script>    
     <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
     <script src="phonegap.js"></script>
@@ -863,7 +864,9 @@
 		{
 			$.mobile.loading( "show" );
 			$.localStorage.setItem('easy', 1)
-			window.location = "easy.html";
+			var wait2go = setTimeout( function () {
+				window.location = "easy.html";
+			}, 1000);
 		}
 		
 		// Checks App or Browser
