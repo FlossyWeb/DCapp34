@@ -193,6 +193,16 @@
 			{
 				$.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel, dep: '34'}, function(data) {
 					var actived = data.active;
+					// GET SHIT BACK !!
+					$.localStorage.setItem('civil', data.civil);
+					$.localStorage.setItem('nom', data.nom);
+					$.localStorage.setItem('prenom', data.prenom);
+					$.localStorage.setItem('taxi', data.taxi);
+					$.localStorage.setItem('tel', data.tel);
+					$.localStorage.setItem('siret', data.siret);
+					$.localStorage.setItem('email', data.email);
+					$.localStorage.setItem('station', data.station);
+					$.localStorage.setItem('group', data.group);
 					if($.localStorage.getItem('pass') && actived)
 					{
 						//navigator.splashscreen.hide();

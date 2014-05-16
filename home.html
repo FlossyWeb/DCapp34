@@ -1093,7 +1093,7 @@
 		});
 					
 		$(document).bind( 'pagecreate', function() {
-		
+			/*
 			var tel = $.localStorage.getItem('tel');
 			$.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel, dep: '34'}, function(data) {
 				// GET SHIT BACK !!
@@ -1107,18 +1107,17 @@
 				$.localStorage.setItem('station', data.station);
 				$.localStorage.setItem('group', data.group);
 			}, "json");
+			*/
 			if(!$.localStorage.getItem('pass'))
 			{
 				document.location.href='index.html';
 				//$.mobile.changePage( "test.html", { transition: "slide"} );
 			}
-			/*
 			if(($.localStorage.getItem('taxi') == '') || ($.localStorage.getItem('tel') == ''))
 			{
 				document.location.href='index.html';
 				//$.mobile.changePage( "test.html", { transition: "slide"} );
 			}
-			*/
 			// Advert user that the app may need his Android device to be rebooted, for geolocation to work.
 			var droidFirstInstall = 1;
 			var droidFirstInstall = $.localStorage.getItem('v1.3.0');
@@ -1127,7 +1126,7 @@
 				if (navigator.userAgent.toLowerCase().match(/android/)) {
 					setTimeout(function () {
 						$.mobile.pageContainer.pagecontainer("change", "#droidFirstInstall", { transition: "slide"} );
-					 }, 3000);
+					 }, 6000);
 				}
 			}
 			//setTimeout('dispo()', 10000);
