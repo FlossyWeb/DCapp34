@@ -864,8 +864,9 @@
 			$.mobile.loading( "show" );
 			$.localStorage.setItem('easy', 1)
 			var wait2go = setTimeout( function () {
+				$.mobile.loading( "hide" );
 				document.location.href='easy.html';
-			}, 2000);
+			}, 1000);
 		}
 		
 		// Checks App or Browser
@@ -1107,7 +1108,6 @@
 				$.localStorage.setItem('station', data.station);
 				$.localStorage.setItem('group', data.group);
 			}, "json");
-			*/
 			if(!$.localStorage.getItem('pass'))
 			{
 				document.location.href='index.html';
@@ -1118,6 +1118,7 @@
 				document.location.href='index.html';
 				//$.mobile.changePage( "test.html", { transition: "slide"} );
 			}
+			*/
 			// Advert user that the app may need his Android device to be rebooted, for geolocation to work.
 			var droidFirstInstall = 1;
 			var droidFirstInstall = $.localStorage.getItem('v1.3.0');

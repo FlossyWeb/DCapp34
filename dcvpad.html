@@ -489,10 +489,12 @@
 		$.mobile.loading( "show" );
 		if($.localStorage.getItem('easy'))
 		{
+			$.mobile.loading( "hide" );
 			document.location.href='easy.html';
 			//$.mobile.changePage( "test.html", { transition: "slideup"} );
 		}
 		else {
+			$.mobile.loading( "hide" );
 			document.location.href='home.html';
 		}
     }        

@@ -848,8 +848,9 @@
 			$.mobile.loading( "show" );
 			$.localStorage.setItem('easy', 0)
 			var wait2go = setTimeout( function () {
+				$.mobile.loading( "hide" );
 				document.location.href='home.html';
-			}, 2000);
+			}, 1000);
 		}
 		
 		// Checks App or Browser
