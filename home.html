@@ -977,6 +977,40 @@
 			};
 			sms.send(number, message, intent, success, error);
 		}
+		function SharePad()
+		{
+			var number = $('#telShare').val();
+			var message = "Rendez-vous sur le WebService myTaxi 34 Hôtels & Restaurants en suivant ce lien : http://ecra.se/AA";
+			var intent = ""; //leave empty for sending sms using default intent
+			var success = function () {
+				//alert('Message sent successfully');
+				$('#smsReturn').empty().append('Message envoy&eacute; avec succ&egrave;s, Merci');
+				$( "#popSms" ).popup( "open", { positionTo: "window" } );
+			};
+			var error = function (e) {
+				//alert('Message Failed:' + e); 
+				$('#smsReturn').empty().append('Probl&egrave;me lors de l&rsquo;envoi du message: ' + e);
+				$( "#popSms" ).popup( "open", { positionTo: "window" } );
+			};
+			sms.send(number, message, intent, success, error);
+		}
+		function SharePro()
+		{
+			var number = $('#telShare').val();
+			var message = "Téléchargez l'app myTaxi 34 Pro sur les sores en suivant ce lien : http://www.taximedia.fr/stores.php?app=pro&dep=34  ou rendez-vous sur le WebService en suivant ce lien : http://ecra.se/3jt";
+			var intent = ""; //leave empty for sending sms using default intent
+			var success = function () {
+				//alert('Message sent successfully');
+				$('#smsReturn').empty().append('Message envoy&eacute; avec succ&egrave;s, Merci');
+				$( "#popSms" ).popup( "open", { positionTo: "window" } );
+			};
+			var error = function (e) {
+				//alert('Message Failed:' + e); 
+				$('#smsReturn').empty().append('Probl&egrave;me lors de l&rsquo;envoi du message: ' + e);
+				$( "#popSms" ).popup( "open", { positionTo: "window" } );
+			};
+			sms.send(number, message, intent, success, error);
+		}
 		function contactShare()
 		{
 			var successCallbackPick = function(result){
@@ -1825,8 +1859,10 @@
                                 </td></tr>
                                 </tbody>
                             </table>
-                            <a href="#" onClick="Share()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail ui-shadow-icon ui-corner-all"><b>Partager myTaxi 34</b></a>
-                            <a href="#" onClick="ShareArt()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail ui-shadow-icon ui-corner-all"><b>Partager DCVP 34</b></a>
+                            <a href="#" onClick="Share()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail ui-shadow-icon ui-corner-all"><b>App Particuliers</b></a>
+                            <a href="#" onClick="ShareArt()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail ui-shadow-icon ui-corner-all"><b>App Artisans</b></a>
+                            <a href="#" onClick="SharePad()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail ui-shadow-icon ui-corner-all"><b>App Hotels/Resto</b></a>
+                            <a href="#" onClick="SharePro()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail ui-shadow-icon ui-corner-all"><b>App Client Pro</b></a>
                         </div>
                     </div>
                     <input type="button" value="Scanner un QrCode" onClick="goScan()" data-icon="camera"/>
