@@ -863,9 +863,7 @@
 		{
 			$.mobile.loading( "show" );
 			$.localStorage.setItem('easy', 1)
-			var wait2go = setTimeout( function () {
-				document.location.href='easy.html';
-			}, 1000);
+			window.location = "easy.html";
 		}
 		
 		// Checks App or Browser
