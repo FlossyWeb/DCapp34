@@ -211,14 +211,14 @@
 						var wait2go = setTimeout( function () {
 							if($.localStorage.getItem('easy') == 1)
 							{
-								window.location.assign('easy.html');
+								window.location='easy.html';
 								//$.mobile.pageContainer.pagecontainer("change", "easy.html", { reload: true} );
 							}
 							else {
-								window.location.assign('home.html');
+								window.location='home.html';
 								//$.mobile.pageContainer.pagecontainer("change", "home.html", { reload: true} );
 							}
-						}, 1000);
+						}, 6000);
 					}
 					else if (!actived) {
 						var display = '<p style="color:red;"><b>Il semblerait que votre compte ait &eacute;t&eacute; d&eacute;sactiv&eacute;</b></p><a href="mailto:info@taxibleuservices.com"style="width:32%;display:inline-block;"><img src="visuels/Contact_flat.png" width="90%"/></a>';
@@ -343,7 +343,8 @@
 						$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
 					}
 					StatusBar.overlaysWebView(false);
-					active();				
+					active();
+					//setTimeout('active()', 1000);
 				}
 			}
 			
