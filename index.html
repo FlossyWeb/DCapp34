@@ -192,7 +192,7 @@
 		
 			function active()
 			{
-				$.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel, dep: '34'}, function(data) {
+				var posting = $.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel, dep: '34'}, function(data) {
 					var actived = data.active;
 					// GET SHIT BACK !!
 					$.localStorage.setItem('civil', data.civil);
@@ -204,7 +204,9 @@
 					$.localStorage.setItem('email', data.email);
 					$.localStorage.setItem('station', data.station);
 					$.localStorage.setItem('group', data.group);
-					if($.localStorage.getItem('pass') && actived)
+				}, "json");
+				posting.done(function( data ) {
+					if($.localStorage.getItem('pass') && data.active)
 					{
 						//navigator.splashscreen.hide();
 						$.mobile.loading( "show" );
@@ -218,14 +220,14 @@
 								window.location='home.html';
 								//$.mobile.pageContainer.pagecontainer("change", "home.html", { reload: true} );
 							}
-						}, 1000);
+						}, 2000);
 					}
 					else if (!actived) {
 						var display = '<p style="color:red;"><b>Il semblerait que votre compte ait &eacute;t&eacute; d&eacute;sactiv&eacute;</b></p><a href="mailto:info@taxibleuservices.com"style="width:32%;display:inline-block;"><img src="visuels/Contact_flat.png" width="90%"/></a>';
 						$("#returns").empty().append(display);
 						//alert(actived +' - '+  $.localStorage.getItem('tel'));
 					}
-				}, "json");
+				});
 			}
 			
 			// Urgence call => Danger zone
@@ -343,18 +345,7 @@
 						$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
 					}
 					StatusBar.overlaysWebView(false);
-					$.mobile.loading( "show" );
-					var wait2go = setTimeout( function () {
-						if($.localStorage.getItem('easy') == 1)
-						{
-							window.location='easy.html';
-							//$.mobile.pageContainer.pagecontainer("change", "easy.html", { reload: true} );
-						}
-						else {
-							window.location='home.html';
-							//$.mobile.pageContainer.pagecontainer("change", "home.html", { reload: true} );
-						}
-					}, 1000);
+					active();
 					//setTimeout('active()', 1000);
 				}
 			}
@@ -362,7 +353,6 @@
 			$(document).bind( 'pagecreate', function() {
 
 				if(!app) {
-					alert('app var problem');
 					active();				
 				}
 				footer();
