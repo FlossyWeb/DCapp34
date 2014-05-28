@@ -23,11 +23,10 @@
                 media="(device-width: 320px) and (device-height: 568px)
                 and (-webkit-device-pixel-ratio: 2)"
                 href="visuels/startup_image_i5.png">
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css" />
         <link type="text/css" rel="stylesheet" href="css/mobile.css" />
-        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
-		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/jquery-1.11.1.min.js"></script>
+        <script src="js/jquery-migrate-1.2.1.min.js"></script>
 		<script type="text/javascript">
             $( document ).bind( "mobileinit", function() {
                 // Make your jQuery Mobile framework configuration changes here!
@@ -37,7 +36,7 @@
 				//$.mobile.ajaxEnabled = false;
             });
         </script>    
-		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+		<script src="js/jquery.mobile-1.4.2.min.js"></script>
         <script src="phonegap.js"></script>
         <script src="js/plugins/Calendar.js"></script>
         <script src="barcodescanner.js"></script>
@@ -49,13 +48,14 @@
         <script src="GAPlugin.js"></script>
         <script src="cdv-plugin-fb-connect.js"></script>
 		<script src="facebook-js-sdk.js"></script>
-        -->
-        <script type="text/javascript" src="js/jquery.html5storage.min.js"></script>
+        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
         <script type="text/javascript" src="js/jquery.ui.autocomplete.min.js"></script>
         <script type="text/javascript" src="js/demo.js"></script>
         <script type="text/javascript" src="ui/jquery.ui.map.js"></script>
         <script type="text/javascript" src="ui/jquery.ui.map.services.js"></script>
         <script type="text/javascript" src="ui/jquery.ui.map.extensions.js"></script>
+        -->
+        <script type="text/javascript" src="js/jquery.html5storage.min.js"></script>
         <link rel="stylesheet" href="css/add2home.css"/>
 		<script type="text/javascript">
 			var addToHomeConfig = {
@@ -220,7 +220,7 @@
 								window.location='home.html';
 								//$.mobile.pageContainer.pagecontainer("change", "home.html", { reload: true} );
 							}
-						}, 2000);
+						}, 1000);
 					}
 					else if (!data.active) {
 						var display = '<p style="color:red;"><b>Il semblerait que votre compte ait &eacute;t&eacute; d&eacute;sactiv&eacute;</b></p><a href="mailto:info@taxibleuservices.com"style="width:32%;display:inline-block;"><img src="visuels/Contact_flat.png" width="90%"/></a>';
