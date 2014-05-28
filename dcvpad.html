@@ -403,7 +403,7 @@
 				$('#dblinks').append($('<input class="cabs" id="' + i + '" type="hidden" onclick="sendJob(\''+ url +'\')" />'));
 			});
 			num_req = num_req+1;
-			i = i+1;
+			i = parseInt(i,10)+1;
 			url = 'taxi=0000&tel=0000000000&idcourse=' + idcourse + '&num_req=' + num_req + '&rdvpoint=' + rdvpoint + '&lat=' + rdvlat + '&lng=' + rdvlng + '&comments=' + comments + '&cell=' + cell + '&when=' + when + '&date=' + date + '&operator=' + operator + '&dep=34&group=1&ack=0&db=1';
 			url = url.replace(/'/g, "&rsquo;");
 			// Sends Auction Request to TaxiMedia Server
