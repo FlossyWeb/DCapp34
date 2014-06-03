@@ -345,8 +345,18 @@
 						$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
 					}
 					StatusBar.overlaysWebView(false);
-					active();
-					//setTimeout('active()', 1000);
+					//active();
+					if($.localStorage.getItem('tel') && $.localStorage.getItem('pwd'))
+					{
+						$('#tel').val($.localStorage.getItem('tel'));
+						$('#pwd').val($.localStorage.getItem('pwd'));
+					}
+					var timing = setTimeout( function () {
+						if($.localStorage.getItem('pass') && $.localStorage.getItem('tel') && $.localStorage.getItem('pwd'))
+						{
+							$("#subLog").trigger('click');
+						}
+					}, 1000);
 				}
 			}
 			
@@ -372,6 +382,7 @@
 						$.localStorage.setItem('email', data.email);
 						$.localStorage.setItem('station', data.station);
 						$.localStorage.setItem('group', data.group);
+						$.localStorage.setItem('pwd', data.pwd);
 						$.localStorage.setItem('mngid', data.mngid);
 						$.localStorage.setItem('pass', data.pass);
 						$.sessionStorage.setItem('badid', data.badid);
@@ -433,7 +444,7 @@
 							$.localStorage.setItem('siret', data.siret);
 							$.localStorage.setItem('email', data.email);
 							$.localStorage.setItem('group', data.group);
-							$.sessionStorage.setItem('pwd', data.pwd);
+							$.localStorage.setItem('pwd', data.pwd);
 							$.sessionStorage.setItem('subscribed', data.subscribed);
 							$.sessionStorage.setItem('telexist', data.telexist);
 							$.sessionStorage.setItem('cabexist', data.cabexist);
@@ -623,8 +634,8 @@
                             </h1>
                             <fieldset><legend></legend>
                             <form  action="/" method="post" name="id" id="login" data-ajax="false" data-transition="slidefade">
-                                <input type="tel" name="log" size="20" maxlength="10" placeholder="Identifiant"/>
-                                <input type="password" name="pass" size="20" maxlength="16" placeholder="Mot de Passe"/>
+                                <input type="tel" id="tel" name="log" size="20" maxlength="10" placeholder="Identifiant"/>
+                                <input type="password" id="pwd" name="pass" size="20" maxlength="16" placeholder="Mot de Passe"/>
                                 <input type="hidden" name="dep" value="34"/>
                                 <input type="submit" id="subLog" value=" Connexion "/>
                             </form>
