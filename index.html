@@ -345,7 +345,8 @@
 						$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
 					}
 					StatusBar.overlaysWebView(false);
-					//active();
+					active();
+					/*
 					if($.localStorage.getItem('tel') && $.localStorage.getItem('pwd'))
 					{
 						$('#tel').val($.localStorage.getItem('tel'));
@@ -357,6 +358,7 @@
 							$("#subLog").trigger('click');
 						}
 					}, 1000);
+					*/
 				}
 			}
 			

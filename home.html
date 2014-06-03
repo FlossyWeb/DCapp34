@@ -887,7 +887,7 @@
 				//Functions to call only at app first load
 				getLocation();
 				dispo();
-				update();
+				setTimeout('update()', 2000);
 				scanner = cordova.require("cordova/plugin/BarcodeScanner");
 			}
 		}
