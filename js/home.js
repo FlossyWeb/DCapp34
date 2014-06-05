@@ -629,7 +629,7 @@ function goEasy()
 	$.mobile.loading( "show" );
 	$.localStorage.setItem('easy', 1)
 	var wait2go = setTimeout( function () {
-		window.location.assign("easy.html");
+		window.location.href="easy.html";
 	}, 1000);
 }
 
@@ -882,6 +882,7 @@ $(document).bind( 'pagecreate', function() {
 		document.location.href='index.html';
 		//$.mobile.changePage( "test.html", { transition: "slide"} );
 	}
+	*/
 	// Advert user that the app may need his Android device to be rebooted, for geolocation to work.
 	var droidFirstInstall = 1;
 	var droidFirstInstall = $.localStorage.getItem('v1.3.0');
@@ -893,7 +894,6 @@ $(document).bind( 'pagecreate', function() {
 			 }, 6000);
 		}
 	}
-	*/
 	
 	//setTimeout('dispo()', 10000);
 	if(!app) {
