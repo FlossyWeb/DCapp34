@@ -612,6 +612,7 @@ function unEasy()
 	$.localStorage.setItem('easy', 0)
 	$.mobile.loading( "show" );
 	var wait2go = setTimeout( function () {
+		$.mobile.loading( "hide" );
 		window.location.href="home.html";
 		//$.mobile.pageContainer.pagecontainer("change", "home.html", { reload: true} );
 	}, 1000);

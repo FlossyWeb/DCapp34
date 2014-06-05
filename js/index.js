@@ -33,10 +33,12 @@ function active()
 			var wait2go = setTimeout( function () {
 				if($.localStorage.getItem('easy') == 1)
 				{
+					$.mobile.loading( "hide" );
 					window.location.href='easy.html';
 					//$.mobile.pageContainer.pagecontainer("change", "easy.html", { reload: true} );
 				}
 				else {
+					$.mobile.loading( "hide" );
 					window.location.href='home.html';
 					//$.mobile.pageContainer.pagecontainer("change", "home.html", { reload: true} );
 				}
