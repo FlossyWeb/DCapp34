@@ -33,11 +33,11 @@ function active()
 			var wait2go = setTimeout( function () {
 				if($.localStorage.getItem('easy') == 1)
 				{
-					window.location='easy.html';
+					window.location.replace("easy.html");
 					//$.mobile.pageContainer.pagecontainer("change", "easy.html", { reload: true} );
 				}
 				else {
-					window.location='home.html';
+					window.location.replace("home.html");
 					//$.mobile.pageContainer.pagecontainer("change", "home.html", { reload: true} );
 				}
 			}, 1000);
