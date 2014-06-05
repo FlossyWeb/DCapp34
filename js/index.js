@@ -29,7 +29,7 @@ function active()
 		if($.localStorage.getItem('pass') && data.active)
 		{
 			//navigator.splashscreen.hide();
-			$.mobile.loading( "show" );
+			//$.mobile.loading( "show" );
 			var wait2go = setTimeout( function () {
 				if($.localStorage.getItem('easy') == 1)
 				{
