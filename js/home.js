@@ -265,7 +265,7 @@ function update()
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
 			document.getElementById("play").play();
-			document.getElementById("play_home").play();
+			//document.getElementById("play_home").play();
 			//navigator.notification.beep(2);
 			navigator.notification.vibrate(3600);
 		}
@@ -274,23 +274,7 @@ function update()
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			document.getElementById("play").pause();
-			document.getElementById("play_home").pause();
-		}
-	});
-
-	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_drive.php?cmd=1", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group }, function(data){ 
-		$("#screen_job_cmd").empty().append(data);
-		if (data != 0)
-		{
-			$("#warn_cmd").empty().append('<img src="visuels/Alerte_course_flat.png" width="100%"/>');
-			document.getElementById("play_cmd").play();
-			//navigator.notification.beep(2);
-			navigator.notification.vibrate(3600);
-		}
-		else
-		{
-			$("#warn_cmd").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
-			document.getElementById("play_cmd").pause();
+			//document.getElementById("play_home").pause();
 		}
 	});
 
@@ -337,51 +321,6 @@ function Dispo_Off()
 	$("#dispo_jobs").empty().append('<a href="#jobs_taker" onClick="Dispo_On()"><img src="visuels/DispoOff_flat.png" width="100%"/></a>');
 	$("#dispo_cmd").empty().append('<a href="#jobs_taker" onClick="Dispo_On()"><img src="visuels/DispoOff_flat.png" width="100%"/></a>');
 	$.sessionStorage.setItem('dispo', '0');
-}
-
-function playAudio(src) {
-	// Créer l'objet Media à partir de src
-	my_media = new Media(src, onSuccess, onError);
-
-	// Lire le clip audio
-	my_media.play();
-	/*
-	// Récupérer la positon courante une fois par seconde
-	if (mediaTimer == null) {
-		mediaTimer = setInterval(function() {
-			// Récupérer la positon de my_media
-			my_media.getCurrentPosition(
-				// Callback en cas de succès
-				function(position) {
-					if (position > -1) {
-						setAudioPosition((position) + " sec");
-					}
-				},
-				// Callback en cas d'erreur
-				function(e) {
-					console.log("Erreur lors de la récupération de la position = " + e);
-					setAudioPosition("Erreur : " + e);
-				}
-			);
-		}, 1000);
-	}
-	*/
-}
-
-// Mettre en pause la lecture audio
-function pauseAudio() {
-	if (my_media) {
-		my_media.pause();
-	}
-}
-
-// Arrêter la lecture audio
-function stopAudio() {
-	if (my_media) {
-		my_media.stop();
-	}
-	//clearInterval(mediaTimer);
-	//mediaTimer = null;
 }
 
 function Sound_On()
@@ -456,17 +395,6 @@ function delayCall(query_string)
 	$.sessionStorage.setItem('query_string', query_string);
 	$.mobile.pageContainer.pagecontainer("change", "#delayPop", { transition: "slide"} );
 }
-/*
-$(document).on( "click", "#directCall", function() {
-	$.mobile.loading( "show" );
-});
-$(document).on( "click", "#diaryLink", function() {
-	$.mobile.loading( "show" );
-});
-$(document).on( "click", ".hide-page-loading-msg", function() {
-	$.mobile.loading( "hide" );
-});
-*/
 function directCall()
 {
 	$.mobile.loading( "show" );
@@ -623,15 +551,6 @@ function cgv()
 {
 	//window.plugins.childBrowser.showWebPage('http://taxibleuservices.com/client/docs/CGV.pdf', { showLocationBar: true });
 	window.open('http://taxibleuservices.com/client/docs/CGV.pdf','_blank','location=yes,enableViewportScale=yes,closebuttoncaption=Fermer');
-}
-function goEasy()
-{
-	$.mobile.loading( "show" );
-	$.localStorage.setItem('easy', 1)
-	var wait2go = setTimeout( function () {
-		$.mobile.loading( "hide" );
-		window.location.href="easy.html";
-	}, 1000);
 }
 
 // Checks App or Browser
@@ -895,7 +814,7 @@ $(document).bind( 'pagecreate', function() {
 		}
 	}
 	*/
-	
+	$( "body>[data-role='panel']" ).panel().enhanceWithin();
 	//setTimeout('dispo()', 10000);
 	if(!app) {
 		getLocation();

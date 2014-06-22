@@ -30,19 +30,7 @@ function active()
 		{
 			//navigator.splashscreen.hide();
 			$.mobile.loading( "show" );
-			var wait2go = setTimeout( function () {
-				if($.localStorage.getItem('easy') == 1)
-				{
-					$.mobile.loading( "hide" );
-					window.location.href='easy.html';
-					//$.mobile.pageContainer.pagecontainer("change", "easy.html", { reload: true} );
-				}
-				else {
-					$.mobile.loading( "hide" );
-					window.location.href='home.html';
-					//$.mobile.pageContainer.pagecontainer("change", "home.html", { reload: true} );
-				}
-			}, 1000);
+			window.location.href='home.html';
 		}
 		else if (!data.active) {
 			var display = '<p style="color:red;"><b>Il semblerait que votre compte ait &eacute;t&eacute; d&eacute;sactiv&eacute;</b></p><a href="mailto:info@taxibleuservices.com"style="width:32%;display:inline-block;"><img src="visuels/Contact_flat.png" width="90%"/></a>';

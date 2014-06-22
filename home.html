@@ -63,29 +63,27 @@
     <script type="text/javascript" src="js/home.js"></script>
     </head>
     <body>
-    <center>
+        <div data-role="panel" id="homepanel" data-position="left" data-display="reveal" data-theme="e">
+            <!-- panel content goes here -->
+            <ul data-role="listview" data-inset="true" data-theme="b">
+              <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
+              <li><a href="#jobs_taker" data-transition="slide"><b>Courses directes</b></a></li>
+              <li><a href="#cmd" data-transition="slide"><b>Courses command&eacute;es</b></a></li>
+              <li><a href="#history" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bars"><b>Historique</b></a></li>
+              <li><a href="#planning" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-calendar"><b>Planning</b></a></li>
+              <li><a href="#manage" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-user"><b>Mon compte</b></a></li>
+              <li><a href="#directions_map" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-location"><b>Carte GPS</b></a></li>
+              <li><a href="#" onClick="help()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bullets"><b>Aide utilisateur</b></a></li>
+              <li><a href="#" onClick="taximedia()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>TaxiMedia.fr</b></a></li>
+              <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
+              <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
+              <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
+              <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
+            </ul>
+        </div><!-- /panel -->
+        <center>
         <div data-role="page" data-theme="a" id="home">
 
-            <div data-role="panel" id="homepanel" data-position="left" data-display="reveal" data-theme="e">
-                <!-- panel content goes here -->
-                <ul data-role="listview" data-inset="true" data-theme="b">
-                  <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
-                  <li><a href="#jobs_taker" data-transition="slide"><b>Courses directes</b></a></li>
-                  <li><a href="#cmd" data-transition="slide"><b>Courses command&eacute;es</b></a></li>
-                  <li><a href="#history" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bars"><b>Historique</b></a></li>
-                  <li><a href="#planning" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-calendar"><b>Planning</b></a></li>
-                  <li><a href="#manage" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-user"><b>Mon compte</b></a></li>
-                  <li><a href="#directions_map" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-location"><b>Carte GPS</b></a></li>
-                  <li><a href="#" onClick="help()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bullets"><b>Aide utilisateur</b></a></li>
-                  <li><a href="#" onClick="taximedia()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>TaxiMedia.fr</b></a></li>
-                  <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
-                  <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
-                  <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
-                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
-                </ul>
-                <a href="#"  onClick="goEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Simple</a>
-                <a href="#home" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
-            </div><!-- /panel -->
             <div class="ui-content" role="main" id="home_cont">
                 <div class="ui-bar-b ui-corner-all ui-shadow" style="padding:1em; text-align: left;">
                 <div style="text-align: left;">
@@ -183,12 +181,6 @@
                         <div id="ePopResults"></div>
                     </div>
                 </div>
-                <div id="player_home">
-                    <audio id="play_home" loop="loop" preload="auto" style="display:none" >
-                        <source src="http://www.taxibleuservices.com/client/sounds/ring.mp3" type="audio/mpeg" />
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
                 <a href="#homepanel" id="homepanel_poper"></a>
             </div>
             <div data-theme="a" data-role="footer" id="footer_cont0" data-position="fixed">
@@ -198,30 +190,10 @@
         </div>
         
         <div data-role="page" data-theme="a" id="jobs_taker">
-            <div data-role="panel" id="jobs_panel" data-position="left" data-display="reveal" data-theme="e">
-                <!-- panel content goes here -->
-                <ul data-role="listview" data-inset="true" data-theme="b">
-                  <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
-                  <li><a href="#jobs_taker" data-transition="slide"><b>Courses directes</b></a></li>
-                  <li><a href="#cmd" data-transition="slide"><b>Courses command&eacute;es</b></a></li>
-                  <li><a href="#history" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bars"><b>Historique</b></a></li>
-                  <li><a href="#planning" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-calendar"><b>Planning</b></a></li>
-                  <li><a href="#manage" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-user"><b>Mon compte</b></a></li>
-                  <li><a href="#directions_map" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-location"><b>Carte GPS</b></a></li>
-                  <li><a href="#" onClick="help()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bullets"><b>Aide utilisateur</b></a></li>
-                  <li><a href="#" onClick="taximedia()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>TaxiMedia.fr</b></a></li>
-                  <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
-                  <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
-                  <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
-                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
-                </ul>
-                <a href="#"  onClick="goEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Simple</a>
-                <a href="#jobs_taker" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
-            </div><!-- /panel -->
             <div data-theme="a" data-role="header" data-position="fixed">
 				<h1 style="padding: 0; margin: 0;">
                     <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#jobs_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
+                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
                 </h1>
             </div>
             <div class="ui-content" role="main">
@@ -291,30 +263,10 @@
             </div>
         </div>
         <div data-role="page" id="delayPop" data-transition="pop" data-theme="a">
-            <div data-role="panel" id="delay_panel" data-position="left" data-display="reveal" data-theme="e">
-                <!-- panel content goes here -->
-                <ul data-role="listview" data-inset="true" data-theme="b">
-                  <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
-                  <li><a href="#jobs_taker" data-transition="slide"><b>Courses directes</b></a></li>
-                  <li><a href="#cmd" data-transition="slide"><b>Courses command&eacute;es</b></a></li>
-                  <li><a href="#history" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bars"><b>Historique</b></a></li>
-                  <li><a href="#planning" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-calendar"><b>Planning</b></a></li>
-                  <li><a href="#manage" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-user"><b>Mon compte</b></a></li>
-                  <li><a href="#directions_map" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-location"><b>Carte GPS</b></a></li>
-                  <li><a href="#" onClick="help()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bullets"><b>Aide utilisateur</b></a></li>
-                  <li><a href="#" onClick="taximedia()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>TaxiMedia.fr</b></a></li>
-                  <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
-                  <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
-                  <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
-                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
-                </ul>
-                <a href="#"  onClick="goEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Simple</a>
-                <a href="#delayPop" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
-            </div><!-- /panel -->
             <div data-theme="a" data-role="header" data-position="fixed">
 				<h1 style="width:100%; padding: 0; margin: 0;">
                     <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#delay_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
+                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
                 </h1>
             </div>
             <div class="ui-content" role="main">
@@ -343,30 +295,10 @@
             </div>
         </div>
         <div data-role="page" data-theme="a" id="cmd">
-            <div data-role="panel" id="cmd_panel" data-position="left" data-display="reveal" data-theme="e">
-                <!-- panel content goes here -->
-                <ul data-role="listview" data-inset="true" data-theme="b">
-                  <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
-                  <li><a href="#jobs_taker" data-transition="slide"><b>Courses directes</b></a></li>
-                  <li><a href="#cmd" data-transition="slide"><b>Courses command&eacute;es</b></a></li>
-                  <li><a href="#history" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bars"><b>Historique</b></a></li>
-                  <li><a href="#planning" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-calendar"><b>Planning</b></a></li>
-                  <li><a href="#manage" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-user"><b>Mon compte</b></a></li>
-                  <li><a href="#directions_map" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-location"><b>Carte GPS</b></a></li>
-                  <li><a href="#" onClick="help()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bullets"><b>Aide utilisateur</b></a></li>
-                  <li><a href="#" onClick="taximedia()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>TaxiMedia.fr</b></a></li>
-                  <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
-                  <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
-                  <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
-                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
-                </ul>
-                <a href="#"  onClick="goEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Simple</a>
-                <a href="#cmd" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
-            </div><!-- /panel -->
             <div data-theme="a" data-role="header" data-position="fixed">
 				<h1 style="width:100%; padding: 0; margin: 0;">
                     <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#cmd_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
+                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
                 </h1>
             </div>
             <div class="ui-content" role="main">
@@ -406,27 +338,6 @@
                     </a>
                 </div>
                 <div class="cleaner"></div>
-                <a href="#secureDialogCmd" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-alert">Bouton d&rsquo;urgence</a>
-                <div data-role="popup" data-theme="a" id="secureDialogCmd" data-dismissible="false" data-overlay-theme="b">
-                    <div data-theme="a" data-role="header">
-                        <h1>
-                            Confirmation
-                        </h1>
-                    </div>
-                    <div class="ui-content" role="main">
-                        <h1>Lancer l&rsquo;appel d&rsquo;urgence ?</h1>
-                        <button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check" onClick="getLocationOnce()">CONFIRMER</button>
-                        <a href="#home" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete" data-transition="slideUp">ANNULER</a>
-                        <div id="secureResults"></div>
-                    </div>
-                </div>        
-                <div id="player_cmd">
-                    <audio id="play_cmd" loop="loop" preload="auto" style="display:none" >
-                        <source src="http://www.taxibleuservices.com/client/sounds/ring.mp3" type="audio/mpeg" />
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-                <div id="results"></div>
             </div>
             <div data-theme="a" data-role="footer" id="footer_cont3" data-position="fixed">
 				<div class="ui-bar-b ui-corner-all ui-shadow" style="width:96%;height:19px;"><marquee><b>Mise &agrave; jour des informations DCVP en cours.</b></marquee></div>
@@ -434,30 +345,10 @@
             </div>
         </div>
         <div data-role="page" data-theme="a" id="planning">
-            <div data-role="panel" id="planning_panel" data-position="left" data-display="reveal" data-theme="e">
-                <!-- panel content goes here -->
-                <ul data-role="listview" data-inset="true" data-theme="b">
-                  <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
-                  <li><a href="#jobs_taker" data-transition="slide"><b>Courses directes</b></a></li>
-                  <li><a href="#cmd" data-transition="slide"><b>Courses command&eacute;es</b></a></li>
-                  <li><a href="#history" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bars"><b>Historique</b></a></li>
-                  <li><a href="#planning" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-calendar"><b>Planning</b></a></li>
-                  <li><a href="#manage" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-user"><b>Mon compte</b></a></li>
-                  <li><a href="#directions_map" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-location"><b>Carte GPS</b></a></li>
-                  <li><a href="#" onClick="help()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bullets"><b>Aide utilisateur</b></a></li>
-                  <li><a href="#" onClick="taximedia()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>TaxiMedia.fr</b></a></li>
-                  <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
-                  <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
-                  <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
-                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
-                </ul>
-                <a href="#"  onClick="goEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Simple</a>
-                <a href="#planning" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
-            </div><!-- /panel -->
             <div data-theme="a" data-role="header" data-position="fixed">
 				<h1 style="width:100%; padding: 0; margin: 0;">
                     <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>        
-                    <a href="#planning_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
+                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
                 </h1>
             </div>
             <div class="ui-content" role="main">
@@ -477,30 +368,10 @@
             </div>
         </div>
         <div data-role="page" data-theme="a" id="history">
-            <div data-role="panel" id="history_panel" data-position="left" data-display="reveal" data-theme="e">
-                <!-- panel content goes here -->
-                <ul data-role="listview" data-inset="true" data-theme="b">
-                  <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
-                  <li><a href="#jobs_taker" data-transition="slide"><b>Courses directes</b></a></li>
-                  <li><a href="#cmd" data-transition="slide"><b>Courses command&eacute;es</b></a></li>
-                  <li><a href="#history" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bars"><b>Historique</b></a></li>
-                  <li><a href="#planning" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-calendar"><b>Planning</b></a></li>
-                  <li><a href="#manage" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-user"><b>Mon compte</b></a></li>
-                  <li><a href="#directions_map" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-location"><b>Carte GPS</b></a></li>
-                  <li><a href="#" onClick="help()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bullets"><b>Aide utilisateur</b></a></li>
-                  <li><a href="#" onClick="taximedia()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>TaxiMedia.fr</b></a></li>
-                  <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
-                  <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
-                  <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
-                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
-                </ul>
-                <a href="#"  onClick="goEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Simple</a>
-                <a href="#history" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
-            </div><!-- /panel -->
             <div data-theme="a" data-role="header" data-position="fixed">
 				<h1 style="width:100%; padding: 0; margin: 0;">
                     <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#history_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
+                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
                 </h1>
             </div>
             <div class="ui-content" role="main">
@@ -520,30 +391,10 @@
             </div>
         </div>
         <div data-role="page" data-theme="a" id="infos">
-            <div data-role="panel" id="infos_panel" data-position="left" data-display="reveal" data-theme="e">
-                <!-- panel content goes here -->
-                <ul data-role="listview" data-inset="true" data-theme="b">
-                  <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
-                  <li><a href="#jobs_taker" data-transition="slide"><b>Courses directes</b></a></li>
-                  <li><a href="#cmd" data-transition="slide"><b>Courses command&eacute;es</b></a></li>
-                  <li><a href="#history" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bars"><b>Historique</b></a></li>
-                  <li><a href="#planning" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-calendar"><b>Planning</b></a></li>
-                  <li><a href="#manage" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-user"><b>Mon compte</b></a></li>
-                  <li><a href="#directions_map" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-location"><b>Carte GPS</b></a></li>
-                  <li><a href="#" onClick="help()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bullets"><b>Aide utilisateur</b></a></li>
-                  <li><a href="#" onClick="taximedia()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>TaxiMedia.fr</b></a></li>
-                  <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
-                  <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
-                  <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
-                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
-                </ul>
-                <a href="#"  onClick="goEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Simple</a>
-                <a href="#infos" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
-            </div><!-- /panel -->
             <div data-theme="a" data-role="header" data-position="fixed">
 				<h1 style="width:100%; padding: 0; margin: 0;">
                     <a data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#infos_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
+                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Menu</b></a>
                 </h1>
             </div>
             <div class="ui-content" role="main">
@@ -556,30 +407,10 @@
             </div>
         </div>
         <div data-role="page" data-theme="a" id="manage">
-            <div data-role="panel" id="manage_panel" data-position="left" data-display="reveal" data-theme="e">
-                <!-- panel content goes here -->
-                <ul data-role="listview" data-inset="true" data-theme="b">
-                  <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
-                  <li><a href="#jobs_taker" data-transition="slide"><b>Courses directes</b></a></li>
-                  <li><a href="#cmd" data-transition="slide"><b>Courses command&eacute;es</b></a></li>
-                  <li><a href="#history" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bars"><b>Historique</b></a></li>
-                  <li><a href="#planning" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-calendar"><b>Planning</b></a></li>
-                  <li><a href="#manage" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-user"><b>Mon compte</b></a></li>
-                  <li><a href="#directions_map" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-location"><b>Carte GPS</b></a></li>
-                  <li><a href="#" onClick="help()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bullets"><b>Aide utilisateur</b></a></li>
-                  <li><a href="#" onClick="taximedia()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>TaxiMedia.fr</b></a></li>
-                  <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
-                  <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
-                  <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
-                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
-                </ul>
-                <a href="#"  onClick="goEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Simple</a>
-                <a href="#manage" data-rel="close" role="button"  class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
-            </div><!-- /panel -->
             <div data-theme="a" data-role="header" data-position="fixed">
 				<h1 style="width:100%; padding: 0; margin: 0;">
                     <a data-rel="back"  class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#manage_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline"  data-transition="slide"><b>Menu</b></a>
+                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline"  data-transition="slide"><b>Menu</b></a>
                 </h1>
             </div>
             <div class="ui-content" role="main">
@@ -783,29 +614,9 @@
         </div>
         
 		<div id="directions_map" data-role="page" data-theme="e">
-            <div data-role="panel" id="map_panel" data-position="left" data-display="reveal" data-theme="e">
-                <!-- panel content goes here -->
-                <ul data-role="listview" data-inset="true" data-theme="b">
-                  <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
-                  <li><a href="#jobs_taker" data-transition="slide"><b>Courses directes</b></a></li>
-                  <li><a href="#cmd" data-transition="slide"><b>Courses command&eacute;es</b></a></li>
-                  <li><a href="#history" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bars"><b>Historique</b></a></li>
-                  <li><a href="#planning" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-calendar"><b>Planning</b></a></li>
-                  <li><a href="#manage" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-user"><b>Mon compte</b></a></li>
-                  <li><a href="#directions_map" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-location"><b>Carte GPS</b></a></li>
-                  <li><a href="#" onClick="help()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bullets"><b>Aide utilisateur</b></a></li>
-                  <li><a href="#" onClick="taximedia()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>TaxiMedia.fr</b></a></li>
-                  <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
-                  <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
-                  <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
-                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
-                </ul>
-                <a href="#"  onClick="goEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Simple</a>
-                <a href="#directions_map" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
-            </div><!-- /panel -->
 			<div data-role="header">
             	<a data-rel="back" href="#home" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-back ui-btn-inline"><h1><b>Retour</b></h1></a>
-                <a href="#map_panel" id="mapPanel_poper" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><h1><b>Menu</b></h1></a>
+                <a href="#homepanel" id="mapPanel_poper" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><h1><b>Menu</b></h1></a>
 			</div>
             <div class="spacer"></div><div class="spacer"></div><div class="spacer"></div>
             
@@ -833,30 +644,10 @@
 		</div>
 
         <div data-role="page" data-theme="a" id="toolate">
-            <div data-role="panel" id="toolate_panel" data-position="left" data-display="reveal" data-theme="e">
-                <!-- panel content goes here -->
-                <ul data-role="listview" data-inset="true" data-theme="b">
-                  <li><a href="#home" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-home"><b>Accueil</b></a></li>
-                  <li><a href="#jobs_taker" data-transition="slide"><b>Courses directes</b></a></li>
-                  <li><a href="#cmd" data-transition="slide"><b>Courses command&eacute;es</b></a></li>
-                  <li><a href="#history" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bars"><b>Historique</b></a></li>
-                  <li><a href="#planning" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-calendar"><b>Planning</b></a></li>
-                  <li><a href="#manage" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-user"><b>Mon compte</b></a></li>
-                  <li><a href="#directions_map" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-location"><b>Carte GPS</b></a></li>
-                  <li><a href="#" onClick="help()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-bullets"><b>Aide utilisateur</b></a></li>
-                  <li><a href="#" onClick="taximedia()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-eye"><b>TaxiMedia.fr</b></a></li>
-                  <li><a href="#infos" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-info"><b>Infos myTaxi</b></a></li>
-                  <li><a href="dcvpad.html" data-ajax="false" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-action"><b>Envoyer une course</b></a></li>
-                  <li><a href="#" onClick="goScan()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-camera"><b>Scanner un code</b></a></li>
-                  <li><a href="#" onClick="contactShare()" data-transition="slide" class="ui-btn ui-btn-icon-left ui-icon-mail"><b>Envoyer l&rsquo;app</b></a></li>
-                </ul>
-                <a href="#"  onClick="goEasy()" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-power">Mode Simple</a>
-                <a href="#toolate" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-delete">Fermer</a>
-            </div><!-- /panel -->
             <div data-theme="a" data-role="header" data-position="fixed">
 				<h1 style="width:100%; padding: 0; margin: 0;">
                     <a href="#home" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-back ui-btn-inline" data-transition="slide"><b>Retour</b></a>            
-                    <a href="#toolate_panel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Accueil</b></a>
+                    <a href="#homepanel" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-home ui-btn-inline" data-transition="slide"><b>Accueil</b></a>
                 </h1>
             </div>
             <div class="ui-content" role="main">
@@ -888,6 +679,6 @@
             </div>
         </div>
                 
-    </center>
+        </center>
 	</body>
 </html>
