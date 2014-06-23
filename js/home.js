@@ -570,8 +570,6 @@ if ( app ) {
 		StatusBar.overlaysWebView(false);
 		//Functions to call only at app first load
 		getLocation();
-		dispo();
-		setTimeout('update()', 2000);
 		scanner = cordova.require("cordova/plugin/BarcodeScanner");
 	}
 }
@@ -778,30 +776,13 @@ $('#directions_map').live("swiperight", function() {
 });
 			
 $(document).bind( 'pagecreate', function() {
-	/*
-	var tel = $.localStorage.getItem('tel');
-	$.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel, dep: '34'}, function(data) {
-		// GET SHIT BACK !!
-		$.localStorage.setItem('civil', data.civil);
-		$.localStorage.setItem('nom', data.nom);
-		$.localStorage.setItem('prenom', data.prenom);
-		$.localStorage.setItem('taxi', data.taxi);
-		$.localStorage.setItem('tel', data.tel);
-		$.localStorage.setItem('siret', data.siret);
-		$.localStorage.setItem('email', data.email);
-		$.localStorage.setItem('station', data.station);
-		$.localStorage.setItem('group', data.group);
-	}, "json");
+	
 	if(!$.localStorage.getItem('pass'))
 	{
 		document.location.href='index.html';
 		//$.mobile.changePage( "test.html", { transition: "slide"} );
 	}
-	if(($.localStorage.getItem('taxi') == '') || ($.localStorage.getItem('tel') == ''))
-	{
-		document.location.href='index.html';
-		//$.mobile.changePage( "test.html", { transition: "slide"} );
-	}
+	/*
 	// Advert user that the app may need his Android device to be rebooted, for geolocation to work.
 	var droidFirstInstall = 1;
 	var droidFirstInstall = $.localStorage.getItem('v1.3.0');
@@ -818,12 +799,10 @@ $(document).bind( 'pagecreate', function() {
 	//setTimeout('dispo()', 10000);
 	if(!app) {
 		getLocation();
-		update();
-		dispo();
 	}
+	dispo();
+	setTimeout('update()', 2000);
 	footer();
-	//update_cmd();
-	//setTimeout('JobWatcher()', 2000); // Starts after 2 seconds...
 	/*
 	$('a.poper').click(function() {
 		$("#delayPop").popup("open");

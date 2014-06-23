@@ -30,7 +30,7 @@ function active()
 		{
 			//navigator.splashscreen.hide();
 			$.mobile.loading( "show" );
-			window.location.href='home.html';
+			document.location.href='home.html';
 		}
 		else if (!data.active) {
 			var display = '<p style="color:red;"><b>Il semblerait que votre compte ait &eacute;t&eacute; d&eacute;sactiv&eacute;</b></p><a href="mailto:info@taxibleuservices.com"style="width:32%;display:inline-block;"><img src="visuels/Contact_flat.png" width="90%"/></a>';
@@ -155,7 +155,6 @@ if ( app ) {
 			$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
 		}
 		StatusBar.overlaysWebView(false);
-		active();
 		/*
 		if($.localStorage.getItem('tel') && $.localStorage.getItem('pwd'))
 		{
@@ -174,9 +173,7 @@ if ( app ) {
 
 $(document).bind( 'pagecreate', function() {
 
-	if(!app) {
-		active();				
-	}
+	active();
 	footer();
 
 	$("#login").submit(function(event) {
