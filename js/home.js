@@ -562,7 +562,6 @@ if ( app ) {
 
 	// PhoneGap est prêt
 	function onDeviceReady() {
-		//navigator.geolocation.getCurrentPosition(onSuccess, onError);
 		navigator.splashscreen.hide();
 		if(navigator.network.connection.type == Connection.NONE){
 			$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
