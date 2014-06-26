@@ -131,6 +131,14 @@ $( '#planning' ).live( 'pagebeforeshow',function(event){
 		$.mobile.loading( "show" );
 		$("#plan_cont").empty().append(data);
 		$("#plan_cont").trigger('create');
+	}).done(function() { $.mobile.loading( "hide" ); });
+});
+
+$( '#cmd' ).live( 'pagebeforeshow',function(event){
+	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group }, function(data){
+		$.mobile.loading( "show" );
+		$("#screen_bookings").empty().append(data);
+		$("#screen_bookings").trigger('create');
 		//alert(data);
 	}).done(function() { $.mobile.loading( "hide" ); });
 });
@@ -432,7 +440,7 @@ function directCall()
 function diaryCall(query_string)
 {
 	$.mobile.loading( "show" );
-	$.post("https://ssl14.ovh.net/~taxibleu/server/diary_app_dcvp.php?dep=34", query_string, function(data){ 
+	$.post("https://ssl14.ovh.net/~taxibleu/server/bookings_app_dcvp.php?dep=34", query_string, function(data){ 
 		switch (data.location) {
 			 case '#directions_map':
 				//alert('in direction case');
