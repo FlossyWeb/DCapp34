@@ -288,7 +288,25 @@ function update()
 
 setTimeout('update()', 2000);
 }
-
+function checkCmd () {
+	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group, ring: pass }, function(data){
+		if (data != 0)
+		{
+			$("#warn").empty().append('<a href="#cmd"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
+			$("#warn_home").empty().append('<a href="#cmd"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
+			document.getElementById("play").play();
+			navigator.notification.vibrate(3600);
+		}
+	});
+setTimeout('checkCmd()', 60000);
+}
+function refreshCmd () {
+	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group }, function(data){
+		$.mobile.loading( "show" );
+		$("#screen_bookings").empty().append(data);
+		$("#screen_bookings").trigger('create');
+	}).done(function() { $.mobile.loading( "hide" ); });
+}
 function dispo()
 {
 	$.post("https://ssl14.ovh.net/~taxibleu/client/dispo_app.php?check=1", { taxi: taxi, tel: tel, pass: pass, dep: '34' }, function(data){ 
@@ -449,7 +467,17 @@ function diaryCall(query_string)
 				$.sessionStorage.setItem('com', data.com);
 				$.sessionStorage.setItem('cell', data.cell);
 				$.sessionStorage.setItem('cmd', 1);
-				$.mobile.pageContainer.pagecontainer("change", "#directions_map", { transition: "slide"} );
+				var number = data.cell;
+				var message = "Le taxi "+taxi+" viendra vous chercher à l'heure prévue.";
+				var intent = ""; //leave empty for sending sms using default intent
+				var success = function () {
+					$.mobile.pageContainer.pagecontainer("change", "#directions_map", { transition: "slide"} );
+				};
+				var error = function (e) {
+					alert('Veuillez informer le client que vous effectuerez la course, SVP'); 
+					$.mobile.pageContainer.pagecontainer("change", "#directions_map", { transition: "slide"} );
+				};
+				sms.send(number, message, intent, success, error);
 				 
 				 break;
 			 case '#toolate':
@@ -809,6 +837,7 @@ $(document).bind( 'pagecreate', function() {
 	}
 	dispo();
 	setTimeout('update()', 2000);
+	setTimeout('checkCmd()', 30000);
 	footer();
 	/*
 	$('a.poper').click(function() {
