@@ -468,19 +468,13 @@ function diaryCall(query_string)
 				$.sessionStorage.setItem('com', data.com);
 				$.sessionStorage.setItem('cell', data.cell);
 				$.sessionStorage.setItem('cmd', 1);
+				$.mobile.pageContainer.pagecontainer("change", "#directions_map", { transition: "slide"} );
 				var number = data.cell;
 				var message = "Le taxi "+taxi+" viendra vous chercher à l'heure prévue.";
 				var intent = ""; //leave empty for sending sms using default intent
 				var success = function () {
-					setTimeout( function () {
-						$.mobile.pageContainer.pagecontainer("change", "#directions_map", { transition: "slide"} );
-					}, 500);
 				};
 				var error = function (e) {
-					//alert('Veuillez informer le client que vous effectuerez la course, SVP'); 
-					setTimeout( function () {
-						$.mobile.pageContainer.pagecontainer("change", "#directions_map", { transition: "slide"} );
-					}, 500);
 				};
 				sms.send(number, message, intent, success, error);
 				 
