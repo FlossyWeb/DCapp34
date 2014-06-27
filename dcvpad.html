@@ -558,21 +558,9 @@
 			document.location.href='dcvpad.html';
 		}, 2000);
 	}
-    function gobis(flag)
+    function goback(flag)
     {
         document.location.href=flag;
-    }        
-    function goBackMode()
-    {
-		if($.localStorage.getItem('easy') == 1)
-		{
-			window.location='easy.html';
-			//$.mobile.pageContainer.pagecontainer("change", "easy.html", { reload: true} );
-		}
-		else {
-			window.location='home.html';
-			//$.mobile.pageContainer.pagecontainer("change", "home.html", { reload: true} );
-		}
     }        
     function processMap()
     {
@@ -727,7 +715,7 @@
                     </div>
                     <div class="ui-content" role="main">
                         <div id="answer"></div>
-                        <input type="button" value="OK" onClick="gobis('home.html')"/>
+                        <input type="button" value="OK" onClick="goback('dcvpad.html')"/>
                     </div>
                 </div>
             </div>
@@ -739,7 +727,7 @@
             	<center>
                 <img src="visuels/logo.png" width="60%" style="max-width:252px"/>
                 <p><b><br><br>Votre demande a &eacute;t&eacute; prise en compte, votre taxi prendra contact avec vous par t&eacute;l&eacute;phone ou sms.<br><br>Toute l&rsquo;&eacute;quipe myTaxi 34 vous remerci.</b></p>
-                <button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-edit" onClick="document.location.reload(true)">Retour</button>
+                <button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-edit" onClick="goback('dcvpad.html')">Retour</button>
                 </center>
             </div>
         </div>
