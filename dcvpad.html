@@ -279,6 +279,10 @@
                 $("#next-box").show("medium");
             }
         }, 1000);
+		$('.expends').click(function () {
+			$(this).next('div').slideToggle('slow');
+			//$.mobile.silentScroll($(this).next('div').offset().top);
+		});
 		$('#regLinks').append('<fieldset data-role="controlgroup"><legend>Derni&egrave;res informations saisies:</legend>');
 		for(n=1;n<4;n++) {
 			if(($.localStorage.getItem('regName'+n) != null) && ($.localStorage.getItem('regCell'+n) != null)) {

@@ -288,19 +288,20 @@ function update()
 
 setTimeout('update()', 2000);
 }
-function checkCmd () {
+function checkCmd() {
 	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group, ring: pass }, function(data){
 		if (data != 0)
 		{
-			$("#warn").empty().append('<a href="#cmd"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
-			$("#warn_home").empty().append('<a href="#cmd"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
-			document.getElementById("play").play();
-			navigator.notification.vibrate(3600);
+			//$("#warn").empty().append('<a href="#cmd"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
+			//$("#warn_home").empty().append('<a href="#cmd"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
+			//document.getElementById("play").play();
+			navigator.notification.beep(2);
+			navigator.notification.vibrate(1000);
 		}
 	});
-setTimeout('checkCmd()', 60000);
+setTimeout('checkCmd()', 300000);
 }
-function refreshCmd () {
+function refreshCmd() {
 	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group }, function(data){
 		$.mobile.loading( "show" );
 		$("#screen_bookings").empty().append(data);
@@ -471,11 +472,15 @@ function diaryCall(query_string)
 				var message = "Le taxi "+taxi+" viendra vous chercher à l'heure prévue.";
 				var intent = ""; //leave empty for sending sms using default intent
 				var success = function () {
-					$.mobile.pageContainer.pagecontainer("change", "#directions_map", { transition: "slide"} );
+					setTimeout( function () {
+						$.mobile.pageContainer.pagecontainer("change", "#directions_map", { transition: "slide"} );
+					}, 500);
 				};
 				var error = function (e) {
-					alert('Veuillez informer le client que vous effectuerez la course, SVP'); 
-					$.mobile.pageContainer.pagecontainer("change", "#directions_map", { transition: "slide"} );
+					//alert('Veuillez informer le client que vous effectuerez la course, SVP'); 
+					setTimeout( function () {
+						$.mobile.pageContainer.pagecontainer("change", "#directions_map", { transition: "slide"} );
+					}, 500);
 				};
 				sms.send(number, message, intent, success, error);
 				 
