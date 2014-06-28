@@ -119,6 +119,10 @@ $('#toolate').live('pagecreate', function() {
 	$("#late_cont").empty().append(late);			
 });
 
+$( '#home' ).live( 'pagebeforeshow',function(event){
+	checkCmd();
+});
+
 $('#delayPop').live( 'pagebeforeshow',function(event) {
 	//$("#hideCall").hide("fast");
 	$("#delayConf").hide("fast");
@@ -292,9 +296,10 @@ function checkCmd() {
 	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group, ring: pass }, function(data){
 		if (data != 0)
 		{
-			//$("#warn").empty().append('<a href="#cmd"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
-			//$("#warn_home").empty().append('<a href="#cmd"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
-			//document.getElementById("play").play();
+			$('.orders').addClass('badge');
+			$('.ordersjob').addClass('badge');
+			$('.orders').empty().append(data);
+			$('.ordersjob').empty().append(data);
 			navigator.notification.beep(2);
 			navigator.notification.vibrate(1000);
 		}
@@ -836,7 +841,6 @@ $(document).bind( 'pagecreate', function() {
 	}
 	dispo();
 	setTimeout('update()', 2000);
-	setTimeout('checkCmd()', 30000);
 	footer();
 	/*
 	$('a.poper').click(function() {

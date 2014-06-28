@@ -126,6 +126,28 @@ input[type=text], input[type=tel], input[type=date], input[type=time], input[typ
 #screen_job_cmd, #screen_bookings {
 	text-align: left;
 }
+.orders, .ordersjob {
+	float: right;
+	margin-bottom: -16px;
+	color:#F00;
+}
+.badge {
+    background:             radial-gradient( 1px -11px, circle, white 8%, red 26px );
+        background:    -moz-radial-gradient( 1px -11px, circle, white 8%, red 26px );
+        background:     -ms-radial-gradient( 1px -11px, circle, white 8%, red 26px );
+        background:      -o-radial-gradient( 1px -11px, circle, white 8%, red 26px );
+        background: -webkit-radial-gradient( 1px -11px, circle, white 8%, red 26px );
+    background-color: red;
+    border: 2px solid white;
+    border-radius: 12px;
+    box-shadow: 1px 1px 1px black;
+    color: white;
+    font: bold 16px/13px Helvetica, Verdana, Tahoma;
+    height: 16px;
+    padding: 2px 5px 0 5px;
+    text-align: center;
+    min-width: 8px;
+}
 #screen_job_cmd a {
 	display: inline-block;
 	width: 50%;
