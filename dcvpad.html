@@ -195,8 +195,14 @@
 			payment = "Oui";
 		}
 		var coms = document.getElementById("coms").value.replace(/'/g, "&rsquo;");
-		//var comments = '<ul>' + hostname + '<li>Nom du client : ' + room + '</li><li>Paiement CB : ' + payment + '</li><li>Nombre de passagers : ' + howMany + '</li><li>Type de vehicule : ' + typecar + '</li></ul>';
-		var comments = '<ul><li>Nom du client : ' + room + '</li><li>Paiement CB : ' + payment + '</li><li>Nombre de passagers : ' + howMany + '</li><li>Type de vehicule : ' + typecar + '</li><li>' + coms + '</li></ul>';
+		var comments1 = '<ul>Course venant du taxi '+taxi+' (tel: '+tel+')<li>Nom du client : ' + room + '</li><li>Paiement CB : ' + payment + '</li><li>Nombre de passagers : ' + howMany + '</li><li>Type de vehicule : ' + typecar + '</li>';
+		if (coms != '') {
+			var comments2 = '<li>' + coms + '</li></ul>';
+		}
+		else {
+			var comments2 = '</ul>';
+		}
+		var comments = comments1+comments2;
 		var dest = document.getElementById("DestAddress").value.replace(/'/g, "&rsquo;");
 		var cell = document.getElementById("cellular").value;
 		var when = document.getElementById("when").value;
@@ -417,8 +423,15 @@
 		if(cb == 1) {
 			payment = "Oui";
 		}
-		//var comments = '<ul>' + hostname + '<li>Nom du client : ' + room + '</li><li>Paiement CB : ' + payment + '</li><li>Nombre de passagers : ' + howMany + '</li><li>Type de vehicule : ' + typecar + '</li></ul>';
-		var comments = '<ul>Course venant du taxi '+taxi+' (tel: '+tel+')<li>Nom du client : ' + room + '</li><li>Paiement CB : ' + payment + '</li><li>Nombre de passagers : ' + howMany + '</li><li>Type de vehicule : ' + typecar + '</li></ul>';
+		var coms = document.getElementById("coms").value.replace(/'/g, "&rsquo;");
+		var comments1 = '<ul>Course venant du taxi '+taxi+' (tel: '+tel+')<li>Nom du client : ' + room + '</li><li>Paiement CB : ' + payment + '</li><li>Nombre de passagers : ' + howMany + '</li><li>Type de vehicule : ' + typecar + '</li>';
+		if (coms != '') {
+			var comments2 = '<li>' + coms + '</li></ul>';
+		}
+		else {
+			var comments2 = '</ul>';
+		}
+		var comments = comments1+comments2;
 		var dest = document.getElementById("DestAddress").value.replace(/'/g, "&rsquo;");
 		var cell = document.getElementById("cellular").value;
 		var when = document.getElementById("when").value;
