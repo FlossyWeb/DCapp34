@@ -288,9 +288,9 @@ function update()
 		{
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
-			//document.getElementById("play").play();
+			document.getElementById("play").play();
+			//document.getElementById("play_home").play();
 			//navigator.notification.beep(2);
-			playAudio();
 			navigator.notification.vibrate(3600);
 		}
 		else
@@ -298,10 +298,11 @@ function update()
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			document.getElementById("play").pause();
+			//document.getElementById("play_home").pause();
 		}
 	});
 
-setTimeout('update()', 3000);
+setTimeout('update()', 2000);
 }
 function checkCmd() {
 	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group, ring: pass }, function(data){
@@ -375,19 +376,6 @@ function Sound_Off()
 {
 	$("#sound").empty().append('<button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_On()"><img src="visuels/sound_off.png" width="24px"></button>');
 	$("#player").empty();
-}
-function playAudio() {
-    var url = 'sounds/ring.mp3';
-    var my_media = new Media(url,
-            // success callback
-             function () { console.log("playAudio():Audio Success"); },
-            // error callback
-             function (err) { console.log("playAudio():Audio Error: " + err); }
-    );
-   // Play audio
-    my_media.play();
-	my_media.stop();
-	my_media.release();
 }
 function footer()
 {
