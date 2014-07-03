@@ -465,7 +465,7 @@
 				var display_name = 'Taxi ' + name;
 				var cabIcon = 'visuels/cab_marker.png';
 				mapEvent.addMarker({ id: i ,'position': latlng, 'bounds': true, 'title': display_name, 'icon': cabIcon }).click(function() {
-					infoCont = "<b>Le taxi n&deg; " + name + " est &agrave; " + parseFloat(distance).toFixed(1) + " Km du client</b><br>" + address;
+					infoCont = '<p style="color:#333;"><b>taxi n&deg; ' + name + ' est &agrave; ' + parseFloat(distance).toFixed(1) + ' Km du client<br>' + address+ '</b></p>';
 					mapEvent.openInfoWindow({ 'content':  infoCont}, this);
 				});
 				//mapEvent.addBounds(latlng);
@@ -594,13 +594,13 @@
                 	<tr><td>
                         <input type="text" id="addressInput" data-clear-btn="true" size="90" placeholder="Adresse RDV"/>
                     </td><td>
-                        <input type="button" data-icon="location" data-iconpos="notext" value="Geoloc" onClick="locateMe()"/>
+                        <button onClick="locateMe()" class="ui-btn ui-btn-b ui-icon-location ui-shadow-icon ui-btn-icon-notext ui-corner-all"></button>
                     </td></tr>
                 <input type="hidden" id="DestAddress" size="10" value="DESTINATION"/>
                 	<tr><td>
                         <input type="text" id="Accurate" data-clear-btn="true" class="mustHave" size="32" placeholder="Nom du client *"/>
                     </td><td>
-                        <input type="button" data-icon="edit" data-iconpos="notext" value="Contact" onClick="getContact()"/>
+                        <button onClick="getContact()" class="ui-btn ui-btn-b ui-icon-edit ui-shadow-icon ui-btn-icon-notext ui-corner-all"></button>
                     </td></tr>
                 	<tr><td>
                         <input type="tel" id="cellular" data-clear-btn="true" class="mustHave" size="20" placeholder="Tel du client *"/>
