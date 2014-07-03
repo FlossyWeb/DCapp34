@@ -314,8 +314,6 @@ function checkCmd() {
 			$('.ordersjob').empty().append(data);
 			navigator.notification.beep(2);
 			navigator.notification.vibrate(1000);
-			var notDate = new Date();
-			var notId = notDate.getTime();
 			// Schedules a local notification to be triggered after 5 seconds
 			window.plugins.localNotification.add({
 				fireDate        : Math.round(new Date().getTime()/1000 + 5),
@@ -324,7 +322,7 @@ function checkCmd() {
 				repeatInterval  : "daily",
 				soundName       : "beep.caf",
 				badge           : data,
-				notificationId  : notId,
+				notificationId  : 1234,
 				foreground      : function(notificationId){ 
 					alert("Hello World! This alert was triggered by notification " + notificationId); 
 				},
@@ -334,6 +332,10 @@ function checkCmd() {
 			});
 			// set badge number to n
 			//window.plugins.localNotification.setBadgeNumber(3);			
+		}
+		else {
+			// cancel all notifications
+			window.plugins.localNotification.cancelAll(callback);
 		}
 	});
 setTimeout('checkCmd()', 300000);
@@ -390,7 +392,7 @@ function Dispo_Off()
 function Sound_On()
 {
 	$("#sound").empty().append('<button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_Off()"><img src="visuels/sound_on.png" width="24px"></button>');
-	$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="http://www.taxibleuservices.com/client/sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
+	$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
 }
 function Sound_Off()
 {
