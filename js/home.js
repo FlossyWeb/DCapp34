@@ -289,7 +289,7 @@ function update()
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
 			document.getElementById("play").play();
-			document.getElementById("play_home").play();
+			//document.getElementById("play_home").play();
 			//navigator.notification.beep(2);
 			navigator.notification.vibrate(3600);
 		}
@@ -298,7 +298,7 @@ function update()
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			document.getElementById("play").pause();
-			document.getElementById("play_home").pause();
+			//document.getElementById("play_home").pause();
 		}
 	});
 
@@ -371,13 +371,11 @@ function Sound_On()
 {
 	$("#sound").empty().append('<button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_Off()"><img src="visuels/sound_on.png" width="24px"></button>');
 	$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
-	$("#player_home").empty().append('<audio id="play_home" loop="loop" preload="auto" style="display:none" ><source src="http://www.taxibleuservices.com/client/sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
 }
 function Sound_Off()
 {
 	$("#sound").empty().append('<button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_On()"><img src="visuels/sound_off.png" width="24px"></button>');
 	$("#player").empty();
-	$("#player_home").empty();
 }
 function footer()
 {
