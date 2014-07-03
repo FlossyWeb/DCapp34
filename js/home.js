@@ -129,7 +129,19 @@ $('#delayPop').live( 'pagebeforeshow',function(event) {
 	//$('select#delay').val('d&eacute;lai');
 	//$('select#delay').selectmenu('refresh', true);
 });
-
+$('#delayPop').live( 'pagecreate',function(event) {
+	var ok = setInterval( function () {
+		var str = "Temps d'approche : ";
+		$("select#delay option:selected").each(function () {
+			str += $(this).text();
+		});
+		// Getting delay list value
+		var delay = document.getElementById('delay').value;
+		//$("#hideCall").show("fast");
+		$("#delayConf").html(str);
+		$("#delayConf").show("fast");
+	}, 1000);
+});
 $( '#planning' ).live( 'pagebeforeshow',function(event){
 	$.post("https://ssl14.ovh.net/~taxibleu/client/in_app_calls.php", { planning: 'true', tel: tel, pass: pass, dep: '34' }, function(data){
 		$.mobile.loading( "show" );
@@ -835,13 +847,6 @@ $(document).bind( 'pagecreate', function() {
 	setTimeout('update()', 2000);
 	footer();
 	/*
-	$('a.poper').click(function() {
-		$("#delayPop").popup("open");
-	});
-	$('body').click(function() {
-		$( "#delayPop" ).popup( "close" );
-	});
-	*/
 	$("select#delay").change(function () {
 		var str = "Temps d'approche : ";
 		$("select#delay option:selected").each(function () {
@@ -856,6 +861,7 @@ $(document).bind( 'pagecreate', function() {
 		//$("#link2diary").trigger('click');
 
 	});
+	*/
 				
 });
 
