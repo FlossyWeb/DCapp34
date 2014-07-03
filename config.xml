@@ -61,6 +61,8 @@
 	<gap:plugin name="com.phonegap.plugins.barcodescanner" />
 	<gap:plugin name="hu.dpal.phonegap.plugins.contactnumberpicker" version="0.1.1" />
 	<gap:plugin name="tr.bel.mamak.sms_plagin" version="0.1.0" />
+	<gap:plugin name="com.simplec.plugins.powermanagement" version="0.4.0" />
+	<gap:plugin name="com.simplec.plugins.localnotification" version="0.3.5" />
 
     <icon src="icon.png" />
 	<icon src="icons/ios/icon-57.png" gap:platform="ios" width="57" height="57" />
