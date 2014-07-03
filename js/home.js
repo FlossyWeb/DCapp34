@@ -290,7 +290,7 @@ function update()
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
 			//document.getElementById("play").play();
 			//navigator.notification.beep(2);
-			playAudio(play),
+			playAudio();
 			navigator.notification.vibrate(3600);
 		}
 		else
@@ -376,9 +376,8 @@ function Sound_Off()
 	$("#sound").empty().append('<button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_On()"><img src="visuels/sound_off.png" width="24px"></button>');
 	$("#player").empty();
 }
-function playAudio(id) {
-    var audioElement = document.getElementById(id);
-    var url = audioElement.getAttribute('src');
+function playAudio() {
+    var url = 'sounds/ring.mp3';
     var my_media = new Media(url,
             // success callback
              function () { console.log("playAudio():Audio Success"); },
