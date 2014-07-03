@@ -136,7 +136,7 @@ $('#delayPop').live( 'pagecreate',function(event) {
 			str += $(this).text();
 		});
 		// Getting delay list value
-		var delay = document.getElementById('delay').value;
+		delay = document.getElementById('delay').value;
 		//$("#hideCall").show("fast");
 		$("#delayConf").html(str);
 		$("#delayConf").show("fast");
