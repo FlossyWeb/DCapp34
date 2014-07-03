@@ -357,21 +357,13 @@ function Dispo_Off()
 
 function Sound_On()
 {
-	$("#sound").empty().append('<a href="#jobs_taker" onClick="Sound_Off()"><img src="visuels/sound_on.png" width="20"/></a>');
-	$("#sound_cmd").empty().append('<a href="#cmd" onClick="Sound_Off()"><img src="visuels/sound_on.png" width="20"/></a>');
+	$("#sound").empty().append('<button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_Off()"><img src="visuels/sound_on.png" width="24px"></button>');
 	$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="http://www.taxibleuservices.com/client/sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
-	$("#player_cmd").empty().append('<audio id="play_cmd" loop="loop" preload="auto" style="display:none" ><source src="http://www.taxibleuservices.com/client/sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
-	$("#player_home").empty().append('<audio id="play_home" loop="loop" preload="auto" style="display:none" ><source src="http://www.taxibleuservices.com/client/sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
-	//$.sessionStorage.setItem('sound', '1');
 }
 function Sound_Off()
 {
-	$("#sound").empty().append('<a href="#jobs_taker" onClick="Sound_On()"><img src="visuels/sound_off.png" width="20"/></a>');
-	$("#sound_cmd").empty().append('<a href="#cmd" onClick="Sound_On()"><img src="visuels/sound_off.png" width="20"/></a>');
+	$("#sound").empty().append('<button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_On()"><img src="visuels/sound_off.png" width="24px"></button>');
 	$("#player").empty();
-	$("#player_cmd").empty();
-	$("#player_home").empty();
-	//$.sessionStorage.setItem('sound', '0');
 }
 function footer()
 {
