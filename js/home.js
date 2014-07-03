@@ -314,28 +314,6 @@ function checkCmd() {
 			$('.ordersjob').empty().append(data);
 			navigator.notification.beep(2);
 			navigator.notification.vibrate(1000);
-			// Schedules a local notification to be triggered after 5 seconds
-			window.plugins.localNotification.add({
-				fireDate        : Math.round(new Date().getTime()/1000 + 5),
-				alertBody       : "Il y a "+data+" commandes",
-				action          : "View",
-				repeatInterval  : "daily",
-				soundName       : "beep.caf",
-				badge           : data,
-				notificationId  : 1234,
-				foreground      : function(notificationId){ 
-					alert("Hello World! This alert was triggered by notification " + notificationId); 
-				},
-				background  : function(notificationId){
-					alert("Hello World! This alert was triggered by notification " + notificationId);
-				}           
-			});
-			// set badge number to n
-			//window.plugins.localNotification.setBadgeNumber(3);			
-		}
-		else {
-			// cancel all notifications
-			window.plugins.localNotification.cancelAll(callback);
 		}
 	});
 setTimeout('checkCmd()', 300000);
