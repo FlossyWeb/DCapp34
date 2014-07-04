@@ -288,24 +288,23 @@ function update()
 		{
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
-			document.getElementById("play").play();
+			//document.getElementById("play").play();
 			//navigator.notification.beep(2);
 			navigator.notification.vibrate(2000);
-			/*
 			if ($.sessionStorage.getItem('sound') != 'OFF') {
 				playAudio('sounds/ring.mp3');
 			}
-			*/
 		}
 		else
 		{
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
-			document.getElementById("play").pause();
+			//document.getElementById("play").pause();
+			stopAudio();
 		}
 	});
 
-setTimeout('update()', 3000);
+setTimeout('update()', 2000);
 }
 function checkCmd() {
 	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group, ring: pass }, function(data){
@@ -621,6 +620,7 @@ if ( app ) {
 		//Functions to call only at app first load
 		getLocation();
 		scanner = cordova.require("cordova/plugin/BarcodeScanner");
+		playAudio('sounds/ring.mp3');
 	}
 }
 
@@ -776,16 +776,30 @@ function playAudio(src) {
 	if (device.platform == 'Android') {
 		src = '/android_asset/www/' + src;
 	}
-	var media = new Media(src, success, error_error);
-	var success;
-	var error_error;
-    // Play audio
-    my_media.play();
-	setTimeout(function() {
-		my_media.stop();
-		my_media.release();
-	}, 2000);
+	if (my_media == null) {
+		// Create Media object from src
+		my_media = new Media(src, playOnSuccess, playOnError);
+	}
+	// Play audio
+	my_media.play();
 } 
+// Stop audio
+function stopAudio() {
+	if (my_media) {
+		my_media.stop();
+	}
+}
+
+// onSuccess Callback
+function playOnSuccess() {
+	console.log("playAudio():Audio Success");
+}
+
+// onError Callback 
+function playOnError(error) {
+	alert('code: '    + error.code    + '\n' + 
+		  'message: ' + error.message + '\n');
+}
 /*
 // Swiping between pages function
 $('div.ui-page').live("swipeleft", function(){
