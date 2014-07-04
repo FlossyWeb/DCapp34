@@ -288,18 +288,20 @@ function update()
 		{
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
-			//document.getElementById("play").play();
+			document.getElementById("play").play();
 			//navigator.notification.beep(2);
 			navigator.notification.vibrate(2000);
+			/*
 			if ($.sessionStorage.getItem('sound') != 'OFF') {
 				playAudio('sounds/ring.mp3');
 			}
+			*/
 		}
 		else
 		{
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
-			//document.getElementById("play").pause();
+			document.getElementById("play").pause();
 		}
 	});
 
@@ -861,6 +863,12 @@ $(document).bind( 'pagecreate', function() {
 	//setTimeout('dispo()', 10000);
 	if(!app) {
 		getLocation();
+	}
+	if (navigator.userAgent.toLowerCase().match(/android/)) {
+		$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="/android_asset/www/sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
+	}
+	else {
+		$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
 	}
 	dispo();
 	setTimeout('update()', 2000);
