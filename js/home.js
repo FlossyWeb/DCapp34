@@ -21,7 +21,7 @@ var delay = 10;
 
 // Lecteur audio
 var my_media = null;
-var mediaTimer = null;
+var sound = $.sessionStorage.setItem('sound', 'ON');
 
 // Scanner
 var scanner;
@@ -288,21 +288,22 @@ function update()
 		{
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
-			document.getElementById("play").play();
-			//document.getElementById("play_home").play();
+			//document.getElementById("play").play();
 			//navigator.notification.beep(2);
-			navigator.notification.vibrate(3600);
+			navigator.notification.vibrate(2000);
+			if ($.sessionStorage.getItem('sound') != 'OFF') {
+				playAudio('sounds/ring.mp3');
+			}
 		}
 		else
 		{
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
-			document.getElementById("play").pause();
-			//document.getElementById("play_home").pause();
+			//document.getElementById("play").pause();
 		}
 	});
 
-setTimeout('update()', 2000);
+setTimeout('update()', 3000);
 }
 function checkCmd() {
 	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group, ring: pass }, function(data){
@@ -371,11 +372,13 @@ function Sound_On()
 {
 	$("#sound").empty().append('<button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_Off()"><img src="visuels/sound_on.png" width="24px"></button>');
 	$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
+	$.sessionStorage.setItem('sound', 'ON');
 }
 function Sound_Off()
 {
 	$("#sound").empty().append('<button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_On()"><img src="visuels/sound_off.png" width="24px"></button>');
 	$("#player").empty();
+	$.sessionStorage.setItem('sound', 'OFF');
 }
 function footer()
 {
@@ -767,6 +770,20 @@ function contactShare()
 	}
 	window.plugins.contactNumberPicker.pick(successCallbackPick,failedCallbackPick);
 }
+function playAudio(src) {
+	if (device.platform == 'Android') {
+		src = '/android_asset/www/' + src;
+	}
+	var media = new Media(src, success, error_error);
+	var success;
+	var error_error;
+    // Play audio
+    my_media.play();
+	setTimeout(function() {
+		my_media.stop();
+		my_media.release();
+	}, 2000);
+} 
 /*
 // Swiping between pages function
 $('div.ui-page').live("swipeleft", function(){
