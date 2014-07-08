@@ -120,7 +120,7 @@ $('#toolate').live('pagecreate', function() {
 });
 
 $( '#home' ).live( 'pagebeforeshow',function(event){
-	checkCmd();
+	//checkCmd();
 });
 
 $('#delayPop').live( 'pagebeforeshow',function(event) {
@@ -620,7 +620,8 @@ if ( app ) {
 		//Functions to call only at app first load
 		getLocation();
 		scanner = cordova.require("cordova/plugin/BarcodeScanner");
-		playAudio('sounds/ring.mp3');
+		setTimeout('update()', 2000);
+		checkCmd();
 	}
 }
 
@@ -877,6 +878,7 @@ $(document).bind( 'pagecreate', function() {
 	//setTimeout('dispo()', 10000);
 	if(!app) {
 		getLocation();
+		setTimeout('update()', 2000);
 	}
 	if (navigator.userAgent.toLowerCase().match(/android/)) {
 		$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="/android_asset/www/sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
@@ -885,7 +887,6 @@ $(document).bind( 'pagecreate', function() {
 		$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
 	}
 	dispo();
-	setTimeout('update()', 2000);
 	footer();
 	/*
 	$("select#delay").change(function () {
