@@ -260,9 +260,9 @@ function update()
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
 			//document.getElementById("play").play();
 			//navigator.notification.beep(2);
-			navigator.notification.vibrate(2000);
 			if ($.sessionStorage.getItem('sound') != 'OFF') {
 				playAudio('sounds/ring.mp3');
+				navigator.notification.vibrate(2000);
 			}
 		}
 		else
@@ -763,13 +763,12 @@ function stopAudio() {
 
 // onSuccess Callback
 function playOnSuccess() {
-	console.log("playAudio():Audio Success");
+	//console.log("playAudio():Audio Success");
 }
 
 // onError Callback 
 function playOnError(error) {
-	//console.log("playAudio():Audio Error");
-	alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+	//alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
 }
 $('#home').live("swiperight", function() {
 	//$.mobile.pageContainer.pagecontainer("change", "#home", { transition: "slide", reverse: true} );
