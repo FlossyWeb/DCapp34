@@ -740,10 +740,14 @@ function contactShare()
 	}
 	window.plugins.contactNumberPicker.pick(successCallbackPick,failedCallbackPick);
 }
+function getPhoneGapPath() {
+    var path = window.location.pathname;
+    path = path.substring(0, path.lastIndexOf('/') + 1);
+    return 'file://' + path;
+};
+var localPath = getPhoneGapPath();
 function playAudio(src) {
-	if (device.platform == 'Android') {
-		src = '/android_asset/www/' + src;
-	}
+	var src = localPath + src;
 	if (my_media == null) {
 		// Create Media object from src
 		my_media = new Media(src, playOnSuccess, playOnError);
