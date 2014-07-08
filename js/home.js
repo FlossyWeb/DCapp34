@@ -741,16 +741,15 @@ function contactShare()
 	window.plugins.contactNumberPicker.pick(successCallbackPick,failedCallbackPick);
 }
 function getPhoneGapPath() {
-    var path = window.location.pathname;
-    path = path.substring(0, path.lastIndexOf('/') + 1);
     return 'file://' + path;
 };
-var localPath = getPhoneGapPath();
 function playAudio(src) {
-	var src = localPath + src;
 	if (my_media == null) {
 		// Create Media object from src
-		my_media = new Media(src, playOnSuccess, playOnError);
+		var path = window.location.pathname;
+		path = path.substring(0, path.lastIndexOf('/') + 1);
+		var source = path + src;
+		my_media = new Media(source, playOnSuccess, playOnError);
 	}
 	// Play audio
 	my_media.play();
@@ -769,8 +768,8 @@ function playOnSuccess() {
 
 // onError Callback 
 function playOnError(error) {
-	console.log("playAudio():Audio Error");
-	//alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+	//console.log("playAudio():Audio Error");
+	alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
 }
 $('#home').live("swiperight", function() {
 	//$.mobile.pageContainer.pagecontainer("change", "#home", { transition: "slide", reverse: true} );
