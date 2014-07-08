@@ -214,36 +214,6 @@ function getLocation()
 	}
 	setTimeout('getLocation()', 30000); // Every thirty seconds you check geolocation...
 }
-function testGeoloc()
-{
-	var passed = function () { 
-		alert('REUSSI');
-		document.location.href='home.html';
-	}
-	var failed = function () { 
-		alert('ECHEC');
-	}
-	if (navigator.geolocation)
-	{
-		navigator.geolocation.getCurrentPosition(passed, failed,{enableHighAccuracy:false, maximumAge:0});
-	}
-	else {
-		alert("Localisation impossible.");
-	}
-}		
-function stopWatch()
-{
-	navigator.geolocation.clearWatch(watchId);
-}
-
-function showPosition(position)
-{
-	var latlon=position.coords.latitude+","+position.coords.longitude;
-	
-	var img_url="http://maps.googleapis.com/maps/api/staticmap?center="
-	+latlon+"&zoom=14&size=600x400&sensor=false&key=AIzaSyCvL4a4-LKLUXJrTwpJ4_UnkmtZSGgrVWg";
-	document.getElementById("mapholder").innerHTML="<img src='"+img_url+"' />";
-}			  
 function showError(error)
 {
 	var x=document.getElementById("ePopResults");
@@ -300,7 +270,7 @@ function update()
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			//document.getElementById("play").pause();
-			stopAudio();
+			//stopAudio();
 		}
 	});
 
@@ -372,13 +342,13 @@ function Dispo_Off()
 function Sound_On()
 {
 	$("#sound").empty().append('<button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_Off()"><img src="visuels/sound_on.png" width="24px"></button>');
-	$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
+	//$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
 	$.sessionStorage.setItem('sound', 'ON');
 }
 function Sound_Off()
 {
 	$("#sound").empty().append('<button class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-inline" onClick="Sound_On()"><img src="visuels/sound_off.png" width="24px"></button>');
-	$("#player").empty();
+	//$("#player").empty();
 	$.sessionStorage.setItem('sound', 'OFF');
 }
 function footer()
@@ -566,9 +536,6 @@ function check_answer()
 		$.post("https://ssl14.ovh.net/~taxibleu/client/status.php?idcourse=" + idcourseUrg + "&check=1" , { dep: '34'}, function(data){ 
 			if (data != 0)
 			{
-				//cancel(idcourse);
-				//$('#dblinks').append($('<input id="stop" type="hidden" value="1" />'));
-				//var box = alert(data);
 				$('#urgencyResults').empty().append(data);
 			}
 		}); 
@@ -798,26 +765,9 @@ function playOnSuccess() {
 
 // onError Callback 
 function playOnError(error) {
-	alert('code: '    + error.code    + '\n' + 
-		  'message: ' + error.message + '\n');
+	console.log("playAudio():Audio Error");
+	//alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
 }
-/*
-// Swiping between pages function
-$('div.ui-page').live("swipeleft", function(){
-	var nextpage = $(this).next('div[data-role="page"]');
-	// swipe using id of next page if exists
-	if (nextpage.length > 0) {
-		$.mobile.changePage(nextpage, 'slide');
-	}
-});
-$('div.ui-page').live("swiperight", function(){
-	var prevpage = $(this).prev('div[data-role="page"]');
-	// swipe using id of next page if exists
-	if (prevpage.length > 0) {
-		$.mobile.changePage(prevpage, 'slide', true);
-	}
-});
-*/		
 $('#home').live("swiperight", function() {
 	//$.mobile.pageContainer.pagecontainer("change", "#home", { transition: "slide", reverse: true} );
 	$("#homepanel_poper").trigger('click');
@@ -861,21 +811,7 @@ $(document).bind( 'pagecreate', function() {
 		document.location.href='index.html';
 		//$.mobile.changePage( "test.html", { transition: "slide"} );
 	}
-	/*
-	// Advert user that the app may need his Android device to be rebooted, for geolocation to work.
-	var droidFirstInstall = 1;
-	var droidFirstInstall = $.localStorage.getItem('v1.3.0');
-	if(!droidFirstInstall) {
-		$.localStorage.setItem('v1.3.0', 0);
-		if (navigator.userAgent.toLowerCase().match(/android/)) {
-			setTimeout(function () {
-				$.mobile.pageContainer.pagecontainer("change", "#droidFirstInstall", { transition: "slide"} );
-			 }, 6000);
-		}
-	}
-	*/
 	$( "body>[data-role='panel']" ).panel().enhanceWithin();
-	//setTimeout('dispo()', 10000);
 	if(!app) {
 		getLocation();
 		setTimeout('update()', 2000);
@@ -887,24 +823,7 @@ $(document).bind( 'pagecreate', function() {
 		$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
 	}
 	dispo();
-	footer();
-	/*
-	$("select#delay").change(function () {
-		var str = "Temps d'approche : ";
-		$("select#delay option:selected").each(function () {
-			str += $(this).text();
-		});
-		
-		// Getting delay list value
-		var delay = document.getElementById('delay').value;
-		//$("#hideCall").show("fast");
-		$("#delayConf").html(str);
-		$("#delayConf").show("fast");
-		//$("#link2diary").trigger('click');
-
-	});
-	*/
-				
+	footer();				
 });
 
 $(document).ready(function(){
@@ -994,7 +913,6 @@ $(document).ready(function(){
 				$.localStorage.setItem('station', data.station);
 				$.sessionStorage.setItem('pwd', data.pwd);
 				$.sessionStorage.setItem('modmy', data.modmy);
-				//alert(data.taxi + ' - ' + data.siret + ' - ' + data.email + ' - ' + data.tel + ' - ' + data.subscribed + ' - ' + data.telexist + ' - ' + data.cabexist + ' - ' + data.sirexist);
 				
 				var display = '';
 				if (data.modmy)
@@ -1014,7 +932,6 @@ $(document).ready(function(){
 		event.preventDefault();
 		// Subs some data
 		$.post("https://ssl14.ovh.net/~taxibleu/client/login_app.php", $("#change").serialize(), function(data) {
-			//alert($("#change").serialize());
 			// GET SHIT BACK !!
 			var display = '';
 			if (data.changed)
