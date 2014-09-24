@@ -8,6 +8,7 @@ var tel = $.localStorage.getItem('tel');
 var civil = $.localStorage.getItem('civil');
 var nom = $.localStorage.getItem('nom');
 var prenom = $.localStorage.getItem('prenom');
+var mngid = $.localStorage.getItem('mngid');
 var actived;
 
 function active()
@@ -251,6 +252,7 @@ $(document).bind( 'pagecreate', function() {
 				$.localStorage.setItem('taxi', data.taxi);
 				$.localStorage.setItem('tel', data.tel);
 				$.localStorage.setItem('siret', data.siret);
+				$.localStorage.setItem('station', data.station);
 				$.localStorage.setItem('email', data.email);
 				$.localStorage.setItem('group', data.group);
 				$.localStorage.setItem('pwd', data.pwd);
