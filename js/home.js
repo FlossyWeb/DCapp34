@@ -586,12 +586,15 @@ if ( app ) {
 		window.plugins.powerManagement.acquire();
 		//Functions to call only at app first load
 		getLocation();
+		document.addEventListener("resume", onResume, false);
 		scanner = cordova.require("cordova/plugin/BarcodeScanner");
 		setTimeout('update()', 2000);
 		checkCmd();
 	}
 }
-
+function onResume() {
+	$.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel, mngid: mngid, dep: '34'}, function(data) {});
+}
 var scanSuccess = function (result) {
 	var textFormats = "QR_CODE DATA_MATRIX";
 	var productFormats = "UPC_E UPC_A EAN_8 EAN_13";

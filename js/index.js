@@ -13,7 +13,7 @@ var actived;
 
 function active()
 {
-	var posting = $.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel, dep: '34'}, function(data) {
+	var posting = $.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel, mngid: mngid, dep: '34'}, function(data) {
 		var actived = data.active;
 		// GET SHIT BACK !!
 		$.localStorage.setItem('civil', data.civil);
