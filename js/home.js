@@ -577,6 +577,7 @@ if ( app ) {
 
 	// PhoneGap est prêt
 	function onDeviceReady() {
+		document.addEventListener("resume", onResume, false);
 		navigator.splashscreen.hide();
 		if(navigator.network.connection.type == Connection.NONE){
 			$("body").empty().append('<img src="no_network.png" onClick="window.location.reload()" />');
@@ -586,7 +587,6 @@ if ( app ) {
 		window.plugins.powerManagement.acquire();
 		//Functions to call only at app first load
 		getLocation();
-		document.addEventListener("resume", onResume, false);
 		scanner = cordova.require("cordova/plugin/BarcodeScanner");
 		setTimeout('update()', 2000);
 		checkCmd();
