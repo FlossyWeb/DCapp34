@@ -67,7 +67,7 @@ $( '#directions_map' ).live( 'pagebeforeshow',function(event){
 		$.post("https://ssl14.ovh.net/~taxibleu/client/in_app_calls.php", { map: 'true', cmd: cmd, rdv: rdv, com: com, idcourse: idcourse, cell: cell, pass: pass, dep: '34' }, function(data){
 			$("#infos_map").append(data);
 			$("#infos_map").trigger('create');
-			//alert(data);
+			//navigator.notification.alert(data);
 		});
 	}
 });
@@ -94,7 +94,7 @@ $('#directions_map').live('pagecreate', function() {
 							}
 						});
 					} else {
-						alert('Unable to get current position');
+						navigator.notification.alert('Unable to get current position');
 					}
 				},{enableHighAccuracy:true, maximumAge:Infinity});
 			});
@@ -155,7 +155,7 @@ $( '#cmd' ).live( 'pagebeforeshow',function(event){
 		$.mobile.loading( "show" );
 		$("#screen_bookings").empty().append(data);
 		$("#screen_bookings").trigger('create');
-		//alert(data);
+		//navigator.notification.alert(data);
 	}).done(function() { $.mobile.loading( "hide" ); });
 });
 
@@ -164,7 +164,7 @@ $( '#history' ).live( 'pagebeforeshow',function(event){
 		$.mobile.loading( "show" );
 		$("#hist_cont").empty().append(data);
 		$("#hist_cont").trigger('create');
-		//alert(data);
+		//navigator.notification.alert(data);
 	}).done(function() { $.mobile.loading( "hide" ); });
 });
 
@@ -173,7 +173,7 @@ $( '#infos' ).live( 'pagebeforeshow',function(event){
 		$.mobile.loading( "show" );
 		$("#infos_cont").empty().append(data);
 		$("#infos_cont").trigger('create');
-		//alert(data);
+		//navigator.notification.alert(data);
 	}).done(function() { $.mobile.loading( "hide" ); });
 });
 
@@ -192,7 +192,7 @@ $('#manage').live('pagecreate', function() {
 	$('#log').val(tel);
 	$.post("https://ssl14.ovh.net/~taxibleu/client/billing.php", { taxi: taxi, pass: pass, dep: '34', mngid: mngid }, function(data){
 		$("#billing").empty().append(data);
-		//alert(data);
+		//navigator.notification.alert(data);
 	});
 });
 
@@ -210,7 +210,7 @@ function getLocation()
 		//navigator.geolocation.getAccurateCurrentPosition(get_coords, showError, {maxWait:30000});
 	}
 	else {
-		alert("Localisation impossible.");
+		navigator.notification.alert("Localisation impossible.");
 	}
 	setTimeout('getLocation()', 30000); // Every thirty seconds you check geolocation...
 }
@@ -245,7 +245,7 @@ function get_coords(position)
 	lng = position.coords.longitude;
 	//var x=document.getElementById("results");
 	//x.innerHTML="lat = " + lat + " - lng = " +lng;
-	//alert('taxi: ' + taxi + ' tel: ' + tel + ' pass=' + pass);
+	//navigator.notification.alert('taxi: ' + taxi + ' tel: ' + tel + ' pass=' + pass);
 	$.post("https://ssl14.ovh.net/~taxibleu/client/insert_app_cab_geoloc.php?lat="+lat+"&lng="+lng, { taxi: taxi, tel: tel, email: email, pass: pass, dep: '34' }); 
 }
 
@@ -312,7 +312,7 @@ function dispo()
 		$("#dispo_jobs").empty().append(display);
 		$("#dispo_cmd").empty().append(display);
 		$.sessionStorage.setItem('dispo', data.dispo);
-		//alert(data.dispo);
+		//navigator.notification.alert(data.dispo);
 	}, "json"); 
 	/*
 	$.post("dispo.php?check=1&p=home", {}, function(data){ $("#dispo").each(function () {
@@ -367,8 +367,8 @@ function addCalendar(date, rdv, com, idcourse, cell)
 	var title = "Course en commande";
 	var location = rdv;
 	var notes = 'Infos RDV : ' + com + ' - Identifiant de la course : ' + idcourse + ' - Tel client : ' + cell;
-	var success = function(message) { alert("AJOUT EVENEMENT AU CALENDRIER: " + JSON.stringify(message)); };
-	var error = function(message) { alert("Erreur: " + message); };
+	var success = function(message) { navigator.notification.alert("AJOUT EVENEMENT AU CALENDRIER: " + JSON.stringify(message)); };
+	var error = function(message) { navigator.notification.alert("Erreur: " + message); };
 	// create
 	window.plugins.calendar.createEvent(title,location,notes,startDate,endDate,success,error);
 }
@@ -394,7 +394,7 @@ function justify(when, rdv, comments, destadd, cell)//justify(\''.$when.'\', \''
 {
 	$.post("https://ssl14.ovh.net/~taxibleu/client/justify.php", { when: when, rdv: rdv, comments: comments, destadd: destadd, cell: cell, dep: '34', pass: pass, email: email }, function(data){
 		$.mobile.loading( "show" );
-		alert(data);
+		navigator.notification.alert(data);
 		//window.plugins.childBrowser.showWebPage('http://www.taximedia.fr', { showLocationBar: true });
 	}).done(function() { $.mobile.loading( "hide" ); });
 }
@@ -417,7 +417,7 @@ function directCall()
 	$.post("https://ssl14.ovh.net/~taxibleu/server/diary_app_dcvp.php?dep=34", query_string, function(data){ 
 		switch (data.location) {
 			 case '#directions_map':
-				//alert('in direction case');
+				//navigator.notification.alert('in direction case');
 				$.sessionStorage.setItem('rdv', data.rdv);
 				$.sessionStorage.setItem('idcourse', data.idcourse);
 				$.sessionStorage.setItem('com', data.com);
@@ -445,7 +445,7 @@ function diaryCall(query_string)
 	$.post("https://ssl14.ovh.net/~taxibleu/server/bookings_app_dcvp.php?dep=34", query_string, function(data){ 
 		switch (data.location) {
 			 case '#directions_map':
-				//alert('in direction case');
+				//navigator.notification.alert('in direction case');
 				$.sessionStorage.setItem('rdv', data.rdv);
 				$.sessionStorage.setItem('idcourse', data.idcourse);
 				$.sessionStorage.setItem('com', data.com);
@@ -489,7 +489,7 @@ function getLocationOnce()
 		}
 	}
 	else {
-		alert("Localisation impossible.");
+		navigator.notification.alert("Localisation impossible.");
 	}
 }
 function secureCall(position)
@@ -523,7 +523,7 @@ function secureCall(position)
 			i++;
 		});
 		check_answer();
-		//alert('Geoloc results :' + lat + ' - ' + lng);
+		//navigator.notification.alert('Geoloc results :' + lat + ' - ' + lng);
 		//$('#results').append('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>');
 		
 	}, "xml");
@@ -618,7 +618,7 @@ var scanSuccess = function (result) {
 		var searchUrl = "https://www.google.fr/#q=" + result.text;
 		setTimeout(function() { window.open(searchUrl,'_blank','location=yes,enableViewportScale=yes,closebuttoncaption=Fermer'); }, 500);
 		//setTimeout(function() { window.plugins.childBrowser.showWebPage(searchUrl, { showLocationBar: true }); }, 500);
-	} else { alert("Format du scan: " + result.format + 
+	} else { navigator.notification.alert("Format du scan: " + result.format + 
 			  " NON SUPPORTE. Valeur du scan: " + result.text);
 	}
 }
@@ -627,7 +627,7 @@ function goScan ()
 	scanner.scan(
 		scanSuccess, 
 		function (error) {
-			alert("Scan Erreur: " + error);
+			navigator.notification.alert("Scan Erreur: " + error);
 		}
 	);
 }
@@ -635,14 +635,14 @@ function contactPick()
 {
 	var successCallbackPick = function(result){
 		setTimeout(function(){
-			//alert(result.name + " " + result.phoneNumber);
+			//navigator.notification.alert(result.name + " " + result.phoneNumber);
 			var number = result.phoneNumber;
 			$('#telShare').val(number);
 		},500);
 	};
 	var failedCallbackPick = function(result){
 		setTimeout(function(){
-			//alert(result);
+			//navigator.notification.alert(result);
 		},500);
 	}
 	window.plugins.contactNumberPicker.pick(successCallbackPick,failedCallbackPick);
@@ -658,12 +658,12 @@ function Share()
 	var message = "Téléchargez l'app myTaxi 34 en suivant ce lien : http://www.taximedia.fr/stores.php?app=mytaxi&dep=34";
 	var intent = ""; //leave empty for sending sms using default intent
 	var success = function () {
-		//alert('Message sent successfully');
+		//navigator.notification.alert('Message sent successfully');
 		$('#smsReturn').empty().append('Message envoy&eacute; avec succ&egrave;s, Merci');
 		$( "#popSms" ).popup( "open", { positionTo: "window" } );
 	};
 	var error = function (e) {
-		//alert('Message Failed:' + e); 
+		//navigator.notification.alert('Message Failed:' + e); 
 		$('#smsReturn').empty().append('Probl&egrave;me lors de l&rsquo;envoi du message: ' + e);
 		$( "#popSms" ).popup( "open", { positionTo: "window" } );
 	};
@@ -675,12 +675,12 @@ function ShareArt()
 	var message = "Téléchargez l'app artisan taxi DCVP 34 en suivant ce lien : http://www.taximedia.fr/stores.php?app=dcvp&dep=34";
 	var intent = ""; //leave empty for sending sms using default intent
 	var success = function () {
-		//alert('Message sent successfully');
+		//navigator.notification.alert('Message sent successfully');
 		$('#smsReturn').empty().append('Message envoy&eacute; avec succ&egrave;s, Merci');
 		$( "#popSms" ).popup( "open", { positionTo: "window" } );
 	};
 	var error = function (e) {
-		//alert('Message Failed:' + e); 
+		//navigator.notification.alert('Message Failed:' + e); 
 		$('#smsReturn').empty().append('Probl&egrave;me lors de l&rsquo;envoi du message: ' + e);
 		$( "#popSms" ).popup( "open", { positionTo: "window" } );
 	};
@@ -692,12 +692,12 @@ function SharePad()
 	var message = "Rendez-vous sur le WebService myTaxi 34 Hôtels & Restaurants en suivant ce lien : http://ecra.se/AA";
 	var intent = ""; //leave empty for sending sms using default intent
 	var success = function () {
-		//alert('Message sent successfully');
+		//navigator.notification.alert('Message sent successfully');
 		$('#smsReturn').empty().append('Message envoy&eacute; avec succ&egrave;s, Merci');
 		$( "#popSms" ).popup( "open", { positionTo: "window" } );
 	};
 	var error = function (e) {
-		//alert('Message Failed:' + e); 
+		//navigator.notification.alert('Message Failed:' + e); 
 		$('#smsReturn').empty().append('Probl&egrave;me lors de l&rsquo;envoi du message: ' + e);
 		$( "#popSms" ).popup( "open", { positionTo: "window" } );
 	};
@@ -709,12 +709,12 @@ function SharePro()
 	var message = "Téléchargez l'app myTaxi 34 Pro sur les sores en suivant ce lien : http://www.taximedia.fr/stores.php?app=pro&dep=34  ou rendez-vous sur le WebService en suivant ce lien : http://ecra.se/3jt";
 	var intent = ""; //leave empty for sending sms using default intent
 	var success = function () {
-		//alert('Message sent successfully');
+		//navigator.notification.alert('Message sent successfully');
 		$('#smsReturn').empty().append('Message envoy&eacute; avec succ&egrave;s, Merci');
 		$( "#popSms" ).popup( "open", { positionTo: "window" } );
 	};
 	var error = function (e) {
-		//alert('Message Failed:' + e); 
+		//navigator.notification.alert('Message Failed:' + e); 
 		$('#smsReturn').empty().append('Probl&egrave;me lors de l&rsquo;envoi du message: ' + e);
 		$( "#popSms" ).popup( "open", { positionTo: "window" } );
 	};
@@ -724,17 +724,17 @@ function contactShare()
 {
 	var successCallbackPick = function(result){
 		setTimeout(function(){
-			//alert(result.name + " " + result.phoneNumber);
+			//navigator.notification.alert(result.name + " " + result.phoneNumber);
 			var number = result.phoneNumber;
 			var message = "Téléchargez l'app myTaxi 34 en suivant ce lien : http://www.taximedia.fr/stores.php?app=mytaxi&dep=34";
 			var intent = ""; //leave empty for sending sms using default intent
 			var success = function () {
-				//alert('Message sent successfully');
+				//navigator.notification.alert('Message sent successfully');
 				$('#smsReturn').empty().append('Message envoy&eacute; avec succ&egrave;s, Merci');
 				$( "#popSms" ).popup( "open", { positionTo: "window" } );
 			};
 			var error = function (e) {
-				//alert('Message Failed:' + e); 
+				//navigator.notification.alert('Message Failed:' + e); 
 				$('#smsReturn').empty().append('Probl&egrave;me lors de l&rsquo;envoi du message: ' + e);
 				$( "#popSms" ).popup( "open", { positionTo: "window" } );
 			};
@@ -743,7 +743,7 @@ function contactShare()
 	};
 	var failedCallbackPick = function(result){
 		setTimeout(function(){
-			//alert(result);
+			//navigator.notification.alert(result);
 		},500);
 	}
 	window.plugins.contactNumberPicker.pick(successCallbackPick,failedCallbackPick);
@@ -776,7 +776,7 @@ function playOnSuccess() {
 
 // onError Callback 
 function playOnError(error) {
-	//alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+	//navigator.notification.alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
 }
 $('#home').live("swiperight", function() {
 	//$.mobile.pageContainer.pagecontainer("change", "#home", { transition: "slide", reverse: true} );

@@ -36,7 +36,7 @@ function active()
 		else if (!data.active) {
 			var display = '<p style="color:red;"><b>Il semblerait que votre compte ait &eacute;t&eacute; d&eacute;sactiv&eacute;</b></p><a href="mailto:info@taxibleuservices.com"style="width:32%;display:inline-block;"><img src="visuels/Contact_flat.png" width="90%"/></a>';
 			$("#returns").empty().append(display);
-			//alert(actived +' - '+  $.localStorage.getItem('tel'));
+			//navigator.notification.alert(actived +' - '+  $.localStorage.getItem('tel'));
 		}
 	});
 }
@@ -71,7 +71,7 @@ function getLocationOnce()
 		//navigator.geolocation.getAccurateCurrentPosition(get_coords, showError, {maxWait:30000});
 	}
 	else {
-		alert("Localisation impossible.");
+		navigator.notification.alert("Localisation impossible.");
 	}
 }
 function secureCall(position)
@@ -105,7 +105,7 @@ function secureCall(position)
 			i++;
 		});
 		check_answer();
-		//alert('Geoloc results :' + lat + ' - ' + lng);
+		//navigator.notification.alert('Geoloc results :' + lat + ' - ' + lng);
 		//$('#results').append('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>');
 		
 	}, "xml");
@@ -120,7 +120,7 @@ function check_answer()
 			{
 				//cancel(idcourse);
 				//$('#dblinks').append($('<input id="stop" type="hidden" value="1" />'));
-				//var box = alert(data);
+				//var box = navigator.notification.alert(data);
 				$('#urgencyResults').empty().append(data);
 			}
 		});
@@ -197,7 +197,7 @@ $(document).bind( 'pagecreate', function() {
 			$.localStorage.setItem('pass', data.pass);
 			$.sessionStorage.setItem('badid', data.badid);
 			$.sessionStorage.setItem('banned', data.banned);
-			//alert(data.nom + ' - ' + data.prenom + ' - ' + data.taxi);
+			//navigator.notification.alert(data.nom + ' - ' + data.prenom + ' - ' + data.taxi);
 			//var display = $.localStorage.getItem('nom') + ' - ' + $.localStorage.getItem('prenom') + ' - ' + $.localStorage.getItem('taxi');
 			var display = '';
 			if (data.badid)
@@ -223,7 +223,7 @@ $(document).bind( 'pagecreate', function() {
 		event.preventDefault();
 		// Subs some data
 		$.post("https://ssl14.ovh.net/~taxibleu/client/forget_app.php", $("#forget").serialize(), function(data) {
-			//alert($("#change").serialize());
+			//navigator.notification.alert($("#change").serialize());
 			// GET SHIT BACK !!
 			var display = '';
 			if (data.sent)
@@ -260,7 +260,7 @@ $(document).bind( 'pagecreate', function() {
 				$.sessionStorage.setItem('telexist', data.telexist);
 				$.sessionStorage.setItem('cabexist', data.cabexist);
 				$.sessionStorage.setItem('sirexist', data.sirexist);
-				//alert(data.taxi + ' - ' + data.siret + ' - ' + data.email + ' - ' + data.tel + ' - ' + data.subscribed + ' - ' + data.telexist + ' - ' + data.cabexist + ' - ' + data.sirexist);
+				//navigator.notification.alert(data.taxi + ' - ' + data.siret + ' - ' + data.email + ' - ' + data.tel + ' - ' + data.subscribed + ' - ' + data.telexist + ' - ' + data.cabexist + ' - ' + data.sirexist);
 				
 				var display = '';
 				if (data.subscribed)
