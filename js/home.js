@@ -277,7 +277,7 @@ function update()
 setTimeout('update()', 2000);
 }
 function checkCmd() {
-	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group, ring: pass }, function(data){
+	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group, zip: station, ring: pass }, function(data){
 		if (data != 0)
 		{
 			$('.orders').addClass('badge');
@@ -291,7 +291,7 @@ function checkCmd() {
 setTimeout('checkCmd()', 300000);
 }
 function refreshCmd() {
-	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group }, function(data){
+	$.post("https://ssl14.ovh.net/~taxibleu/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group, zip: station }, function(data){
 		$.mobile.loading( "show" );
 		$("#screen_bookings").empty().append(data);
 		$("#screen_bookings").trigger('create');
