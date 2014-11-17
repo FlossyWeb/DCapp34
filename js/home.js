@@ -647,6 +647,11 @@ function contactPick()
 	}
 	window.plugins.contactNumberPicker.pick(successCallbackPick,failedCallbackPick);
 }
+function myTaxiDown()
+{
+	var url = "http://www.taximedia.fr/stores.php?app=pro&dep=34";
+	window.open(url,'_blank','location=yes,enableViewportScale=yes,closebuttoncaption=Fermer');
+}
 function Share()
 {
 	var number = $('#telShare').val();
