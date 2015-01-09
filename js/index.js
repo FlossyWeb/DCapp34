@@ -13,7 +13,7 @@ var actived;
 
 function active()
 {
-	var posting = $.post("https://ssl14.ovh.net/~taxibleu/client/active_app.php", { tel: tel, mngid: mngid, dep: '34'}, function(data) {
+	var posting = $.post("https://www.mytaxiserver.com/client/active_app.php", { tel: tel, mngid: mngid, dep: '34'}, function(data) {
 		var actived = data.active;
 		// GET SHIT BACK !!
 		$.localStorage.setItem('civil', data.civil);
@@ -84,7 +84,7 @@ function secureCall(position)
 	var idcourseUrg = myDate.getTime();
 	$.sessionStorage.setItem('idcourseUrg', idcourseUrg);
 	
-	$.post("https://ssl14.ovh.net/~taxibleu/client/secure_xml.php", { lat: lat, lng: lng, dep: '34', pass: 'true'}, function(xml){
+	$.post("https://www.mytaxiserver.com/client/secure_xml.php", { lat: lat, lng: lng, dep: '34', pass: 'true'}, function(xml){
 																							 
 		var i = 0; // We need to make any numreq unique on that one !!
 		$(xml).find('marker').each(function(){
@@ -99,7 +99,7 @@ function secureCall(position)
 			//$('<div id='+name+'></div>').html('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>').appendTo('#secureResults');
 			//$('#secureResults').append('<p><b>'+name+' - '+address+' - '+lat+' - '+lng+' - '+timestamp+' - '+distance+'</b></p>');
 			
-			$.post("https://ssl14.ovh.net/~taxibleu/client/secure.php", { taxi: name, tel: address, rdvpoint: rdvpoint, helptaxi: taxi, helpname: helpname, helptel: tel, idcourse: idcourseUrg, num_req: num_reqUrg, dep: '34', pass: 'true'}, function(data){
+			$.post("https://www.mytaxiserver.com/client/secure.php", { taxi: name, tel: address, rdvpoint: rdvpoint, helptaxi: taxi, helpname: helpname, helptel: tel, idcourse: idcourseUrg, num_req: num_reqUrg, dep: '34', pass: 'true'}, function(data){
 				//$('#secureResults').append(data);
 			});
 			i++;
@@ -115,7 +115,7 @@ function check_answer()
 	$.mobile.pageContainer.pagecontainer("change", "#urgency", { transition: "slide"} );
 	var idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
 	sec = setInterval( function () {
-		$.post("https://ssl14.ovh.net/~taxibleu/client/status.php?idcourse=" + idcourseUrg + "&check=1" , { dep: '34'}, function(data){ 
+		$.post("https://www.mytaxiserver.com/client/status.php?idcourse=" + idcourseUrg + "&check=1" , { dep: '34'}, function(data){ 
 			if (data != 0)
 			{
 				//cancel(idcourse);
@@ -130,7 +130,7 @@ function check_answer()
 function stopSecureCall()
 {
 	var idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
-	$.post("https://ssl14.ovh.net/~taxibleu/client/secure.php", { taxi: '', tel: '', rdvpoint: '', helptaxi: taxi, helpname: '', helptel: tel, idcourse: idcourseUrg, dep: '34', pass: 'true', stopcall: 'true'}, function(data){
+	$.post("https://www.mytaxiserver.com/client/secure.php", { taxi: '', tel: '', rdvpoint: '', helptaxi: taxi, helpname: '', helptel: tel, idcourse: idcourseUrg, dep: '34', pass: 'true', stopcall: 'true'}, function(data){
 		$.mobile.pageContainer.pagecontainer("change", "#portal", { transition: "slide"} );
 	});
 	//$.sessionStorage.setItem('idcourseUrg', false);
@@ -139,7 +139,7 @@ function stopSecureCall()
 
 function footer()
 {
-	$.post("https://ssl14.ovh.net/~taxibleu/client/footer_app.php", { dep: '34' }, function(data) {
+	$.post("https://www.mytaxiserver.com/client/footer_app.php", { dep: '34' }, function(data) {
 		$("#footer_cont").empty().append(data);
 	});
 }
@@ -181,7 +181,7 @@ $(document).bind( 'pagecreate', function() {
 		// stop form from submitting normally 
 		event.preventDefault();
 		// Subs some data 
-		$.post("https://ssl14.ovh.net/~taxibleu/client/login_app.php", $("#login").serialize(), function(data) {
+		$.post("https://www.mytaxiserver.com/client/login_app.php", $("#login").serialize(), function(data) {
 			// GET SHIT BACK !!
 			$.localStorage.setItem('civil', data.civil);
 			$.localStorage.setItem('nom', data.nom);
@@ -222,7 +222,7 @@ $(document).bind( 'pagecreate', function() {
 		// stop form from submitting normally
 		event.preventDefault();
 		// Subs some data
-		$.post("https://ssl14.ovh.net/~taxibleu/client/forget_app.php", $("#forget").serialize(), function(data) {
+		$.post("https://www.mytaxiserver.com/client/forget_app.php", $("#forget").serialize(), function(data) {
 			//navigator.notification.alert($("#change").serialize());
 			// GET SHIT BACK !!
 			var display = '';
@@ -244,7 +244,7 @@ $(document).bind( 'pagecreate', function() {
 			event.preventDefault();
 			$.mobile.loading( "show" );
 			// Subs some data
-			$.post("https://ssl14.ovh.net/~taxibleu/client/register_app.php", $("#register").serialize(), function(data) {
+			$.post("https://www.mytaxiserver.com/client/register_app.php", $("#register").serialize(), function(data) {
 				// GET SHIT BACK !!
 				$.localStorage.setItem('civil', data.civil);
 				$.localStorage.setItem('nom', data.nom);
@@ -263,7 +263,7 @@ $(document).bind( 'pagecreate', function() {
 				//navigator.notification.alert(data.taxi + ' - ' + data.siret + ' - ' + data.email + ' - ' + data.tel + ' - ' + data.subscribed + ' - ' + data.telexist + ' - ' + data.cabexist + ' - ' + data.sirexist);
 				
 				var display = '';
-				if (data.subscribed)
+				if (data.subscribed && data.payzen)
 				{
 					display = '<p><b>' + data.civil + ' ' + data.nom + ' ' + data.prenom + ' Voici les informations d&rsquo;identification qui vous permettront d&rsquo;acc&egrave;der &agrave; votre compte :<br><span style="color:#09F;">Identifiant = ' + data.tel + '<br>Mot de passe = ' + data.pwd + '</span><br>Vous les recevrez dans quelques instants &agrave; cet email : <span style="color:#09F;">' + data.email + '</span>, merci.<br></b></p>';
 				}
@@ -274,14 +274,14 @@ $(document).bind( 'pagecreate', function() {
 					{
 						display += '<p style="color:red;"><b>Le num&eacute;ro de t&eacute;l&eacute;phone fourni est d&eacute;j&agrave; associ&eacute; &agrave; un compte.</b></p>';
 					}
-					if (data.cabexist)
+					if (data.sniffed == 'KO')
 					{
-						display += '<p style="color:red;"><b>Le num&eacute;ro de taxi fourni est d&eacute;j&agrave; associ&eacute; &agrave; un compte.</b></p>';
-					}
-					if (data.sirexist)
+						display += '<p style="color:red;"><b>Il y a un probl&egrave;me avec l&rsquo;enregistrement de la carte bancaire, il faut une carte VALIDE de type CB, VISA ou MASTERCARD.</b></p>';
+					}/*
+					else if (!data.signed)
 					{
-						display += '<p style="color:red;"><b>Le num&eacute;ro SIRET fourni est d&eacute;j&agrave; associ&eacute; &agrave; un compte.</b></p>';
-					}
+						display += '<p style="color:red;"><b>Il y a un probl&egrave;me technique avec l&rsquo;enregistrement de la carte bancaire.</b></p>';
+					}*/
 				}
 				$('#reg_collaps').collapsible( "collapse" );
 				$("#returns").empty().append(display);
@@ -311,6 +311,14 @@ $(document).ready(function(){
 		return /^[0-9]{14}$/.test(value);
 	}, 'Le N&deg; SIRET doit corresondre &agrave; 14 chiffres sans espace.');
 
+	$.validator.addMethod('cbnum', function (value) {
+		return /^[0-9]{16}$/.test(value);
+	}, 'Le N&deg; CB doit corresondre &agrave; 16 chiffres sans espace.');
+	
+	$.validator.addMethod('cp', function (value) {
+		return /^[0-9]{5}$/.test(value);
+	}, 'Le CP fait 5 chiffres sans espace.');
+
 	$("#register").validate({
 		rules: {
 		 nom: "required",
@@ -320,11 +328,17 @@ $(document).ready(function(){
 		   required: true,
 		   phone: true
 		 },
-		 siret: {
+		 brand: "required",
+		 cbnum: {
 		   required: true,
-		   siret: true
+		   cbnum: true
 		 },
-		 station: "required",
+		 cbexp: "required",
+		 cbval: "required",
+		 station: {
+		   required: true,
+		   cp: true
+		 },
 		 cgv: "required",
 		 email: {
 		   required: true,
@@ -343,10 +357,15 @@ $(document).ready(function(){
 		 tel: {
 		   required: "Ce champs est obligatoire"
 		 },
-		 siret: {
+		 cbtit: "Ce champs est obligatoire",
+		 cbnum: {
 		   required: "Ce champs est obligatoire"
 		 },
-		 station: "Ce champs est obligatoire",
+		 cbexp: "Ce champs est obligatoire",
+		 cbval: "Ce champs est obligatoire",
+		 station: {
+		   required: "Ce champs est obligatoire"
+		 },
 		 cgv: "Vous devez acceper les CGV",
 		 email: {
 		   required: "Nous avons besoin de votre email afin de vous contacter",
