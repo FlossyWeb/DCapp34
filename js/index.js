@@ -242,6 +242,7 @@ $(document).bind( 'pagecreate', function() {
 		{	
 			// stop form from submitting normally
 			event.preventDefault();
+			$('#subReg').prop("disabled",true);
 			$.mobile.loading( "show" );
 			// Subs some data
 			$.post("https://www.mytaxiserver.com/client/register_app.php", $("#register").serialize(), function(data) {
@@ -286,6 +287,7 @@ $(document).bind( 'pagecreate', function() {
 				$('#reg_collaps').collapsible( "collapse" );
 				$("#returns").empty().append(display);
 				$.mobile.loading( "hide" );
+				$('#subReg').prop("disabled",false);
 			}, "json");
 		}
 	});

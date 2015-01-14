@@ -12,6 +12,7 @@ var mngid = $.localStorage.getItem('mngid');
 var pass = $.localStorage.getItem('pass');
 var idcourse = $.sessionStorage.setItem('idcourse', '');
 var idcourseUrg = $.sessionStorage.setItem('idcourseUrg', '');
+var dispo = $.sessionStorage.getItem('dispo');
 var rdv = $.sessionStorage.setItem('rdv', '');
 var com = $.sessionStorage.setItem('com', '');
 var cell = $.sessionStorage.setItem('cell', '');
@@ -40,7 +41,7 @@ var mobileDemo = { 'center': '43.615945,3.876743', 'zoom': 10 };
 //$(document).on( 'pagebeforecreate', '#directions_map', function() {
 $( '#directions_map' ).live( 'pagebeforeshow',function(event){
 	$("#infos_map").empty();
-	var idcourse = $.sessionStorage.getItem('idcourse');
+	idcourse = $.sessionStorage.getItem('idcourse');
 	var rdv = $.sessionStorage.getItem('rdv');
 	var com = $.sessionStorage.getItem('com');
 	var cell = $.sessionStorage.getItem('cell');
@@ -111,7 +112,7 @@ $('#directions_map').live('pageshow', function() {
 	demo.add('directions_map', $('#map_canvas_1').gmap('get', 'getCurrentPosition')).load('directions_map');
 });
 $('#toolate').live('pagecreate', function() {
-	var idcourse = $.sessionStorage.getItem('idcourse');
+	idcourse = $.sessionStorage.getItem('idcourse');
 	var late = '<p style="color:#F00; font-size: large;"><b>D&eacute;sol&eacute; mais la course ' + idcourse + ' &agrave; &eacute;t&eacute; prise par un autre taxi.</b></p>';
 	$("#late_cont").empty().append(late);			
 });
@@ -168,6 +169,7 @@ $('#manage').live('pagecreate', function() {
 	var dec_prenom = $('#prenom').html(prenom).text();
 	var dec_station = $('#station').html(station).text();
 	$('#login').val(tel);
+	$('#civil').val(civil);
 	$('#nom').val(dec_nom);
 	$('#prenom').val(dec_prenom);
 	$('#taxi').val(taxi);
@@ -240,7 +242,7 @@ function get_coords(position)
 }
 function update()
 {
-	var dispo = $.sessionStorage.getItem('dispo');
+	dispo = $.sessionStorage.getItem('dispo');
 	$.post("https://www.mytaxiserver.com/server/get_app_drive.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group }, function(data){ 
 		$("#screen_job").empty().append(data);
 		if (data != 0)
@@ -286,7 +288,7 @@ function refreshCmd() {
 		$("#screen_bookings").trigger('create');
 	}).done(function() { $.mobile.loading( "hide" ); });
 }
-function dispo()
+function dispoCheck()
 {
 	$.post("https://www.mytaxiserver.com/client/dispo_app.php?check=1", { taxi: taxi, tel: tel, pass: pass, dep: '34' }, function(data){ 
 		var display = '';
@@ -303,7 +305,7 @@ function dispo()
 		$.sessionStorage.setItem('dispo', data.dispo);
 		//navigator.notification.alert(data.dispo);
 	}, "json").done(function(data) {
-		setTimeout('dispo()', 60000); // Every minutes you check dispo for real or oldies...
+		setTimeout('dispoCheck()', 60000); // Every minutes you check dispo for real or oldies...
 	});
 }
 function Dispo_On()
@@ -481,7 +483,7 @@ function secureCall(position)
 	var rdvpoint = lat + ', ' + lng;
 	var helpname = civil + ' ' + nom + ' ' + prenom;
 	var myDate = new Date();
-	var idcourseUrg = myDate.getTime();
+	idcourseUrg = myDate.getTime();
 	$.sessionStorage.setItem('idcourseUrg', idcourseUrg);
 	
 	$.post("https://www.mytaxiserver.com/client/secure_xml.php", { lat: lat, lng: lng, dep: '34', pass: pass}, function(xml){
@@ -510,7 +512,7 @@ function secureCall(position)
 function check_answer()
 {
 	$.mobile.pageContainer.pagecontainer("change", "#urgency", { transition: "slide"} );
-	var idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
+	idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
 	sec = setInterval( function () {
 		$.post("https://www.mytaxiserver.com/client/status.php?idcourse=" + idcourseUrg + "&check=1" , { dep: '34'}, function(data){ 
 			if (data != 0)
@@ -523,7 +525,7 @@ function check_answer()
 }
 function stopSecureCall()
 {
-	var idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
+	idcourseUrg = $.sessionStorage.getItem('idcourseUrg');
 	$.post("https://www.mytaxiserver.com/client/secure.php", { taxi: '', tel: '', rdvpoint: '', helptaxi: taxi, helpname: '', helptel: tel, idcourse: idcourseUrg, dep: '34', pass: pass, stopcall: 'true'}, function(data){
 		$.mobile.pageContainer.pagecontainer("change", "#home", { transition: "slide"} );
 	});
@@ -653,7 +655,7 @@ function Share()
 function ShareArt()
 {
 	var number = $('#telShare').val();
-	var message = "Téléchargez l'app artisan taxi DCVP 34 en suivant ce lien : http://www.taximedia.fr/stores.php?app=dcvp&dep=34";
+	var message = "Téléchargez l'app artisan taxi myTaxi 34 Corp en suivant ce lien : http://www.taximedia.fr/stores.php?app=dcvp&dep=34";
 	var intent = ""; //leave empty for sending sms using default intent
 	var success = function () {
 		//navigator.notification.alert('Message sent successfully');
@@ -820,7 +822,7 @@ $(document).bind( 'pagecreate', function() {
 	else {
 		$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
 	}
-	dispo();
+	dispoCheck();
 	footer();				
 });
 $(document).ready(function(){
