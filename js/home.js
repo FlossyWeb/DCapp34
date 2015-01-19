@@ -134,31 +134,31 @@ $('#delayPop').live( 'pagecreate',function(event) {
 	}, 1000);
 });
 $( '#planning' ).live( 'pagebeforeshow',function(event){
+	$.mobile.loading( "show" );
 	$.post("https://www.mytaxiserver.com/client/in_app_calls.php", { planning: 'true', tel: tel, pass: pass, dep: '34' }, function(data){
-		$.mobile.loading( "show" );
 		$("#plan_cont").empty().append(data);
 		$("#plan_cont").trigger('create');
 	}).done(function() { $.mobile.loading( "hide" ); });
 });
 $( '#cmd' ).live( 'pagebeforeshow',function(event){
+	$.mobile.loading( "show" );
 	$.post("https://www.mytaxiserver.com/server/get_app_bookings.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group }, function(data){
-		$.mobile.loading( "show" );
 		$("#screen_bookings").empty().append(data);
 		$("#screen_bookings").trigger('create');
 		//navigator.notification.alert(data);
 	}).done(function() { $.mobile.loading( "hide" ); });
 });
 $( '#history' ).live( 'pagebeforeshow',function(event){
+	$.mobile.loading( "show" );
 	$.post("https://www.mytaxiserver.com/client/in_app_calls.php", { history: 'true', tel: tel, pass: pass, dep: '34' }, function(data){
-		$.mobile.loading( "show" );
 		$("#hist_cont").empty().append(data);
 		$("#hist_cont").trigger('create');
 		//navigator.notification.alert(data);
 	}).done(function() { $.mobile.loading( "hide" ); });
 });
 $( '#infos' ).live( 'pagebeforeshow',function(event){
+	$.mobile.loading( "show" );
 	$.post("https://www.mytaxiserver.com/client/in_app_calls.php", { infos: 'true', pass: pass, dep: '34' }, function(data){
-		$.mobile.loading( "show" );
 		$("#infos_cont").empty().append(data);
 		$("#infos_cont").trigger('create');
 		//navigator.notification.alert(data);
@@ -352,7 +352,8 @@ function addCalendar(date, rdv, com, idcourse, cell)
 	var title = "Course en commande";
 	var location = rdv;
 	var notes = 'Infos RDV : ' + com + ' - Identifiant de la course : ' + idcourse + ' - Tel client : ' + cell;
-	var success = function(message) { navigator.notification.alert("AJOUT EVENEMENT AU CALENDRIER: " + JSON.stringify(message)); };
+	//var success = function(message) { navigator.notification.alert("AJOUT EVENEMENT AU CALENDRIER: " + JSON.stringify(message)); };
+	var success = function(message) { navigator.notification.alert("EVENEMENT AJOUTE AU CALENDRIER"); };
 	var error = function(message) { navigator.notification.alert("Erreur: " + message); };
 	// create
 	window.plugins.calendar.createEvent(title,location,notes,startDate,endDate,success,error);
@@ -747,7 +748,10 @@ function modPay() {
 	var exp = $('#cbexp').val();
 	var cardNetwork = $('#brand').val();
 	var cvv = $('#cbval').val();
+	$('#modPay').button('disable');
+	$.mobile.loading( "show" );
 	$.post('https://www.mytaxiserver.com/payzen/updateIndent.php', {cardNumber: cardNumber, exp: exp, cardNetwork: cardNetwork, cvv: cvv, civil: civil, nom: nom, prenom: prenom, tel: tel, email: email, cardIdent: siret, station: station}, function(data){
+	}, "json").done(function(data) { 
 		var display = '';
 		if (data.sniffed == 'OK')
 		{
@@ -763,7 +767,9 @@ function modPay() {
 		}
 		$('#mod_collaps').collapsible( "collapse" );
 		$("#returns").empty().append(display);
-	}, "json");
+		$.mobile.loading( "hide" );
+		$('#modPay').button('enable');
+	});
 }
 $('#home').live("swiperight", function() {
 	//$.mobile.pageContainer.pagecontainer("change", "#home", { transition: "slide", reverse: true} );
@@ -911,8 +917,8 @@ $(document).ready(function(){
 				$.localStorage.setItem('email', data.email);
 				$.localStorage.setItem('station', data.station);
 				$.sessionStorage.setItem('pwd', data.pwd);
-				$.sessionStorage.setItem('modmy', data.modmy);
-				
+				$.sessionStorage.setItem('modmy', data.modmy);				
+			}, "json").done(function(data) {
 				var display = '';
 				if (data.modmy)
 				{
@@ -921,9 +927,11 @@ $(document).ready(function(){
 				else {
 					display = '<p style="color:red;"><b>la modification de vos informations personnelles n&rsquo;&agrave; pas &eacute;t&eacute; prise en compte, l&rsquo;identifiant fourni ne figurant pas dans notre base de donn&eacute;e.</b></p>';
 				}
+				$.mobile.loading( "hide" );
 				$('#mod_collaps').collapsible( "collapse" );
+				$('#mod_collaps input[type=submit]').button('enable');
 				$("#returns").empty().append(display);
-			}, "json");
+			});
 		}
 	});
 	$("#change").submit(function(event) {

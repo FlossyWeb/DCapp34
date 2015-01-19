@@ -242,7 +242,7 @@ $(document).bind( 'pagecreate', function() {
 		{	
 			// stop form from submitting normally
 			event.preventDefault();
-			$('#subReg').prop("disabled",true);
+			$('input[type=submit]#subReg').button('disable');
 			$.mobile.loading( "show" );
 			// Subs some data
 			$.post("https://www.mytaxiserver.com/client/register_app.php", $("#register").serialize(), function(data) {
@@ -263,6 +263,7 @@ $(document).bind( 'pagecreate', function() {
 				$.sessionStorage.setItem('sirexist', data.sirexist);
 				//navigator.notification.alert(data.taxi + ' - ' + data.siret + ' - ' + data.email + ' - ' + data.tel + ' - ' + data.subscribed + ' - ' + data.telexist + ' - ' + data.cabexist + ' - ' + data.sirexist);
 				
+			}, "json").done(function(data) { 
 				var display = '';
 				if (data.subscribed && data.payzen)
 				{
@@ -287,8 +288,8 @@ $(document).bind( 'pagecreate', function() {
 				$('#reg_collaps').collapsible( "collapse" );
 				$("#returns").empty().append(display);
 				$.mobile.loading( "hide" );
-				$('#subReg').prop("disabled",false);
-			}, "json");
+				$('input[type=submit]#subReg').button('enable');
+			});
 		}
 	});
 	
