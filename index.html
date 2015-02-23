@@ -28,7 +28,7 @@
 		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 		<script type="text/javascript">
-            $( document ).bind( "mobileinit", function() {
+            $( document ).on( "mobileinit", function() {
                 // Make your jQuery Mobile framework configuration changes here!
                 $.support.cors = true;
                 $.mobile.allowCrossDomainPages = true;
@@ -54,11 +54,6 @@
         <script type="text/javascript" src="ui/jquery.ui.map.js"></script>
         <script type="text/javascript" src="ui/jquery.ui.map.services.js"></script>
         <script type="text/javascript" src="ui/jquery.ui.map.extensions.js"></script>
-        -->
-        <script type="text/javascript" src="js/jquery.html5storage.min.js"></script>
-        <style type="text/css">
-			label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
-        </style>
         <link rel="stylesheet" href="css/add2home.css"/>
 		<script type="text/javascript">
 			var addToHomeConfig = {
@@ -71,6 +66,12 @@
 			};
         </script>        
         <script type="application/javascript" src="js/add2home.js"></script>
+        -->
+        <script type="text/javascript" src="js/jquery.html5storage.min.js"></script>
+        <style type="text/css">
+			label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+			div.error span { color: red;}
+        </style>
         <script type="text/javascript" src="js/jquery.validate.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
         
@@ -89,7 +90,8 @@
                                  Inscrivez-Vous 
                             </h1>
                             <fieldset><legend></legend>
-                            <form method="POST" action="/" data-transition="slidefade" data-ajax="false" id="register">
+ 							<div class="error"><span></span></div>
+							<form method="POST" action="/" data-transition="slidefade" data-ajax="false" id="register">
                                 <select name="civil">
                                     <option selected value="Mr">Civilit&eacute;</option>
                                     <option>Mme</option>
@@ -101,7 +103,7 @@
                                 <input type="tel" name="taxi" placeholder="Num&eacute;ro de taxi" maxlength="6" size="20" class="required"><em></em>
                                 <input type="tel" name="tel" placeholder="T&eacute;l&eacute;phone (Sans espace SVP)" maxlength="10" size="20" class="required"><em></em>
                                 <!-- <input type="tel" name="siret" placeholder="N&deg; SIRET (14 chiffres sans espace SVP)" maxlength="14" size="20" class="required"><em></em> -->
-                                <input type="tel" name="station" placeholder="CP Commune Rattachement" maxlength="5" size="20" class="required"><em></em>
+                                <input type="tel" name="station" placeholder="Code Postal Commune Rattachement" maxlength="5" size="20" class="required"><em></em>
 								<div class="ui-body ui-body-a ui-corner-all">
 									<h3>Infos CB : </h3>
 									<select name="brand" id="brand">
@@ -297,7 +299,17 @@
                     </div>    
                 </div>
                 <!-- HERE COMES ALL ANSWERS CONCERNING BOTH LOGIN AND REGISTERING METHODS -->
-                <div id="returns"></div>
+                <div data-role="popup" data-theme="b" id="answer" data-dismissible="true" data-overlay-theme="b">
+					<a href="#portal" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Fermer</a>
+                    <div data-theme="a" data-role="header">
+                        <h1>
+                            R&eacute;ponse
+                        </h1>
+                    </div>
+                    <div class="ui-content" role="main">
+						<div id="returns"></div>
+                    </div>
+                </div>
                 <a href="#secureDialog" data-rel="popup" data-position-to="window" data-role="button" class="secure-bt" data-theme="b" data-icon="alert">Bouton d&rsquo;urgence</a>
                 <div data-role="popup" data-theme="a" id="secureDialog" data-dismissible="false" data-overlay-theme="b">
                     <div data-theme="a" data-role="header">

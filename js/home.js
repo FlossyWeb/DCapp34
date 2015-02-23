@@ -87,7 +87,10 @@ $('#directions_map').live('pagecreate', function() {
 							if ( status === 'OK' ) {
 								$('#from').val(results[0].formatted_address);
 								var rdv = $.sessionStorage.getItem('rdv');
-								//document.getElementById('to').value = rdv;
+								var gmapLink = '<a href="#" onClick="openSomeUrl(\'http://maps.google.com/maps?daddr='+rdv+'&saddr='+results[0].formatted_address+'&directionsmode=driving\')" class="ui-btn  ui-btn-b ui-corner-all ui-shadow ui-icon-navigation ui-btn-icon-left">Ouvrir dans Maps</a>';
+								setTimeout(function() { 
+									$("#infos_map").append(gmapLink);
+								}, 1000);
 								if (rdv != '')
 								{
 									$('#submit').trigger('click');
@@ -533,20 +536,25 @@ function stopSecureCall()
 	//$.sessionStorage.setItem('idcourseUrg', false);
 	clearInterval(sec);
 }
+function openSomeUrl(url)
+{
+	//window.plugins.childBrowser.showWebPage('http://www.taximedia.fr/redir.php', { showLocationBar: true });
+	window.open(url,'_blank','location=false,enableViewportScale=yes,closebuttoncaption=Fermer');
+}
 function taximedia()
 {
 	//window.plugins.childBrowser.showWebPage('http://www.taximedia.fr/redir.php', { showLocationBar: true });
-	window.open('http://www.taximedia.fr/redir.php','_blank','location=yes,enableViewportScale=yes,closebuttoncaption=Fermer');
+	window.open('http://www.taximedia.fr/redir.php','_blank','location=false,enableViewportScale=yes,closebuttoncaption=Fermer');
 }
 function help()
 {
 	//window.plugins.childBrowser.showWebPage('http://taximedia.fr/client/help.html', { showLocationBar: true });
-	window.open('http://taximedia.fr/client/help.html','_blank','location=yes,enableViewportScale=yes,closebuttoncaption=Fermer');
+	window.open('http://taximedia.fr/client/help.html','_blank','location=false,enableViewportScale=yes,closebuttoncaption=Fermer');
 }
 function cgv()
 {
 	//window.plugins.childBrowser.showWebPage('http://taximedia.fr/client/docs/CGV.pdf', { showLocationBar: true });
-	window.open('http://taximedia.fr/client/docs/CGV.pdf','_blank','location=yes,enableViewportScale=yes,closebuttoncaption=Fermer');
+	window.open('http://taximedia.fr/client/docs/CGV.pdf','_blank','location=false,enableViewportScale=yes,closebuttoncaption=Fermer');
 }
 // Checks App or Browser
 app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1 && document.URL.indexOf("localhost") != 7;
@@ -806,7 +814,7 @@ $('#planning .ui-content').live("swipeleft", function() {
 $('#directions_map').live("swiperight", function() {
 	$("#mapPanel_poper").trigger('click');
 });
-$(document).bind( 'pagecreate', function() {
+$(document).on( 'pagecreate', function() {
 	
 	if(!$.localStorage.getItem('pass'))
 	{
@@ -899,12 +907,9 @@ $(document).ready(function(){
 			error.appendTo( element.parent().next('em') );
 		}
 		*/
-	});
-	$("#modmy").submit(function(event) {
-		if ($("#modmy").valid())
-		{	
-			// stop form from submitting normally
-			event.preventDefault();
+		// Form submission if every thing is ok
+		,
+		submitHandler: function (form) {
 			// Subs some data
 			$.post("https://www.mytaxiserver.com/client/login_app.php", $("#modmy").serialize(), function(data) {
 				// GET SHIT BACK !!
@@ -913,7 +918,7 @@ $(document).ready(function(){
 				$.localStorage.setItem('prenom', data.prenom);
 				$.localStorage.setItem('taxi', data.taxi);
 				$.localStorage.setItem('tel', data.tel);
-				$.localStorage.setItem('siret', data.siret);
+				//$.localStorage.setItem('siret', data.siret);
 				$.localStorage.setItem('email', data.email);
 				$.localStorage.setItem('station', data.station);
 				$.sessionStorage.setItem('pwd', data.pwd);
