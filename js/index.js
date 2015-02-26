@@ -382,7 +382,6 @@ $(document).ready(function(){
 				}
 				else {
 					display = '<p style="color:red;"><b>Vous n&rsquo;avez pas correctement rempli le formulaire d&rsquo;inscription. Nous vous prions de modifier les informations suivantes, si vous d&eacute;sirez  acc&egrave;der &agrave; ce service, d&eacute;sol&eacute;.</b></p>';
-					$('input[type=submit]#subReg').button('enable');		
 					if (data.telexist)
 					{
 						display += '<p style="color:red;"><b>Le num&eacute;ro de t&eacute;l&eacute;phone fourni est d&eacute;j&agrave; associ&eacute; &agrave; un compte.</b></p>';
@@ -403,7 +402,7 @@ $(document).ready(function(){
 				$('input[type=submit]#subReg').button('enable');
 				$.mobile.loading( "hide" );
 			}).fail(function (jqXHR, textStatus, errorThrown) {
-				navigator.notification.alert('Erreur inconnue, le serveur ou la connexion internet sont indisponibles. ' + textStatus, errorThrown);
+				navigator.notification.alert('Erreur inconnue, le serveur ou la connexion internet sont indisponibles. ' + textStatus+', '+ errorThrown);
 			});
 		} // submitHandler Ends
 	});
