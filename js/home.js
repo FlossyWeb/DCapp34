@@ -1,4 +1,3 @@
-
 var taxi = $.localStorage.getItem('taxi');
 var tel = $.localStorage.getItem('tel');
 var email = $.localStorage.getItem('email');
@@ -6,6 +5,7 @@ var civil = $.localStorage.getItem('civil');
 var nom = $.localStorage.getItem('nom');
 var prenom = $.localStorage.getItem('prenom');
 var siret = $.localStorage.getItem('siret');
+var cpro = $.localStorage.getItem('cpro');
 var station = $.localStorage.getItem('station');
 var group = $.localStorage.getItem('group');
 var mngid = $.localStorage.getItem('mngid');
@@ -178,7 +178,7 @@ $('#manage').live('pagecreate', function() {
 	$('#taxi').val(taxi);
 	$('#tel').val(tel);
 	$('#email').val(email);
-	//$('#siret').val(siret);
+	$('#cpro').val(cpro);
 	$('#station').val(dec_station);
 	$('#log').val(tel);
 	$.post("https://www.mytaxiserver.com/client/billing.php", { taxi: taxi, pass: pass, dep: '34', mngid: mngid }, function(data){
@@ -647,7 +647,7 @@ function myTaxiDown()
 function Share()
 {
 	var number = $('#telShare').val();
-	var message = "Téléchargez l'app myTaxi 34 en suivant ce lien : http://www.taximedia.fr/stores.php?app=mytaxi&dep=34";
+	var message = "Téléchargez l'app monTaxi 34 en suivant ce lien : http://www.taximedia.fr/stores.php?app=mytaxi&dep=34";
 	var intent = ""; //leave empty for sending sms using default intent
 	var success = function () {
 		//navigator.notification.alert('Message sent successfully');
@@ -664,7 +664,7 @@ function Share()
 function ShareArt()
 {
 	var number = $('#telShare').val();
-	var message = "Téléchargez l'app artisan taxi myTaxi 34 Corp en suivant ce lien : http://www.taximedia.fr/stores.php?app=dcvp&dep=34";
+	var message = "Téléchargez l'app artisan taxi monTaxi 34 Corp en suivant ce lien : http://www.taximedia.fr/stores.php?app=dcvp&dep=34";
 	var intent = ""; //leave empty for sending sms using default intent
 	var success = function () {
 		//navigator.notification.alert('Message sent successfully');
@@ -681,7 +681,7 @@ function ShareArt()
 function SharePro()
 {
 	var number = $('#telShare').val();
-	var message = "Téléchargez l'app myTaxi 34 Pro sur les sores en suivant ce lien : http://www.taximedia.fr/stores.php?app=pro&dep=34  ou rendez-vous sur le WebService en suivant ce lien : http://www.taximedia.fr/pro34/";
+	var message = "Téléchargez l'app monTaxi 34 Pro sur les sores en suivant ce lien : http://www.taximedia.fr/stores.php?app=pro&dep=34  ou rendez-vous sur le WebService en suivant ce lien : http://www.taximedia.fr/pro34/";
 	var intent = ""; //leave empty for sending sms using default intent
 	var success = function () {
 		//navigator.notification.alert('Message sent successfully');
@@ -701,7 +701,7 @@ function contactShare()
 		setTimeout(function(){
 			//navigator.notification.alert(result.name + " " + result.phoneNumber);
 			var number = result.phoneNumber;
-			var message = "Téléchargez l'app myTaxi 34 en suivant ce lien : http://www.taximedia.fr/stores.php?app=mytaxi&dep=34";
+			var message = "Téléchargez l'app monTaxi 34 en suivant ce lien : http://www.taximedia.fr/stores.php?app=mytaxi&dep=34";
 			var intent = ""; //leave empty for sending sms using default intent
 			var success = function () {
 				//navigator.notification.alert('Message sent successfully');
@@ -867,13 +867,10 @@ $(document).ready(function(){
 		 nom: "required",
 		 prenom: "required",
 		 taxi: "required",
+		 cpro: "required",
 		 tel: {
 		   required: true,
 		   phone: true
-		 },
-		 siret: {
-		   required: true,
-		   siret: true
 		 },
 		 station: "required",
 		 email: {
@@ -887,10 +884,19 @@ $(document).ready(function(){
 		 }
 		},
 		messages: {
+		 login: {
+		   required: "Ce champs est obligatoire"
+		 },
 		 nom: "Ce champs est obligatoire",
 		 prenom: "Ce champs est obligatoire",
 		 taxi: "Ce champs est obligatoire",
-		 station: "Ce champs est obligatoire",
+		 cpro: "Le N&deg; de Carte Professionelle est obligatoire",
+		 tel: {
+		   required: "Le T&eacute;l&eacute;phone est obligatoire"
+		 },
+		 station: {
+		   required: "Ce champs est obligatoire"
+		 },
 		 email: {
 		   required: "Nous avons besoin de votre email afin de vous contacter",
 		   email: "Votre email doit &ecirc;tre au format nom@domaine.com"
@@ -918,7 +924,7 @@ $(document).ready(function(){
 				$.localStorage.setItem('prenom', data.prenom);
 				$.localStorage.setItem('taxi', data.taxi);
 				$.localStorage.setItem('tel', data.tel);
-				//$.localStorage.setItem('siret', data.siret);
+				$.localStorage.setItem('cpro', data.cpro);
 				$.localStorage.setItem('email', data.email);
 				$.localStorage.setItem('station', data.station);
 				$.sessionStorage.setItem('pwd', data.pwd);

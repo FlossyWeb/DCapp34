@@ -20,6 +20,7 @@ function active()
 		$.localStorage.setItem('nom', data.nom);
 		$.localStorage.setItem('prenom', data.prenom);
 		$.localStorage.setItem('taxi', data.taxi);
+		$.localStorage.setItem('cpro', data.cpro);
 		$.localStorage.setItem('tel', data.tel);
 		$.localStorage.setItem('siret', data.siret);
 		$.localStorage.setItem('email', data.email);
@@ -187,6 +188,7 @@ $(document).on( 'pagecreate', function() {
 			$.localStorage.setItem('nom', data.nom);
 			$.localStorage.setItem('prenom', data.prenom);
 			$.localStorage.setItem('taxi', data.taxi);
+			$.localStorage.setItem('cpro', data.cpro);
 			$.localStorage.setItem('tel', data.tel);
 			$.localStorage.setItem('siret', data.siret);
 			$.localStorage.setItem('email', data.email);
@@ -252,6 +254,7 @@ $(document).ready(function(){
 		 nom: "required",
 		 prenom: "required",
 		 taxi: "required",
+		 cpro: "required",
 		 tel: {
 		   required: true,
 		   phone: true
@@ -282,7 +285,8 @@ $(document).ready(function(){
 		messages: {
 		 nom: "Le Nom est obligatoire",
 		 prenom: "Le Pr&eacute;nom est obligatoire",
-		 taxi: "La License de Taxi est obligatoire",
+		 taxi: "L&rsquo;ADS (N&deg; de Taxi) est obligatoire",
+		 cpro: "Le N&deg; de Carte Professionelle est obligatoire",
 		 tel: {
 		   required: "Le T&eacute;l&eacute;phone est obligatoire"
 		 },
@@ -338,6 +342,7 @@ $(document).ready(function(){
 				$.localStorage.setItem('nom', data.nom);
 				$.localStorage.setItem('prenom', data.prenom);
 				$.localStorage.setItem('taxi', data.taxi);
+				$.localStorage.setItem('cpro', data.cpro);
 				$.localStorage.setItem('tel', data.tel);
 				$.localStorage.setItem('siret', data.siret);
 				$.localStorage.setItem('station', data.station);
@@ -363,6 +368,7 @@ $(document).ready(function(){
 						$.localStorage.setItem('nom', data.nom);
 						$.localStorage.setItem('prenom', data.prenom);
 						$.localStorage.setItem('taxi', data.taxi);
+						$.localStorage.setItem('cpro', data.cpro);
 						$.localStorage.setItem('tel', data.tel);
 						$.localStorage.setItem('siret', data.siret);
 						$.localStorage.setItem('email', data.email);
