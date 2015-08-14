@@ -205,6 +205,10 @@ $('#manage').live('pagecreate', function() {
 		$("#billing").empty().append(data);
 		//navigator.notification.alert(data);
 	});
+	$.post("https://www.mytaxiserver.com/appclient/myrates.php", { tel: tel, pass: pass, dep: '34', mngid: mngid }, function(data){
+		$("#myRates").empty().append(data);
+		//navigator.notification.alert(data);
+	});
 });
 function dc() {
 	$.localStorage.setItem('pass', 0);
