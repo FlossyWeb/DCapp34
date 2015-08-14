@@ -72,7 +72,7 @@ function getLocationOnce()
 		//navigator.geolocation.getAccurateCurrentPosition(get_coords, showError, {maxWait:30000});
 	}
 	else {
-		navigator.notification.alert("Localisation impossible.");
+		navigator.notification.alert("Localisation impossible.", alertDismissed, 'MonTaxi Erreur', 'OK');
 	}
 }
 function secureCall(position)
@@ -144,6 +144,10 @@ function footer()
 		$("#footer_cont").empty().append(data);
 	});
 }
+function alertDismissed()
+{
+	// Do Nothing...
+}
 
 // Checks App or Browser
 app = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1 && document.URL.indexOf("localhost") != 7;
@@ -157,6 +161,7 @@ if ( app ) {
 			$("body").empty().append('<img src="no_network.png" width="'+screen.width+'" height="'+screen.height+'" onClick="window.location.reload()" />');
 		}
 		StatusBar.overlaysWebView(false);
+		StatusBar.backgroundColorByHexString("#E7B242");
 		/*
 		if($.localStorage.getItem('tel') && $.localStorage.getItem('pwd'))
 		{
@@ -176,7 +181,7 @@ if ( app ) {
 $(document).on( 'pagecreate', function() {
 
 	active();
-	footer();
+	//footer();
 
 	$("#login").submit(function(event) {
 		// stop form from submitting normally 
@@ -408,7 +413,7 @@ $(document).ready(function(){
 				$('input[type=submit]#subReg').button('enable');
 				$.mobile.loading( "hide" );
 			}).fail(function (jqXHR, textStatus, errorThrown) {
-				navigator.notification.alert('Erreur inconnue, le serveur ou la connexion internet sont indisponibles. ' + textStatus+', '+ errorThrown);
+				navigator.notification.alert('Erreur inconnue, le serveur ou la connexion internet sont indisponibles. ' + textStatus+', '+ errorThrown, alertDismissed, 'MonTaxi Erreur', 'OK');
 			});
 		} // submitHandler Ends
 	});
@@ -450,7 +455,7 @@ $(document).ready(function(){
 				$("#returns").empty().append(display);
 				$( "#answer" ).popup( "open", { positionTo: "window" } );
 			}, "json").fail(function (jqXHR, textStatus, errorThrown) {
-				navigator.notification.alert('Erreur inconnue, le serveur ou la connexion internet sont indisponibles. ' + textStatus, errorThrown);
+				navigator.notification.alert('Erreur inconnue, le serveur ou la connexion internet sont indisponibles. ' + textStatus, errorThrown, alertDismissed, 'MonTaxi Erreur', 'OK');
 			});
 		} // submitHandler Ends
 		/* Put errors below fields
