@@ -649,6 +649,7 @@ if ( app ) {
 	// PhoneGap est prêt
 	function onDeviceReady() {
 		document.addEventListener("resume", onResume, false);
+		document.addEventListener("pause", onPause, false);
 		navigator.splashscreen.hide();
 		StatusBar.overlaysWebView(false);
 		StatusBar.backgroundColorByHexString("#E7B242");
@@ -686,6 +687,9 @@ function onResume() {
 		//alert("All notifications cleared");
 	}, this);
 	Sound_On();
+}
+function onPause() {
+	Sound_Off();
 }
 var scanSuccess = function (result) {
 	var textFormats = "QR_CODE DATA_MATRIX";
