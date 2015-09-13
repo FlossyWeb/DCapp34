@@ -20,7 +20,7 @@ var cell = $.sessionStorage.setItem('cell', '');
 var cmd = $.sessionStorage.setItem('cmd', 0);
 var query_string = $.sessionStorage.setItem('query_string', '');
 var delay = 10;
-var pollingTime;
+var pollingTime = 3000; // Default PollingTime in case initial pollingTime request fails
 
 // Lecteur audio
 var my_media = null;
@@ -31,7 +31,9 @@ var scanner;
 
 // localNotifications
 var notificationId = 1;
-var badgeNumber = 1;
+var badgeNumber = 0;
+var badgeNumber1 = 0;
+var badgeNumber2 = 0;
 
 // Detect wether it is an App or WebApp
 var app;
@@ -279,9 +281,9 @@ function update()
 {
 	dispo = $.sessionStorage.getItem('dispo');
 	$.post("https://www.mytaxiserver.com/server/get_app_drive.php", { taxi: taxi, tel: tel, email: email, dispo: dispo, pass: pass, dep: '34', mngid: mngid, group: group }, function(data){ 
-		$("#screen_job").empty().append(data);
 		if (data != 0)
 		{
+			$("#screen_job").empty().append(data);
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Alerte_course_flat.png" width="100%"/></a>');
 			//document.getElementById("play").play();
@@ -290,6 +292,8 @@ function update()
 				playAudio('sounds/ring.mp3');
 				navigator.notification.vibrate(2000);
 			}
+			badgeNumber1=1;
+			badgeNumber = badgeNumber1+badgeNumber2;
 			cordova.plugins.notification.local.schedule({
 				id: 1,
 				title: "Notification de course MonTaxi",
@@ -301,6 +305,7 @@ function update()
 		}
 		else
 		{
+			$("#screen_job").empty().append('<br><p><b>En attente de courses...</b></p><br>');
 			$("#warn").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			$("#warn_home").empty().append('<a href="#jobs_taker"><img src="visuels/Aucune_course_flat.png" width="100%"/></a>');
 			//document.getElementById("play").pause();
@@ -323,6 +328,8 @@ function checkCmd() {
 			$('.ordersjob').empty().append(data);
 			navigator.notification.beep(2);
 			navigator.notification.vibrate(1000);
+			badgeNumber2=1;
+			badgeNumber = badgeNumber1+badgeNumber2;
 			cordova.plugins.notification.local.schedule({
 				id: 2,
 				title: "Notification de course MonTaxi",
@@ -453,6 +460,9 @@ function delayCall(query_string)
 	Sound_Off();
 	$.sessionStorage.setItem('query_string', query_string);
 	$.mobile.pageContainer.pagecontainer("change", "#delayPop", { transition: "slide"} );
+	cordova.plugins.notification.local.clear(1, function() {
+		//alert("done");
+	});
 }
 function directCall()
 {
@@ -481,11 +491,20 @@ function directCall()
 				 
 				 break;
 			 default: 
-				$.mobile.pageContainer.pagecontainer("change", "#home", { transition: "slide"} );
+				$.mobile.pageContainer.pagecontainer("change", "#jobs_taker", { transition: "slide"} );
 				 
 				 break;
 		}					
 	}, "json").always(function() { Sound_On();});
+}
+// Cancels direct jobs...
+function cancelCall(query_string)
+{
+	$.mobile.loading( "show" );
+	dep = $.localStorage.getItem('dep');
+	$.post("https://www.mytaxiserver.com/appserver/diary_app_dcvp.php?dep=34", query_string, function(data){ 
+		$.mobile.pageContainer.pagecontainer("change", "#jobs_taker", { transition: "slide"} );
+	}, "json").always(function() { $.mobile.loading( "hide" ); });
 }
 // Diary call when accepting cmd jobs or refusing jobs
 function diaryCall(query_string)
@@ -517,11 +536,11 @@ function diaryCall(query_string)
 				 
 				 break;
 			 default: 
-				$.mobile.pageContainer.pagecontainer("change", "#home", { transition: "slide"} );
+				$.mobile.pageContainer.pagecontainer("change", "#cmd", { transition: "slide"} );
 				 
 				 break;
 		}					
-	}, "json").always(function() { Sound_On();});
+	});
 }
 // Urgence call => Danger zone
 function getLocationOnce()
@@ -635,12 +654,21 @@ if ( app ) {
 		StatusBar.backgroundColorByHexString("#E7B242");
 		// prevent device from sleeping
 		window.plugins.powerManagement.acquire();
+		// Enable background mode
+		cordova.plugins.backgroundMode.enable();
+		cordova.plugins.backgroundMode.configure({
+			text:'App toujours en fonction, nous vous informons des courses en cours...'
+		});
+		// Called when background mode has been activated
+		cordova.plugins.backgroundMode.onactivate = function () {
+			Sound_Off();
+		}
 		//Functions to call only at app first load
 		getLocation();
 		scanner = cordova.require("cordova/plugin/BarcodeScanner");
 		$.post("https://www.mytaxiserver.com/appclient/polling.php", {}, function(data) {
 			pollingTime = data.polling;
-		}, "json").done(function(data) {
+		}, "json").always(function(data) {
 			setTimeout('update()', 2000);
 		});
 		checkCmd();
@@ -654,6 +682,7 @@ function onResume() {
 	if((navigator.network.connection.type == Connection.NONE) || !window.jQuery){
 		$("body").empty().append('<img src="no_network.png" width="'+screen.width+'" height="'+screen.height+'" onClick="window.location.reload()" />');
 	}
+	Sound_On();
 }
 var scanSuccess = function (result) {
 	var textFormats = "QR_CODE DATA_MATRIX";
@@ -893,7 +922,7 @@ $(document).on( 'pagecreate', function() {
 		getLocation();
 		$.post("https://www.mytaxiserver.com/appclient/polling.php", {}, function(data) {
 			pollingTime = data.polling;
-		}, "json").done(function(data) {
+		}, "json").always(function(data) {
 			setTimeout('update()', 2000);
 		});
 	}
@@ -904,6 +933,7 @@ $(document).on( 'pagecreate', function() {
 		$("#player").empty().append('<audio id="play" loop="loop" preload="auto" style="display:none" ><source src="sounds/ring.mp3" type="audio/mpeg" />Your browser does not support the audio element.</audio>');
 	}
 	dispoCheck();
+	checkCmd();
 	footer();				
 });
 $(document).ready(function(){
